@@ -1,0 +1,128 @@
+!!! 5
+%html
+  %head
+    %title {{ page.title }} - trak.io Documentation - Customer Analytics For Data-Driven Startups
+    %link{href: "/assets/stylesheets/default.css", rel: 'stylesheet'}
+    %script{ type: 'text/javascript', src: '//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js' }
+    %script{ type: 'text/javascript', src: '//use.typekit.net/vwv6paq.js' }
+    %script{ type: 'text/javascript', src: '/assets/javascripts/app.js' }
+    %link{ href: "//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css", rel: "stylesheet" }
+    :javascript
+      try{Typekit.load();}catch(e){}
+      if (window.location.hostname == 'docs.trak.io') {
+        var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.trak.io/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+        trak.io.load('2513f6a1eb4a20198b07c1f343499ec0f4f88e57', { channel: 'Documentation' });
+      }
+
+  %body
+
+    .sticky-footer
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            .brand <a href='/'>trak.io</a>
+
+            %ul.nav.pull-right
+              %li
+                %a{href: "http://trak.io"} Sign Up
+              %li
+                %a{href: "http://trak.io/pricing.html"} Pricing
+              %li
+                %a{href: "http://dash.trak.io/sign_in"} Sign In
+              %li.active
+                %a{href: "/"} Docs
+              %li
+                %a{href: "http://blog.trak.io"} Blog
+              %li.were-hiring
+                %a{href: "http://hackerjobs.co.uk/jobs/2014/1/21/trak-io-rails-dev-generalists-welcome"} We're Hiring!
+
+      #root
+        .container
+          .row
+
+            .span3.side-bar
+
+              %ul.nav.nav-list
+                %li
+                  %a{href: '/'} Introduction
+                %li
+                  %a{href: '/quick_start.html'} Quick Start
+                %li.for-javascript
+                  %a{href: '/javascript.html'} JavaScript
+                %li.for-javascript
+                  %a{href: '/segment.io.html'} Segment.io
+                %li.for-http
+                  %a{href: '/http.html'} HTTP
+                %li.for-php
+                  %a{href: '/php.html'} PHP
+                %li.for-ruby
+                  %a{href: '/ruby.html'} Ruby
+
+                %li.nav-header
+                  Methods
+                  %ul
+                    %li
+                      %a{href: '/identify.html'} Identify
+                    %li
+                      %a{href: '/alias.html'} Alias
+                    %li
+                      %a{href: '/track.html'} Track
+                    %li
+                      %a{href: '/page_view.html'} Page View
+                    %li
+                      %a{href: '/annotate.html'} Annotate
+                    %li
+                      %a{href: '/distinct_id.html'} Distinct ID
+                    %li
+                      %a{href: '/channel.html'} Channel
+
+                %li.nav-header
+                  Notes on
+                  %ul
+                    %li
+                      %a{href: '/data_keys.html'} Data Keys
+                    %li
+                      %a{href: '/properties.html'} Properties
+                    %li
+                      %a{href: '/event_icons.html'} Event Icons
+                    %li
+                      %a{href: '/authentication.html'} Authentication
+                    %li
+                      %a{href: '/errors.html'} Errors
+
+                %li.nav-header
+                  Examples
+                  %ul
+                    %li
+                      %a{href: '/cook_book/user_registration.html'} User Registration
+                    %li
+                      %a{href: '/cook_book/email_subscribe_form.html'} Email Subscribe Form
+
+
+
+
+            #content.span7.offset05
+
+              {{ content }}
+
+    .footer
+      .container
+        .copyright &copy; trak.io 2013 all rights reserved
+        %ul.links
+          %li
+            %a{href: "http://trak.io"} Sign up
+          %li
+            %a{href: "http://dash.trak.io/sign_in"} Sign in
+          %li
+            %a{href: "http://blog.trak.io"} Blog
+          %li
+            %a{href: "http://status.trak.io"} Status
+          %li
+            %a{href: "http://trak.io/privacy.html"} Privacy Policy
+          %li
+            %a{href: "http://trak.io/terms.html"} Terms &amp; Conditions
+          %li
+            %a{href: "mailto:hello@trak.io"} Contact
+          %li.were-hiring
+            %a{href: "http://hackerjobs.co.uk/jobs/2014/1/21/trak-io-rails-dev-generalists-welcome"} We're Hiring!
+

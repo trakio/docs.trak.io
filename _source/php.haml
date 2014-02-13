@@ -1,0 +1,55 @@
+---
+title: PHP API Introduction
+---
+
+%h2 PHP API Introduction
+
+%p We don't have an official PHP library but there are a couple of community libraries:
+
+%h5 Helder Duarte
+
+%p <a target="_blank" href="https://twitter.com/cossou">Helder</a> has written a PHP client that is available via composer:
+
+%code
+  :escaped
+    {
+      "require": {
+        "cossou/trak-io-api-client": "1.0.*"
+      }
+    }
+
+%p The source is available on GitHub: <a target="_blank" href='https://github.com/cossou/trak-io-api'>cossou/trak-io-api</a>.
+
+%h5 Sumo Heavy Industries
+
+%p <a href='http://www.sumoheavy.com/' target='_blank'>Sumo Heavy Industries</a> have done a cracking job getting started on a <a href='https://github.com/sumoheavy/SUMOHeavy_TrakIo/tree/feature-zflib' target='_blank'>Zend library</a> for trak.io.
+
+%h3 Send Data From the Client
+
+%p Even though your server side code is in PHP, as long as your application is web based there is no reason why you can't send us your data via the client with our <a href='/javascript.html'>JavaScript library</a>.
+
+%h3 Roll Your Own
+
+%p If you really <em>really</em> need to send us data from the server side you can send data directly to the <a href='/http.html'>HTTP API</a> with something like <a href='http://phphttpclient.com/' target='_blank'>httpful</a>.
+
+%code.php
+  :escaped
+    <?php
+      $data = array(
+        "token"=>"YOUR_API_TOKEN",
+        "data"=>array(
+          "distinct_id"=>$user->id,
+          "properties"=>array(
+            "name"=>$user->name,
+            "email"=>$user->email
+          )
+        )
+      );
+
+      $response = \Httpful\Request::post("http://api.trak.io/v1/identify")
+        ->contentType('application/json')
+        ->body(json_encode($data))
+        ->send();
+
+      $user->trak_io_id = $response->body->trak_id
+      $user->save();

@@ -1,0 +1,475 @@
+---
+title: Event Icons
+---
+
+
+:markdown
+
+  ## Event Icons
+
+  You can send whatever event you please (Note: it will be standardized as outlined in <a href='data_keys.html'>notes on data keys</a>), however by using the following event keys, event ui elements in your dashboard will display the respective icons below.
+
+  Inbound (events users perform) and outbound (events that you or the system performs on users) events are also distinguished in the dashboard ui. You can define whether an event is inbound or outbound with the <a href='/properties.html#direction'>direction property</a>.
+
+#key
+
+  %h3
+    Direction
+
+  .events
+    .event.color1
+      %h4 Inbound event (the person performed it)
+
+    .event.color1.outbound
+      %h4 Outbound event (you performed it)
+
+
+
+  %h3
+    Icons
+
+  .events
+    .event.color1{'data-event' => 'color1'}
+      %h4 Default
+
+    .event.listened.color1{'data-event' => 'listened'}
+      %h4 Listened
+      %ul
+        %li Listen
+
+    .event.searched.color1{'data-event' => 'searched'}
+      %h4 Searched
+      %ul
+        %li Search
+
+
+    .event.liked.color1{'data-event' => 'liked'}
+      %h4 Liked
+      %ul
+        %li Like
+
+    .event.favorited.color1{'data-event' => 'favorited'}
+      %h4 Favorited
+      %ul
+        %li Favorite
+
+    .event.pinned.color1{'data-event' => 'pinned'}
+      %h4 Pinned
+      %ul
+        %li Pin
+
+    .event.deleted.color1{'data-event' => 'deleted'}
+      %h4 Deleted
+      %ul
+        %li Destroyed
+        %li Delete
+        %li Destroy
+
+    .event.agreed.color1{'data-event' => 'agreed'}
+      %h4 Agreed
+      %ul
+        %li Oked
+        %li Agree
+        %li Ok
+
+    .event.signed_in.color1{'data-event' => 'signed_in'}
+      %h4 Signed in
+      %ul
+        %li Logged in
+        %li Sign in
+        %li Log in
+
+    .event.signed_out.color1{'data-event' => 'signed_out'}
+      %h4 Signed out
+      %ul
+        %li Logged out
+        %li Sign out
+        %li Log out
+
+    .event.disagreed.color1{'data-event' => 'disagreed'}
+      %h4 Disagreed
+      %ul
+        %li Disagree
+
+    .event.watched.color1{'data-event' => 'watched'}
+      %h4 Watched
+      %ul
+        %li Watch
+
+    .event.played.color1{'data-event' => 'played'}
+      %h4 Played
+      %ul
+        %li Play
+
+    .event.paused.color1{'data-event' => 'paused'}
+      %h4 Paused
+      %ul
+        %li Pause
+
+    .event.stopped.color1{'data-event' => 'stopped'}
+      %h4 Stopped
+      %ul
+        %li Stop
+
+    .event.skipped.color1{'data-event' => 'skipped'}
+      %h4 Skipped
+      %ul
+        %li Skip
+
+    .event.repeated.color1{'data-event' => 'repeated'}
+      %h4 Repeated
+      %ul
+        %li Repeat
+
+    .event.synced.color1{'data-event' => 'synced'}
+      %h4 Synced
+      %ul
+        %li Sync
+
+    .event.locked.color1{'data-event' => 'locked'}
+      %h4 Locked
+      %ul
+        %li Lock
+
+    .event.unlocked.color1{'data-event' => 'unlocked'}
+      %h4 Unlocked
+      %ul
+        %li Unlock
+
+    .event.tagged.color1{'data-event' => 'tagged'}
+      %h4 Tagged
+      %ul
+        %li Tag
+
+    .event.read.color1{'data-event' => 'read'}
+      %h4 Read
+
+    .event.bookmarked.color1{'data-event' => 'bookmarked'}
+      %h4 Bookmarked
+      %ul
+        %li Bookmark
+
+    .event.printed.color1{'data-event' => 'printed'}
+      %h4 Printed
+      %ul
+        %li Print
+
+    .event.photographed.color1{'data-event' => 'photographed'}
+      %h4 Photographed
+      %ul
+        %li Photograph
+
+    .event.edited.color1{'data-event' => 'edited'}
+      %h4 Edited
+      %ul
+        %li Updated
+        %li Edit
+        %li Update
+
+    .event.added_to_cart.color1{'data-event' => 'added_to_cart'}
+      %h4 Added to cart
+      %ul
+        %li Added to basket
+        %li Add to cart
+        %li Add to basket
+
+    .event.moved.color1{'data-event' => 'moved'}
+      %h4 Moved
+      %ul
+        %li Relocated
+        %li Move
+        %li Relocate
+
+    .event.ejected.color1{'data-event' => 'ejected'}
+      %h4 Ejected
+      %ul
+        %li Eject
+
+    .event.shared.color1{'data-event' => 'shared'}
+      %h4 Shared
+      %ul
+        %li Share
+
+    .event.checked.color1{'data-event' => 'checked'}
+      %h4 Checked
+      %ul
+        %li Check
+
+    .event.removed.color1{'data-event' => 'removed'}
+      %h4 Removed
+      %ul
+        %li Remove
+
+    .event.resized.color1{'data-event' => 'resized'}
+      %h4 Resized
+      %ul
+        %li Resize
+
+    .event.tweeted.color1{'data-event' => 'tweeted'}
+      %h4 Tweeted
+      %ul
+        %li Signed in with twitter
+        %li Logged in with twitter
+        %li Tweet
+        %li Sign in with twitter
+        %li Log in with twitter
+
+    .event.said.color1{'data-event' => 'said'}
+      %h4 Said
+      %ul
+        %li Fedback
+        %li Commented
+        %li Say
+        %li Feedback
+        %li Comment
+
+    .event.viewed.color1{'data-event' => 'viewed'}
+      %h4 Viewed
+      %ul
+        %li Saw
+        %li View
+        %li See
+
+    .event.warned.color1{'data-event' => 'warned'}
+      %h4 Warned
+      %ul
+        %li Cautioned
+        %li Warn
+        %li Caution
+
+    .event.moved_down.color1{'data-event' => 'moved_down'}
+      %h4 Moved down
+      %ul
+        %li Demoted
+        %li Move down
+        %li Demote
+
+    .event.schedueled.color1{'data-event' => 'schedueled'}
+      %h4 Schedueled
+      %ul
+        %li Met
+        %li Scheduel
+        %li Meet
+
+
+    .event.gifted.color1{'data-event' => 'gifted'}
+      %h4 Gifted
+      %ul
+        %li Gift
+
+    .event.moved_right.color1{'data-event' => 'moved_right'}
+      %h4 Moved right
+      %ul
+        %li Move right
+
+    .event.moved_left.color1{'data-event' => 'moved_left'}
+      %h4 Moved left
+      %ul
+        %li Move left
+
+    .event.retweeted.color1{'data-event' => 'retweeted'}
+      %h4 Retweeted
+      %ul
+        %li Retweet
+
+    .event.opened.color1{'data-event' => 'opened'}
+      %h4 Opened
+      %ul
+        %li Open
+
+    .event.located.color1{'data-event' => 'located'}
+      %h4 Located
+      %ul
+        %li Locate
+
+    .event.voted_up.color1{'data-event' => 'voted_up'}
+      %h4 Voted up
+      %ul
+        %li Up voted
+        %li Vote up
+        %li Up vote
+
+    .event.voted_down.color1{'data-event' => 'voted_down'}
+      %h4 Voted down
+      %ul
+        %li Down voted
+        %li Vote down
+        %li Down vote
+
+    .event.moved_up.color1{'data-event' => 'moved_up'}
+      %h4 Moved up
+      %ul
+        %li Promoted
+        %li Move up
+        %li Promote
+
+    .event.won.color1{'data-event' => 'won'}
+      %h4 Won
+      %ul
+        %li Win
+
+    .event.uploaded.color1{'data-event' => 'uploaded'}
+      %h4 Uploaded
+      %ul
+        %li Upload
+
+    .event.shrank.color1{'data-event' => 'shrank'}
+      %h4 Shrank
+      %ul
+        %li Shrink
+
+
+    .event.signed_in_with_facebook.color1{'data-event' => 'signed_in_with_facebook'}
+      %h4 Signed in with facebook
+      %ul
+        %li Logged in with facebook
+        %li Sign in with facebook
+        %li Log in with facebook
+
+    .event.signed_in_with_pinterest.color1{'data-event' => 'signed_in_with_pinterest'}
+      %h4 Signed in with pinterest
+      %ul
+        %li Logged in with pinterest
+        %li Sign in with pinterest
+        %li Log in with pinterest
+
+    .event.phoned.color1{'data-event' => 'phoned'}
+      %h4 Phoned
+      %ul
+        %li Telephoned
+        %li Phone
+        %li Telephone
+
+    .event.signed_in_with_google_plus.color1{'data-event' => 'signed_in_with_google_plus'}
+      %h4 Signed in with google plus
+      %ul
+        %li Logged in with google plus
+        %li Sign in with google plus
+        %li Log in with google plus
+
+    .event.signed_in_with_github.color1{'data-event' => 'signed_in_with_github'}
+      %h4 Signed in with github
+      %ul
+        %li Logged in with github
+        %li Sign in with github
+        %li Log in with github
+
+    .event.viewed_page.color1{'data-event' => 'viewed_page'}
+      %h4 Viewed page
+      %ul
+        %li Page viewed
+        %li View page
+        %li Page view
+
+    .event.added_card.color1{'data-event' => 'added_card'}
+      %h4 Added card
+      %ul
+        %li Add card
+
+    .event.subscribed.color1{'data-event' => 'subscribed'}
+      %h4 Subscribed
+      %ul
+        %li Subscribe
+
+    .event.invited.color1{'data-event' => 'invited'}
+      %h4 Invited
+      %ul
+        %li Invite
+
+    .event.certified.color1{'data-event' => 'certified'}
+      %h4 Certified
+      %ul
+        %li Certify
+
+    .event.linked.color1{'data-event' => 'linked'}
+      %h4 Linked
+      %ul
+        %li Link
+
+    .event.filtered.color1{'data-event' => 'filtered'}
+      %h4 Filtered
+      %ul
+        %li Filter
+
+    .event.cut.color1{'data-event' => 'cut'}
+      %h4 Cut
+
+    .event.saved.color1{'data-event' => 'saved'}
+      %h4 Saved
+      %ul
+        %li Save
+
+    .event.delivered.color1{'data-event' => 'delivered'}
+      %h4 Delivered
+      %ul
+        %li Deliver
+
+    .event.undid.color1{'data-event' => 'undid'}
+      %h4 Undid
+      %ul
+        %li Undo
+
+    .event.downloaded.color1{'data-event' => 'downloaded'}
+      %h4 Downloaded
+      %ul
+        %li Download
+
+    .event.ate.color1{'data-event' => 'ate'}
+      %h4 Ate
+      %ul
+        %li Eat
+
+    .event.drank.color1{'data-event' => 'drank'}
+      %h4 Drank
+      %ul
+        %li Drink
+
+    .event.replied.color1{'data-event' => 'replied'}
+      %h4 Replied
+      %ul
+        %li Reply
+
+    .event.flew.color1{'data-event' => 'flew'}
+      %h4 Flew
+      %ul
+        %li Fly
+
+
+
+    .event.emailed.color1{'data-event' => 'emailed'}
+      %h4 Messaged
+      %ul
+        %li Emailed
+        %li Mailed
+        %li Sent email
+        %li Message
+        %li Email
+        %li Mail
+        %li Send email
+
+    .event.signed_in_with_linked_in.color1{'data-event' => 'signed_in_with_linked_in'}
+      %h4 Signed in with linked in
+      %ul
+        %li Logged in with linked in
+        %li Signed in with linkedin
+        %li Logged in with linkedin
+        %li Sign in with linkedin
+        %li Log in with linkedin
+        %li Sign in with linkedin
+        %li Log in with linkedin
+
+    .event.purchase.color1{'data-event' => 'purchase'}
+      %h4 Purchased
+      %ul
+        %li Bought
+        %li Checked out
+        %li Purchase
+        %li Buy
+        %li Check out
+
+    .event.copied.color1{'data-event' => 'copied'}
+      %h4 Copied
+      %ul
+        %li Duplicated
+        %li Copy
+        %li Duplicate

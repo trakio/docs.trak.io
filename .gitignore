@@ -1,0 +1,5 @@
+Gemfile.lock
+_jekyll_s3.yml
+*.sublime-project
+*.sublime-workspace
+_site

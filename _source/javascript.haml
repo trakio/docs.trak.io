@@ -1,0 +1,89 @@
+---
+title: JavaScript API Introduction
+---
+
+%h2 JavaScript API Introduction
+
+%p To start using the JavaScript library, place the following code in the `head` element of your page, it should be placed before the script tags you are using to send data. You don't need to worry about it slowing down your page load time as it's loaded asynchronously.
+
+%code.html.spread
+  :escaped
+    <script>
+      var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+      trak.io.load("YOUR_API_TOKEN");
+    </script>
+
+
+%p The JavaScript library will <a href='/page_view.html'>automatically start tracking page views</a> for you. To get the most out of trak.io you really need to be sending us more than just page views. The JavaScript library has the following methods to do that:
+
+%ul
+  %li
+    %a{href: '/identify.html'} <code>trak.io.identify()</code>
+    \- send trak.io data about a user
+  %li
+    %a{href: '/alias.html'} <code>trak.io.alias()</code>
+    \- merge the current user with one from another session
+  %li
+    %a{href: '/track.html'} <code>trak.io.track()</code>
+    \- track an event for the current user
+  %li
+    %a{href: '/page_view.html'} <code>trak.io.page_view()</code>
+    \- track a page view for the current user
+
+%p There are a few other methods for altering some of the data that is stored in the user's cookie and sent along with requests to the API
+
+%ul
+  %li
+    %a{href: '/distinct_id.html'} <code>trak.io.distinct_id()</code>
+    \- get or set the current distinct id
+  %li
+    %a{href: '/channel.html'} <code>trak.io.channel()</code>
+    \- get or set the current channel
+  %li
+    %a{href: '/context.html'} <code>trak.io.context()</code>
+    \- get or set the current context
+
+%h3 Options
+
+%p In addition to your API token you can also give <code>trak.io.load()</code> an options object.
+
+
+%code.html.spread
+  :escaped
+    <script>
+      var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+      trak.io.load("YOUR_API_TOKEN", { distinct_id: 'matt@trak.io', channel: 'dashboard' });
+    </script>
+
+%table.table.spread
+  %thead
+    %tr
+      %th Option
+      %th Type
+      %th Default
+      %th Description
+  %tbody
+    %tr
+      %td distinct_id
+      %td String
+      %td
+        %em Current session's distinct id
+      %td Providing this option will simply pass it to <code><a href='/distinct_id.html'>trak.io.distinct_id()</a></code>.
+    %tr#channel
+      %td channel
+      %td String
+      %td
+        %em Current session's channel
+      %td Providing this option will simply pass it to <code><a href='/channel.html'>trak.io.channel()</a></code>.
+    %tr
+      %td auto_track_page_views
+      %td Boolean
+      %td 1
+      %td Whether to automatically track page views, for more information see <a href='/page_view.html'>docs.trak.io/page_view.html</a>.
+    %tr#root_domain
+      %td root_domain
+      %td String
+      %td
+        %em Current root domain
+      %td The <a href='/distinct_id.html'>distinct id</a> cookie is set on the highest domain we can set one at, you can use this option to override this
+

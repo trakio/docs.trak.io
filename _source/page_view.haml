@@ -1,0 +1,121 @@
+---
+title: Page View
+---
+
+.alert.alert-info
+  %h4.first Planned Change to Page Views Within Current Version
+  %p We have a change planned for page views that will change the behaviour documented below within the current API version (V1). Page views are currently events with an event name of 'page_view', at some point in the future page views will:
+  %ul
+    %li be their own record type distinct from events
+    %li not be something you can build metrics around
+    %li still form part of a person's activity on their profile screen
+  %p All existing events with a name of 'page_view' will be migrated, so <strong>this is not a breaking change</strong> and you may use the page_view method as documented below.
+
+%h2 Page view
+
+%h3 Its Just Track
+
+%p Page view is just a wrapper for:
+
+%code.javascript
+  :escaped
+    trak.io.track('Page view')
+
+%div.for-javascript
+
+  %h3.first JavaScript
+
+  %p The JavaScript library will automatically call <code>trak.io.page_view()</code> when the page has finished loading (it behaves in the same ways as <a href='http://api.jquery.com/ready/' target='_blank'>jQuery's ready</a> method). If you call it yourself you will end up with duplicate page views, <strong>so do not call trak.io.page_view() yourself</strong>, unless&hellip;
+
+  %p The exception to this is if you are loading your pages in with ajax (or <a href='https://github.com/defunkt/jquery-pjax' target='_blank'>pjax</a>) in which case you will need to trigger <code>trak.io.page_view()</code> yourself.
+
+  %code.javascript
+    :escaped
+      trak.io.page_view()
+
+  %p If you do wish to trigger all page views yourself you can disable the automatic page_view call with the auto_track_page_views option, when you load trak.io:
+
+  %code.javascript
+    :escaped
+      trak.io.load('YOUT_API_TOKEN', { auto_track_page_views: false })
+
+  %h4 Sending Data For Other Pages
+
+  %p If you need to send data for a page view that is not the current page, you can override the url by passing it in as a string in the first argument.
+
+  %code.javascript
+    :escaped
+      trak.io.page_view("http://trak.io")
+
+  %p You can override the page title by passing it in as a string in the second argument.
+
+  %code.javascript
+    :escaped
+      trak.io.page_view("http://trak.io", "trak.io's uber homepage")
+
+  %h4 Callback
+
+  %p Any function passed as the final argument will be called once the trak.io API has returned, and be passed the page_view's <a href='#return'>return value</a>.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.page_view(function(data) {
+        console.log(data) // the return value for track
+      })
+
+  %h4 Arguments
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Argument
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %th url
+        %td String
+        %td
+          %em The current page's location
+        %td The url of the page view to register.
+      %tr
+        %th page title
+        %td String
+        %td
+          %em The current page's title
+        %td The title of the page view to register
+      %tr
+        %th callback
+        %td function
+        %td null
+        %td A callback function that will be called when the API request completes. It will be passed a <a href='#return'>return value</a> as the first argument.
+
+  %h4 Return Value
+
+  %p The JavaScript method will make the page view HTTP request asynchronously, returning the <code>trak.io</code> instance immediately. The <a href='#return'>return value</a> of the HTTP request it makes will be passed to the callback function as the first argument.
+
+
+%div.for-http
+
+  %h3.first HTTP
+
+  %p Page view is a feature of the JavaScript library, however if you are using the HTTP API it is equivilent of the following:
+
+  %code.bash
+    :escaped
+      $ curl https://api.trak.io/v1/track \
+        --data token=YOUR_API_TOKEN\
+        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Web site"}'
+
+
+%h3#return Return Value
+
+%p Since page view is just a wrapper for <code><a href='/track.html'>trak.io.track()</a></code> its <a href='/track.html#return'>return value is the same</a>.
+
+%code.json
+  :escaped
+    {
+      "status": "success",
+      "trak_id": "516d2737b1b92244bb000001", // trak.io's id for the event
+    }

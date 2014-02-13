@@ -1,0 +1,163 @@
+---
+title: Track
+---
+
+%h2 Track
+
+%p Track is how you record the actions people perform. You can also record properties specific to those actions. For a "Purchased shirt" event, you might record properties like <a href='/properties.html#revenue'>revenue</a>, size, etc.
+
+%div.for-javascript
+
+  %h3.first JavaScript
+
+  %h4 Basic Usage
+
+  %p You don't have to send any properties for an event, at its simpliest you can use <code>trak.io.track()</code> to just register an event for a person.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.track('played video')
+
+  %p.note Your event name will be <a href='data_keys.html'>standardized server side</a>, so 'played video' becomes 'played_video'. It will be humanized again in trak.io's dashboard for you.
+
+  %p If you do want to sent <a href='/properties.html#event'>properties</a> for an event you can do that by passing in an object for the second argument.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.track('added to basket', { sku: '002381', price: 9.99 })
+
+  %h4 Channel
+
+  %p The track method will, by default, use the current session's <a href='/channel.html'>channel</a>, to override this you can pass in a channel as a string for the second argument.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.track('added to basket', 'online store', { sku: '002381', price: 9.99 })
+
+  %p This will then push the properties to the third argument.
+
+  %h4 Callback
+
+  %p Any function passed as the final argument will be called once the trak.io API has returned, and be passed the track's <a href='#return'>return value</a>.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.track('played video', function(data) {
+        console.log(data) // the return value for track
+      })
+      trak.io.track('added to basket', 'online store', { sku: '002381', price: 9.99 }, function(data) {
+        console.log(data) // the return value for track
+      })
+
+  %h4 Arguments
+
+  %p To achieve this versatility with arguments the trak.io library analyses the type of each argument to determine what it is. These are the three possible patterns, listing each argument, its type, and using square brackets to indicate whether the argument is optional.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.track(event:String [, properties:Object [, callback:Function ]]])
+      trak.io.track(event:String, channel:String [, properties:Object [, callback:Function ]]])
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Argument
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %th distinct_id
+        %td String
+        %td
+          %em Current session's distinct id
+        %td The distinct id of the person you wish to register this event against. When ommited the current session's <a href='/distinct_id.html'>distinct id</a> is used.
+      %tr
+        %th event
+        %td String
+        %td
+          %em Required
+        %td The key for this event, this value will be <a href='/data_keys.html'>standardized server side</a>.
+      %tr
+        %th channel
+        %td String
+        %td
+          %em Current session's channel
+        %td The channel this event occurred in. When ommitted the current session's <a href='/channel.html'>channel</a> is used.
+      %tr
+        %th properties
+        %td Object
+        %td {}
+        %td A set of key value <a href='/properties.html#event'>properties</a> that describe the event.
+      %tr
+        %th callback
+        %td function
+        %td null
+        %td A callback function that will be called when the API request completes. It will be passed a <a href='#return'>return value</a> as the first argument.
+
+  %h4 Return Value
+
+  %p The JavaScript method will make the track HTTP request asynchronously, returning the <code>trak.io</code> instance immediately. The <a href='#return'>return value</a> of the HTTP request it makes will be passed to the callback function as the first argument.
+
+%div.for-http
+
+  %h3.first HTTP
+
+  %p A raw HTTP call to <code>api.trak.io/v1/track</code> has certain requirements and options as outlined in the <a href='/http.html'>introduction to the HTTP API</a>. In addition data specific to the track action should be sent in the data parameter as a JSON string.
+
+  %code.bash.spread
+    :escaped
+      $ curl https://api.trak.io/v1/track \
+        --data token=YOUR_API_TOKEN\
+        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Web site", "properties": {}, "context": { "time_zone": "GMT" }}'
+
+  %h4 Data Object
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Property
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %th distinct_id
+        %td String
+        %td
+          %em Required
+        %td The distinct id of the person you wish to register this event against.
+      %tr
+        %th event
+        %td String
+        %td
+          %em Required
+        %td The key for this event, this value will be <a href='/data_keys.html'>standardized server side</a>.
+      %tr
+        %th channel
+        %td String
+        %td web_site
+        %td The channel this event occurred in.
+      %tr
+        %th properties
+        %td Object
+        %td {}
+        %td A set of key value <a href='/properties.html#event'>properties</a> that help describe the event.
+      %tr#time
+        %th time
+        %td String (ISO 8601)
+        %td
+          %em Now
+        %td The time that this event occurred, the time should be a string formatted in <a href='http://en.wikipedia.org/wiki/ISO_8601' target='_blank'>ISO 8601</a>.
+
+#return
+  %h3 Return Value
+
+  %p When track returns you will recieve an object with the following structure.
+
+  %code.json
+    :escaped
+      {
+        "status": "success",
+        "trak_id": "516d2737b1b92244bb000001", // trak.io's id for the event
+      }

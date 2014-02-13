@@ -1,0 +1,40 @@
+---
+title: Channel
+---
+
+%h2 Channel
+
+%p Every time you trigger an event with <a href='/track.html'><code>trak.io.track()</code></a> you can pass it a channel argument, however this is unlikely to change with a single user session so you can set it with <code>trak.io.channel()</code>.
+
+.for-javascript
+
+  %h3.first JavaScript
+
+  %p You can get the current channel by calling the <code>trak.io.channel()</code> method without any arguments.
+
+  %code
+    :escaped
+      trak.io.channel() // returns the current session's channel
+
+  %p You can set the current session's channel by calling the <code>trak.io.channel()</code> method and passing the channel as the first argument.
+
+  %code
+    :escaped
+      trak.io.channel('blog') // set the current session's channel
+
+  %p If you are using the JavaScript library and do not set a channel with <code>trak.io.channel()</code> or provide one as an argument when you call <code><a href='/track.html'>trak.io.track()</a></code>, by default it will use the current page's hostname, including the subdomain.
+
+  %p.note The value you set will be stored in the user's cookie and persist across requests, within the current subdomain. This is in contast to <a href='/distinct_id.html'>distinct id</a> which persists across requests for the root domain and all its subdomains.
+
+.for-http
+
+  %h3.first HTTP
+
+  %p If you are using the HTTP API directly you will need to send the channel with each track request.
+
+  %code.bash.spread
+    :escaped
+      $ curl https://api.trak.io/v1/track \
+        --data token=YOUR_API_TOKEN\
+        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Web site", "properties": { "name": "Matthew Spence" }, "context": { user_agent }}'
+

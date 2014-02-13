@@ -1,0 +1,249 @@
+@import "../_vendor/bootstrap/css/bootstrap";
+@import "_imports/colors";
+@import "_imports/event_icons";
+@import "_imports/buttons";
+@import "_imports/type";
+@import "_imports/tables";
+@import "_imports/mixins";
+
+html, body {
+  height: 100%;
+}
+body {
+  padding-bottom: 0px;
+  background-color: #fff;
+  .at2x('/assets/images/background.png',2560px,5px);
+  background-position: center;
+  background-repeat: repeat-y;
+  font-family: "Myriad Pro", "Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
+#root {
+  padding-top: 80px;
+  padding-bottom: 130px;
+}
+
+.navbar-fixed-top {
+  .navbar-inner {
+    background: #23272d;
+    padding: 18px 0;
+    .box-shadow(none);
+    border: none;
+  }
+}
+
+.navbar {
+  .brand {
+    padding: 1px 20px 0;
+    a {
+      color: #e4e9f0;
+      text-shadow: none;
+      .at2x('/assets/images/logo.png',156px,33px);
+      display: block;
+      height: 0px;
+      overflow: hidden;
+      width: 156px;
+      padding-top: 33px;
+      margin-left: 10px;
+    }
+  }
+  .nav.pull-right {
+    margin-right: 120px;
+  }
+  .nav > li {
+    margin-left: 30px;
+    &.active > a,
+    &.active > a:hover {
+      background: #343941;
+      color: #f8f8f8;
+      .border-radius(3px);
+      .box-shadow(none);
+      text-shadow: none;
+      border: 0;
+    }
+    > a {
+      padding: 9px 12px 9px;
+      text-shadow: none;
+      color: #b5bbc3;
+      &:hover {
+        color: #98a1af;
+      }
+    }
+  }
+  .nav > .were-hiring > a {
+    display: block;
+    position: absolute;
+    top: -18px;
+    right: -125px;
+    width: 170px;
+    height: 0px;
+    padding: 165px 0 0 0;
+    overflow: hidden;
+    z-index: 10;
+    .at2x('/assets/images/were-hiring.png', 170px, 165px);
+  }
+}
+.nav li + .nav-header {
+  margin-top: 20px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #8794a9;
+  margin-left: -15px;
+  padding-right: 0;
+  ul {
+    text-transform: none;
+    font-size: 14px;
+    list-style: none;
+    margin-left: 0px;
+    margin-top: 5px;
+    li {
+      a {
+        line-height: 20px;
+        padding: 3px 0px 3px 10px;
+      }
+    }
+  }
+}
+.nav > li {
+
+  &.active > a {
+    border-right: solid 5px #f49067;
+  }
+  a {
+    display: block;
+  }
+}
+.nav > li a:hover,
+.nav > li a:focus {
+  background-color: #f6f7f8;
+  text-decoration: none;
+}
+
+.offset05 {
+  margin-left: 50px;
+}
+
+.nav-list {
+  margin-top: 30px;
+  padding-left: 15px;
+}
+
+p {
+  line-height: 25px;
+  margin: 15px 0 ;
+}
+
+ul {
+  margin: 10px 0 10px 25px;
+}
+a, a code {
+  color: #2d92c9;
+}
+
+code {
+  display: block;
+  white-space: pre;
+  overflow: scroll;
+  padding: 5px 10px;
+  margin: 20px 0;
+  color: #d25b5b;
+}
+pre {
+  margin: 20px 0;
+  color: #d25b5b;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  padding: 5px 10px;
+  overflow: scroll;
+  code {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    white-space: pre;
+    word-wrap: normal;
+  }
+}
+p code, li code, table code {
+  display: inline;
+  padding: 1px 2px;
+}
+
+.note code {
+  font-style: normal;
+}
+
+li p {
+  margin: 0;
+}
+
+.alert {
+  margin-top: 20px;
+  h4 {
+    margin-top: 10px;
+  }
+
+  p {
+    margin: 5px 0 10px;
+    line-height: 20px
+  }
+}
+
+.sticky-footer {
+  min-height: 100%;
+}
+
+.footer {
+  margin-top: -80px;
+  background: #33373e;
+  color: #eff4fb;
+  padding: 30px 0 30px;
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: -20px;
+  .copyright {
+    float: left;
+  }
+  .links {
+    float: right;
+    margin: 0;
+    li {
+      float: left;
+      list-style: none;
+      margin-left: 30px;
+      a {
+        color: #eff4fb;
+      }
+    }
+  }
+}
+
+.spread {
+  width: 695px;
+  .box-sizing(border-box);
+}
+
+.header-with-btn {
+  font-weight: bold;
+  line-height: 40px;
+  margin: 20px 0;
+  .btn {
+    .pull-right;
+    .btn-large;
+    font-weight: normal;
+  }
+}
+
+#hash_highlight {
+  position: absolute;
+  background: #fcf8e3;
+  z-index: -1;
+  .box-shadow(0px 0px 20px 10px #fcf8e3);
+}
+
+@gridColumnWidth:         41px;
+@gridGutterWidth:         41px;
+// @gridColumnWidth1200:     51px;
+// @gridGutterWidth1200:     51px;
+
+@import "../_vendor/bootstrap/css/grid";
+// @import "../_bootstrap/css/responsive-1200px-min";

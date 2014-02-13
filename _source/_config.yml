@@ -1,0 +1,5 @@
+server: true
+markdown: redcarpet
+layout: default
+redcarpet:
+  extensions: ['autolink','fenced_code_blocks','lax_spacing']

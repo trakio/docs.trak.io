@@ -1,0 +1,36 @@
+---
+title: Quick Start Guide
+---
+%h2 Quick Start Guide
+
+%h3.one Embed the trak.io Library
+
+%p Drop this code into the `head` of your site, this will asyncronously load our JavaScript library onto your page so you can use it to send us data. Be sure to substitute in your own API token.
+%code.html.spread
+  = preserve do
+    :escaped
+      <script type="text/javascript">
+        var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+        trak.io.load('YOUR_API_TOKEN');
+      </script>
+%p Checkout <a href='/javascript.html#options'>docs.trak.io/javascript.html</a> for more information on the <code>trak.io.load()</code> method and its options.
+
+%h3.two Track an Event
+%p You can track an event with the <code><a href='/track.html'>trak.io.track()</a></code> method:
+
+%code.javascript.spread
+  = preserve do
+    :escaped
+      trak.io.track('Signed up');
+
+%p For more on the <code><a href='/track.html'>trak.io.track()</a></code> method, adding properties, context, channels and callbacks checkout <a href='/track.html'>docs.trak.io/track.html</a>.
+
+%h3.three Identify a Person
+%p If you have data about a person you want to send, such as their name, age, email address, etc, you can use the <code><a href='/identify.html'>trak.io.identify()</a></code> method:
+
+%code.javascript.spread
+  = preserve do
+    :escaped
+      trak.io.identify({ name: 'Matt Spence', email: 'matt@trak.io'});
+
+%p For more on the <code><a href='/identify.html'>trak.io.identify()</a></code> method, adding properties and callbacks checkout <a href='/identify.html'>docs.trak.io/identify.html</a>

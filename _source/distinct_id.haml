@@ -1,0 +1,86 @@
+---
+title: Distinct ID
+---
+
+%h2 Distinct ID
+
+%p A user's distinct id is how we identify them when ever you send us their data or events.
+
+%ul
+  %li A user can have one or more distinct ids
+  %li You can find a user's distinct ids by clicking the distinct id link in their person profile screen in the trak.io dashboard
+  %li The <code><a href='/track.html'>trak.io.track()</a></code>, <code><a href='/identify.html'>trak.io.identify()</a></code> and <code><a href='/alias.html'>trak.io.alias()</a></code> actions must be provided with a distinct id when using the HTTP API
+  %li
+    The trak.io JavaScript library will:
+    %ul
+      %li automatically generate a distinct id for users that don't have one
+      %li keep track of your user's distinct id for you in a cookie so you don't have to provide it each time you call a method with the JS library
+      %li share a user's distinct id across a root domain, (unlike <a href='/channel.html'>channel</a> which is only shared between requests on a subdomain) so that users can be tracked across subdomains
+
+.for-javascript
+
+  %h3.first JavaScript
+
+  %p You can get the current distinct id by calling the <code>trak.io.distinct_id()</code> method without any arguments.
+
+  %code
+    :escaped
+      trak.io.distinct_id() // returns the current distinct id
+
+  %p You can set the current distinct id without making any calls to the API by calling the <code>trak.io.distinct_id()</code> method passing the distinct id as the first argument. Setting the current disinct id <strong>does not</strong> change the distinct id of the current user, it in effect changes the current user. To add a distinct id to the current user use <a href='/alias.html'>alias</a>.
+
+  %code
+    :escaped
+      trak.io.distinct_id('matt@trak.io') // set the current distinct id
+
+  %h4 Distinct ID Scope
+
+  %p Distinct ID is stored in the user's cookie and persisted across requests, for the current root domain and all its subdomains. This is in contast to <a href='/channel.html'>channel</a> which only persists across requests for the subdomain.
+
+  %p We determine the root domain as the highest domain we are able to set a cookie for. For example if your domain was 'sub.example.com' we would first try to set a cookie on 'com' which would fail, then on 'example.com' which would succeed therefore 'example.com' would be the root domain. If you domain was 'sub.example.co.uk', we would first try 'uk' and then 'co.uk', finally 'example.co.uk' would succeed so this would be your root domain.
+
+  %p The cookie name is unique to your account so even if you are running it on a shared platform like 'myblog.tumblr.com' it will not conflict with other trak.io users on tublr.
+
+  %h5 Setting Root Domain Manually
+
+  %p You can override the scope of a person's distinct id with the <code><a href='/javascript.html#root_domain'>root_domain</a></code> option.
+
+  %p If for example you were running trak.io on blog.example.com and www.example.com, by default somebody visiting either of these sites will be identified as the same person.
+
+  %p If however you were to set the root domain for your blog as blog.example.com and your site as www.example.com, they would be recognised as two different people, since they no longer share a distinct ID.
+
+  %code
+    :escaped
+      <script>
+        var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+        trak.io.load("YOUR_API_TOKEN", {
+          root_domain: 'blog.example.com'
+        });
+      </script>
+
+  %code
+    :escaped
+      <script>
+        var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+        trak.io.load("YOUR_API_TOKEN", {
+          root_domain: 'www.example.com'
+        });
+      </script>
+
+  %p.note If your site is at example.com and they visit there first they will still share a distinct id, since the code will still pick up the root domain's cookie.
+
+
+
+  %h4 Setting Distinct ID With Incoming Links
+
+  %p By default the JavaScript library will either look for a person's distinct id from their cookie or generate one. You can specify a distinct id for a person with the <code>trak_distinct_id</code> get url parameter.
+
+  %code
+    :escaped
+      http://example.com/my_page.html?trak_distinct_id=matt@trak.io
+
+.for-http
+
+  %h3.first HTTP
+
+  %p The HTTP API doesn't have an endpoint to set or get a distinct id since distinct id is what all other end points use to assign the data you are sending to a person. If you want to add a distinct id to a user you are probably looking for the <a href='/alias.html'>alias end point</a>.

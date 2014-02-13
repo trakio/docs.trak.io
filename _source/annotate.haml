@@ -1,0 +1,61 @@
+---
+title: Annotate
+---
+
+%h2 Annotate
+
+%p Annotate is a way of recording system wide events that affect everyone. Annotations are similar to events except they are not associated with any one person.
+
+%div.for-javascript
+
+  %h3.first JavaScript
+
+  %p Since annotations are system wide events and not triggered by your end users they are not supported by the JavaScript library. If you are building a JavaScript based client for trak.io and need to register annotations, <a href='mailto:support@trak.io?subject=I need annotate in the trak.io JavaScript library'>please let us know</a> and we'll work on adding it.
+
+%div.for-http
+
+  %h3.first HTTP
+
+  %p A raw HTTP call to <code>api.trak.io/v1/annotate</code> has certain requirements and options as outlined in the <a href='/http.html'>introduction to the HTTP API</a>. In addition data specific to the annotate action should be sent in the data parameter as a JSON string.
+
+  %code.bash.spread
+    :escaped
+      $ curl https://api.trak.io/v1/annotate \
+        --data token=YOUR_API_TOKEN\
+        --data data='{"event": "Deployed update", "channel": "Web site", "properties": { "details": "Added new super awesome feature!", "version": "V324" } }'
+
+  %h4 Data Object
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Property
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %th event
+        %td String
+        %td
+          %em Required
+        %td The key for this annotation, this value will be <a href='/data_keys.html'>standardized server side</a>.
+      %tr
+        %th properties
+        %td Object
+        %td {}
+        %td A set of key value <a href='/properties.html#annotate'>properties</a> about the event for example if the event was an update you might include details about what was deployed or what version the system is now at.
+      %tr
+        %th channel
+        %td String
+        %td null
+        %td The channel this event occurred in.
+
+%h3#return Return Value
+
+%code.json
+  :escaped
+    {
+      "status": "success",
+      "trak_id": "516d2737b1b92244bb000001", // trak.io's id for the annotation
+    }

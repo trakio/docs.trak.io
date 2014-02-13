@@ -1,0 +1,95 @@
+---
+title: Data Keys
+---
+
+%h2 Data Keys
+
+%p <strong>"Data Keys"</strong> cover the following:
+%ul
+  %li Event names
+  %li Annotation names
+  %li Channel names
+  %li Event, people and annotation property keys
+
+%p You <strong>may not start a key with a dollar symbol</strong> ($), if you do it will be stripped out.
+
+%p You can use <strong>which ever format of key you wish</strong> (underscore, camelcase, hyphenated, etc), however <strong>they will all be standardize to underscore</strong> for storage and then humanised in trak.io's dashboard, which means all of the following are equivalent:
+
+%code
+  :escaped
+    Page view
+    Page View
+    page view
+    PageView
+    pageView
+    page-view
+    page_view
+
+%p <strong>Numbers are also interpreted as words</strong> so all of the following are also equivalent:
+
+%code
+  :escaped
+    Top10View
+    top10view
+    top-10-view
+    top 10 view
+    top_10_view
+
+%p <strong>Punctuation</strong> (other than underscores, hyphens, and dollars at the start) <strong>is not altered</strong> so these are not equivalent:
+
+%code
+  :escaped
+    page view
+    page.view
+    pageview
+
+%p Except for:
+
+%h3 Property Keys & Dot Syntax
+
+%p Event, people and annotation <strong>property keys will be exploded out</strong> using a dot to indicate a new level in the object. So:
+
+%code
+  :escaped
+    {
+      "nested.a": "value",
+      "nested": {
+        "b": "value",
+        "nested.c": "value"
+      },
+      "nested.nested": {
+        "d": "value",
+        "nested.e": "value"
+      },
+      "overridden_by_dot": "overridden",
+      "overridden_by_dot.a": "value",
+      "overridden_by_normal.a": "overridden",
+      "overridden_by_normal": "value"
+    }
+
+%p Becomes:
+
+%code
+  :escaped
+    {
+      "nested": {
+        "a": "value",
+        "b": "value",
+        "nested": {
+          "c": "value",
+          "d": "value",
+          "nested": {
+            "e": "value"
+          }
+      },
+      "overridden_by_dot": {
+        "a": "value"
+      },
+      "overridden_by_normal": "value"
+    }
+
+%p If this seems confusing, it is! The key thing is that a key's value cannot be a nested object and a value, so whichever is last will be implemented in the final properties object. If you can't get your head around this your best bet is to <strong>just avoid putting dots in your property keys</strong>.
+
+
+
+

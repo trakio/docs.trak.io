@@ -1,0 +1,39 @@
+---
+title: Authentication
+---
+
+%h2 Authentication
+
+%p You authenticate to the trak.io API by providing your API token in the request. You can find your API token in your account.
+
+%div.for-javascript
+
+  %h3.first JavaScript
+
+  %p When using the JavaScript library you just can set the your API token once and it will be used for all subsequent API calls.
+
+  %code.javascript
+    :escaped
+      trak.io.load("YOUR_API_TOKEN");
+
+%div.for-http
+
+  %h3.first HTTP
+
+  %p When accessing the HTTP end points directly you should send your API token with each request in a query parameter named 'token'.
+
+  %code.bash
+    :escaped
+      $ curl https://api.trak.io/v1/identify \
+        --data token='YOUR_API_TOKEN'\
+        --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}'
+
+  %p You can also send your API token as a HTTP header if you like.
+
+  %code.bash
+    :escaped
+      $ curl https://api.trak.io/v1/identify \
+        --header "X-Token: YOUR_API_TOKEN" \
+        --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}'
+
+

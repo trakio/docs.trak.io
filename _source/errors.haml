@@ -1,0 +1,50 @@
+---
+title: Errors
+---
+
+%h2 Errors
+
+%p When the trak.io API encounters a problem it will raise one of the following exceptions:
+
+%ul
+  %li <code>DataObjectInvalidJson</code> - the provided data argument was not valid JSON
+  %li <code>DataObjectInvalidBase64</code> - the encoded data object provided was missing or invalid url safe base64
+  %li <code>DataObjectInvalidType</code> - the data value provided was not an object
+  %li <code>InvalidToken</code> - API token was either missing or invalid
+  %li <code>MissingParameter</code> - you missed a required data parameter
+  %li <code>RouteNotFound</code> - You requested an end point that doesn't exist
+  %li <code>PropertiesObjectInvalid</code> - the properties object provided was invalid
+  %li <code>RequestInvalidJson</code> - when <a href='/http.html#full-json'>sending the request as JSON</a> the body was invalid JSON
+  %li <code>RevenuePropertyInvalid</code> - revenue property for an event was not a float, integer or string
+  %li <code>InternalServiceError</code> - any other error will raise this, it usual means we did something wrong instead of you
+
+.for-http
+
+  %h3.first HTTP
+
+  %p We use HTTP response codes to indicate if anything went wrong whilst we were processing your request.
+
+  %ul
+    %li <code>200</code> - OK, Everything worked as expected.
+    %li <code>400</code> - bad request, missing a required parameter, or incorrect format
+    %li <code>401</code> - unauthorized, missing or invalid API token
+    %li <code>404</code> - not found, the requested method or item doesn't exist
+    %li <code>500</code>, <code>502</code>, <code>503</code>, <code>504</code> - server errors, these are on us :(
+
+  %p We'll also send some more information in the body of the response:
+
+  %code.json
+    :escaped
+      {
+        "status": "error",
+        "code": 401, # repeats the HTTP status code, usefull if using the force_200 argument
+        "exception": "TrakioAPI::Exceptions::InvalidToken", # The exception class raised
+        "message": "Missing or invalid API token.", # The message for the raised exception
+        "details": "You must povide a valid API token, see http://docs.tra.io/authentication.html." # Additional details for the specific error
+      }
+
+.for-javascript
+  %h3.first JavaScript
+
+  %p When the JavaScript library encounters one of the above exceptions it will throw an equivilent JavaScript error.
+

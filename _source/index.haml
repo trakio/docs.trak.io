@@ -1,0 +1,54 @@
+---
+title: Introduction
+---
+
+%h2 Introduction
+
+%p The trak.io documentation is, at its heart, simply a set of RESTful like endpoints with which you can send us details about your users (people) and their behaviour (events).
+
+%h3.header-with-btn
+  Dive Straight In:
+  %a.btn.btn-danger{ href: '/quick_start.html' } Quick Start Guide
+
+%p To make life easier for our users we will be implementing wrapper libraries that do a lot of this for you. So far we have a <a href='/javascript.html'>JavaScript library</a>, we'll be writing libraries for other languages depending on demand, so let us know if there is a language you desparately want us to support.
+
+%h4 JavaScript
+
+%p JavaScript is the quickest way to <a href='/quick_start.html'>get started with trak.io</a>. Because the code is run client side (in your user's browser) what ever language your application is built in, if its web based, you can use the JavaScript library.
+
+%p <a href='/javascript.html' class='btn btn-primary'>Introduction to JavaScript API</a>
+
+%h4 HTTP
+
+%p If your application is native (desktop or mobile) or for whatever reason you need to send data from server side you can use the same HTTP endpoints that our JavaScript library uses.
+
+%p All our HTTP examples are written as curl commands, but these can easily be converted into http requests using your language/library of choice.
+
+%p <a href='/http.html' class='btn btn-primary'>Introduction to HTTP API</a>
+
+%h4 Ruby
+
+We have an official ruby library it is published as a <a target="_blank" href="http://rubygems.org/gems/trakio-ruby">ruby gem</a> and the <a target="_blank" href="https://github.com/trakio/trakio-ruby">source code</a> is avaliable on GitHub. Documentation is still to come though.
+
+%h4 PHP
+
+%p We don't have an official PHP library but there are a couple of community libraries:
+
+%h5 Helder Duarte
+
+%p <a target="_blank" href="https://twitter.com/cossou">Helder</a> has written a PHP client that is available via composer:
+
+%code
+  :escaped
+    {
+      "require": {
+        "cossou/trak-io-api-client": "1.0.*"
+      }
+    }
+
+%p The source is available on GitHub: <a target="_blank" href='https://github.com/cossou/trak-io-api'>cossou/trak-io-api</a>.
+
+%h5 Sumo Heavy Industries
+
+%p <a href='http://www.sumoheavy.com/' target='_blank'>Sumo Heavy Industries</a> have done a cracking job getting started on a <a href='https://github.com/sumoheavy/SUMOHeavy_TrakIo/tree/feature-zflib' target='_blank'>Zend library</a> for trak.io.
+

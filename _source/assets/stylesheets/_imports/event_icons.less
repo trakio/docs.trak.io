@@ -1,0 +1,613 @@
+.event {
+
+  border: 1px solid #d0d7e1;
+  background: white;
+  position: relative;
+  margin-top: 10px;
+  padding: 6px 10px 8px 33px;
+  min-height: 20px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    background: #2d92c9;
+    width: 7px;
+    display: block;
+  }
+
+  h4 {
+    margin-top: 0;
+    font-size: 14px;
+    font-weight: 600;
+    float: left;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 414px;
+    display: block;
+    white-space: nowrap;
+  }
+
+  .head {
+    .clearfix;
+    a {
+      .clearfix;
+      color: #3f4752;
+      display: block;
+      padding: 8px 10px 5px 33px;
+      margin: -8px -10px -5px -33px;
+    }
+    i:after {
+      content: "\f0e7";
+      font-size: 14px;
+      font-family: FontAwesome;
+      position: absolute;
+      top: 6px;
+      left: 12px;
+      display: inline-block;
+      speak: none;
+      width: 14px;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+      font-weight: normal;
+      font-style: normal;
+      display: block;
+    }
+    .caret {
+      float: right;
+      border-top-color: #c0cad6;
+      border-bottom-color: #c0cad6;
+      margin: 8px 0 0;
+    }
+    .time, .date-time {
+      float: right;
+      color: #768599;
+      font-weight: 500;
+      margin-right: 10px;
+    }
+  }
+
+  .details {
+    dl {
+      border: none;
+      margin: 5px 0 5px;
+      dt, dd {
+        padding: 3px 0 1px;
+      }
+      dd {
+        border: none;
+      }
+    }
+    .event-actions {
+      float: right;
+      margin: 5px 5px 5px 0;
+    }
+  }
+
+  .contents {
+    min-height: 20px;
+    overflow: hidden;
+    .transition(~'height .3s ease');
+  }
+  .contents.open {
+    height: auto;
+  }
+
+}
+
+.event.outbound {
+  padding-left: 45px;
+  &:before {
+    width: 37px;
+  }
+  i:after {
+    color: white;
+    left: 10px;
+  }
+}
+
+#key {
+  .events {
+    .clearfix;
+    margin: 10px 0 30px -30px;
+  }
+
+  .event {
+    margin-left: 30px;
+    width: 298px;
+    float: left;
+    h4 {
+      float: none;
+    }
+    &.outbound {
+      width: 286px;
+      &:after {
+        color: white;
+        left: 10px;
+      }
+    }
+    ul {
+      margin: 5px 0 0 5px;
+      list-style: none;
+      font-size: 14px;
+      font-weight: normal;
+    }
+    &:after {
+      content: "\f0e7";
+      font-size: 14px;
+      font-family: FontAwesome;
+      position: absolute;
+      top: 6px;
+      left: 12px;
+      display: inline-block;
+      speak: none;
+      width: 14px;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+      font-weight: normal;
+      font-style: normal;
+      display: block;
+    }
+  }
+  &.modal {
+    .event {
+      width: 315px;
+      &.outbound {
+        width: 303px;
+      }
+    }
+  }
+}
+
+
+#key .event:after,
+.event .head a i:after { content: '\f0e7'; }
+#key .event[data-event^='listened']:after,
+.event[data-event^='listened'] .head a i:after,
+#key .event[data-event^='listen']:after,
+.event[data-event^='listen'] .head a i:after { content: '\f001'; }
+#key .event[data-event^='searched']:after,
+.event[data-event^='searched'] .head a i:after,
+#key .event[data-event^='search']:after,
+.event[data-event^='search'] .head a i:after { content: '\f002'; }
+#key .event[data-event^='messaged']:after,
+.event[data-event^='messaged'] .head a i:after,
+#key .event[data-event^='emailed']:after,
+.event[data-event^='emailed'] .head a i:after,
+#key .event[data-event^='mailed']:after,
+.event[data-event^='mailed'] .head a i:after,
+#key .event[data-event^='sent_email']:after,
+.event[data-event^='sent_email'] .head a i:after,
+#key .event[data-event^='received_email']:after,
+.event[data-event^='received_email'] .head a i:after,
+#key .event[data-event^='messag']:after,
+.event[data-event^='messag'] .head a i:after,
+#key .event[data-event^='email']:after,
+.event[data-event^='email'] .head a i:after,
+#key .event[data-event^='mail']:after,
+.event[data-event^='mail'] .head a i:after,
+#key .event[data-event^='send_email']:after,
+.event[data-event^='send_email'] .head a i:after,
+#key .event[data-event^='receive_email']:after,
+.event[data-event^='receive_email'] .head a i:after { content: '\f003'; }
+#key .event[data-event^='liked']:after,
+.event[data-event^='liked'] .head a i:after,
+#key .event[data-event^='like']:after,
+.event[data-event^='like'] .head a i:after { content: '\f004'; }
+#key .event[data-event^='favorited']:after,
+.event[data-event^='favorited'] .head a i:after,
+#key .event[data-event^='favorite']:after,
+.event[data-event^='favorite'] .head a i:after { content: '\f005'; }
+#key .event[data-event^='watched']:after,
+.event[data-event^='watched'] .head a i:after,
+#key .event[data-event^='watch']:after,
+.event[data-event^='watch'] .head a i:after { content: '\f008'; }
+#key .event[data-event^='agreed']:after,
+.event[data-event^='agreed'] .head a i:after,
+#key .event[data-event^='oked']:after,
+.event[data-event^='oked'] .head a i:after,
+#key .event[data-event^='agree']:after,
+.event[data-event^='agree'] .head a i:after,
+#key .event[data-event^='ok']:after,
+.event[data-event^='ok'] .head a i:after { content: '\f00c'; }
+#key .event[data-event^='disagreed']:after,
+.event[data-event^='disagreed'] .head a i:after,
+#key .event[data-event^='disagree']:after,
+.event[data-event^='disagree'] .head a i:after { content: '\f00d'; }
+#key .event[data-event^='signed_in']:after,
+.event[data-event^='signed_in'] .head a i:after,
+#key .event[data-event^='logged_in']:after,
+.event[data-event^='logged_in'] .head a i:after,
+#key .event[data-event^='sign_in']:after,
+.event[data-event^='sign_in'] .head a i:after,
+#key .event[data-event^='log_in']:after,
+.event[data-event^='log_in'] .head a i:after { content: '\f090'; }
+#key .event[data-event^='sign_out']:after,
+.event[data-event^='sign_out'] .head a i:after,
+#key .event[data-event^='log_out']:after,
+.event[data-event^='log_out'] .head a i:after,
+#key .event[data-event^='signed_out']:after,
+.event[data-event^='signed_out'] .head a i:after,
+#key .event[data-event^='logged_out']:after,
+.event[data-event^='logged_out'] .head a i:after { content: '\f08b'; }
+#key .event[data-event^='deleted']:after,
+.event[data-event^='deleted'] .head a i:after,
+#key .event[data-event^='destroy']:after,
+.event[data-event^='destroy'] .head a i:after,
+#key .event[data-event^='delete']:after,
+.event[data-event^='delete'] .head a i:after,
+#key .event[data-event^='destroyed']:after,
+.event[data-event^='destroyed'] .head a i:after { content: '\f014'; }
+#key .event[data-event^='played']:after,
+.event[data-event^='played'] .head a i:after,
+#key .event[data-event^='play']:after,
+.event[data-event^='play'] .head a i:after { content: '\f04b'; }
+#key .event[data-event^='paused']:after,
+.event[data-event^='paused'] .head a i:after,
+#key .event[data-event^='pause']:after,
+.event[data-event^='pause'] .head a i:after  { content: '\f04c'; }
+#key .event[data-event^='stopped']:after,
+.event[data-event^='stopped'] .head a i:after,
+#key .event[data-event^='stop']:after,
+.event[data-event^='stop'] .head a i:after { content: '\f04d'; }
+#key .event[data-event^='skip']:after,
+.event[data-event^='skip'] .head a i:after,
+#key .event[data-event^='skipped']:after,
+.event[data-event^='skipped'] .head a i:after { content: '\f04e'; }
+#key .event[data-event^='repeated']:after,
+.event[data-event^='repeated'] .head a i:after,
+#key .event[data-event^='repeat']:after,
+.event[data-event^='repeat'] .head a i:after { content: '\f01e'; }
+#key .event[data-event^='synced']:after,
+.event[data-event^='synced'] .head a i:after,
+#key .event[data-event^='sync']:after,
+.event[data-event^='sync'] .head a i:after { content: '\f021'; }
+#key .event[data-event^='locked']:after,
+.event[data-event^='locked'] .head a i:after,
+#key .event[data-event^='lock']:after,
+.event[data-event^='lock'] .head a i:after { content: '\f023'; }
+#key .event[data-event^='unlocked']:after,
+.event[data-event^='unlocked'] .head a i:after,
+#key .event[data-event^='unlock']:after,
+.event[data-event^='unlock'] .head a i:after { content: '\f09c'; }
+#key .event[data-event^='tagged']:after,
+.event[data-event^='tagged'] .head a i:after,
+#key .event[data-event^='tag']:after,
+.event[data-event^='tag'] .head a i:after { content: '\f02b'; }
+#key .event[data-event^='read']:after,
+.event[data-event^='read'] .head a i:after { content: '\f02d'; }
+#key .event[data-event^='bookmarked']:after,
+.event[data-event^='bookmarked'] .head a i:after,
+#key .event[data-event^='bookmark']:after,
+.event[data-event^='bookmark'] .head a i:after { content: '\f02e'; }
+#key .event[data-event^='printed']:after,
+.event[data-event^='printed'] .head a i:after,
+#key .event[data-event^='print']:after,
+.event[data-event^='print'] .head a i:after { content: '\f02f'; }
+#key .event[data-event^='photographed']:after,
+.event[data-event^='photographed'] .head a i:after,
+#key .event[data-event^='photograph']:after,
+.event[data-event^='photograph'] .head a i:after { content: '\f030'; }
+#key .event[data-event^='edited']:after,
+.event[data-event^='edited'] .head a i:after,
+#key .event[data-event^='updated']:after,
+.event[data-event^='updated'] .head a i:after,
+#key .event[data-event^='edit']:after,
+.event[data-event^='edit'] .head a i:after,
+#key .event[data-event^='update']:after,
+.event[data-event^='update'] .head a i:after { content: '\f040'; }
+#key .event[data-event^='located']:after,
+.event[data-event^='located'] .head a i:after,
+#key .event[data-event^='locate']:after,
+.event[data-event^='locate'] .head a i:after { content: '\f041'; }
+#key .event[data-event^='moved']:after,
+.event[data-event^='moved'] .head a i:after,
+#key .event[data-event^='relocated']:after,
+.event[data-event^='relocated'] .head a i:after,
+#key .event[data-event^='move']:after,
+.event[data-event^='move'] .head a i:after,
+#key .event[data-event^='relocate']:after,
+.event[data-event^='relocate'] .head a i:after { content: '\f047'; }
+#key .event[data-event^='ejected']:after,
+.event[data-event^='ejected'] .head a i:after,
+#key .event[data-event^='eject']:after,
+.event[data-event^='eject'] .head a i:after { content: '\f052'; }
+#key .event[data-event^='shared']:after,
+.event[data-event^='shared'] .head a i:after,
+#key .event[data-event^='share']:after,
+.event[data-event^='share'] .head a i:after { content: '\f064'; }
+#key .event[data-event^='checked']:after,
+.event[data-event^='checked'] .head a i:after,
+#key .event[data-event^='check']:after,
+.event[data-event^='check'] .head a i:after { content: '\f046'; }
+#key .event[data-event^='removed']:after,
+.event[data-event^='removed'] .head a i:after,
+#key .event[data-event^='remove']:after,
+.event[data-event^='remove'] .head a i:after { content: '\f057'; }
+#key .event[data-event^='resized']:after,
+.event[data-event^='resized'] .head a i:after,
+#key .event[data-event^='resize']:after,
+.event[data-event^='resize'] .head a i:after { content: '\f065'; }
+#key .event[data-event^='shrank']:after,
+.event[data-event^='shrank'] .head a i:after,
+#key .event[data-event^='shrink']:after,
+.event[data-event^='shrink'] .head a i:after { content: '\f066'; }
+#key .event[data-event^='gifted']:after,
+.event[data-event^='gifted'] .head a i:after,
+#key .event[data-event^='gift']:after,
+.event[data-event^='gift'] .head a i:after { content: '\f06b'; }
+#key .event[data-event^='viewed']:after,
+.event[data-event^='viewed'] .head a i:after,
+#key .event[data-event^='saw']:after,
+.event[data-event^='saw'] .head a i:after,
+#key .event[data-event^='view']:after,
+.event[data-event^='view'] .head a i:after,
+#key .event[data-event^='see']:after,
+.event[data-event^='see'] .head a i:after { content: '\f06e'; }
+#key .event[data-event^='cautioned']:after,
+.event[data-event^='cautioned'] .head a i:after,
+#key .event[data-event^='warned']:after,
+.event[data-event^='warned'] .head a i:after,
+#key .event[data-event^='caution']:after,
+.event[data-event^='caution'] .head a i:after,
+#key .event[data-event^='warn']:after,
+.event[data-event^='warn'] .head a i:after { content: '\f071'; }
+#key .event[data-event^='flew']:after,
+.event[data-event^='flew'] .head a i:after,
+#key .event[data-event^='fly']:after,
+.event[data-event^='fly'] .head a i:after { content: '\f072'; }
+#key .event[data-event^='schedueled']:after,
+.event[data-event^='schedueled'] .head a i:after,
+#key .event[data-event^='met']:after,
+.event[data-event^='met'] .head a i:after,
+#key .event[data-event^='scheduel']:after,
+.event[data-event^='scheduel'] .head a i:after,
+#key .event[data-event^='meet']:after,
+.event[data-event^='meet'] .head a i:after { content: '\f073'; }
+#key .event[data-event^='said']:after,
+.event[data-event^='said'] .head a i:after,
+#key .event[data-event^='fedback']:after,
+.event[data-event^='fedback'] .head a i:after,
+#key .event[data-event^='commented']:after,
+.event[data-event^='commented'] .head a i:after,
+#key .event[data-event^='say']:after,
+.event[data-event^='say'] .head a i:after,
+#key .event[data-event^='feedback']:after,
+.event[data-event^='feedback'] .head a i:after,
+#key .event[data-event^='comment']:after,
+.event[data-event^='comment'] .head a i:after { content: '\f075'; }
+#key .event[data-event^='moved_up']:after,
+.event[data-event^='moved_up'] .head a i:after,
+#key .event[data-event^='promoted']:after,
+.event[data-event^='promoted'] .head a i:after,
+#key .event[data-event^='move_up']:after,
+.event[data-event^='move_up'] .head a i:after,
+#key .event[data-event^='promote']:after,
+.event[data-event^='promote'] .head a i:after { content: '\f062'; }
+#key .event[data-event^='moved_down']:after,
+.event[data-event^='moved_down'] .head a i:after,
+#key .event[data-event^='demoted']:after,
+.event[data-event^='demoted'] .head a i:after,
+#key .event[data-event^='move_down']:after,
+.event[data-event^='move_down'] .head a i:after,
+#key .event[data-event^='demote']:after,
+.event[data-event^='demote'] .head a i:after { content: '\f063'; }
+#key .event[data-event^='moved_left']:after,
+.event[data-event^='moved_left'] .head a i:after,
+#key .event[data-event^='move_left']:after,
+.event[data-event^='move_left'] .head a i:after { content: '\f060'; }
+#key .event[data-event^='moved_right']:after,
+.event[data-event^='moved_right'] .head a i:after,
+#key .event[data-event^='move_right']:after,
+.event[data-event^='move_right'] .head a i:after { content: '\f061'; }
+#key .event[data-event^='retweeted']:after,
+.event[data-event^='retweeted'] .head a i:after,
+#key .event[data-event^='retweet']:after,
+.event[data-event^='retweet'] .head a i:after { content: '\f079'; }
+#key .event[data-event^='opened']:after,
+.event[data-event^='opened'] .head a i:after,
+#key .event[data-event^='open']:after,
+.event[data-event^='open'] .head a i:after { content: '\f07c'; }
+#key .event[data-event^='added_to_cart']:after,
+.event[data-event^='added_to_cart'] .head a i:after,
+#key .event[data-event^='added_to_basket']:after,
+.event[data-event^='added_to_basket'] .head a i:after,
+#key .event[data-event^='add_to_cart']:after,
+.event[data-event^='add_to_cart'] .head a i:after,
+#key .event[data-event^='add_to_basket']:after,
+.event[data-event^='add_to_basket'] .head a i:after { content: '\f07a'; }
+#key .event[data-event^='voted_up']:after,
+.event[data-event^='voted_up'] .head a i:after,
+#key .event[data-event^='up_vote']:after,
+.event[data-event^='up_vote'] .head a i:after,
+#key .event[data-event^='vote_up']:after,
+.event[data-event^='vote_up'] .head a i:after,
+#key .event[data-event^='up_voted']:after,
+.event[data-event^='up_voted'] .head a i:after { content: '\f087'; }
+#key .event[data-event^='voted_down']:after,
+.event[data-event^='voted_down'] .head a i:after,
+#key .event[data-event^='down_voted']:after,
+.event[data-event^='down_voted'] .head a i:after,
+#key .event[data-event^='vote_down']:after,
+.event[data-event^='vote_down'] .head a i:after,
+#key .event[data-event^='down_vote']:after,
+.event[data-event^='down_vote'] .head a i:after { content: '\f088'; }
+#key .event[data-event^='pinned']:after,
+.event[data-event^='pinned'] .head a i:after,
+#key .event[data-event^='pin']:after,
+.event[data-event^='pin'] .head a i:after { content: '\f08d'; }
+#key .event[data-event^='won']:after,
+.event[data-event^='won'] .head a i:after,
+#key .event[data-event^='win']:after,
+.event[data-event^='win'] .head a i:after { content: '\f091'; }
+#key .event[data-event^='uploaded']:after,
+.event[data-event^='uploaded'] .head a i:after,
+#key .event[data-event^='upload']:after,
+.event[data-event^='upload'] .head a i:after{ content: '\f0ee'; }
+#key .event[data-event^='phoned']:after,
+.event[data-event^='phoned'] .head a i:after,
+#key .event[data-event^='telephoned']:after,
+.event[data-event^='telephoned'] .head a i:after,
+#key .event[data-event^='phone']:after,
+.event[data-event^='phone'] .head a i:after,
+#key .event[data-event^='telephone']:after,
+.event[data-event^='telephone'] .head a i:after { content: '\f095'; }
+#key .event[data-event^='tweeted']:after,
+.event[data-event^='tweeted'] .head a i:after,
+#key .event[data-event^='signed_in_with_twitter']:after,
+.event[data-event^='signed_in_with_twitter'] .head a i:after,
+#key .event[data-event^='logged_in_with_twitter']:after,
+.event[data-event^='logged_in_with_twitter'] .head a i:after,
+#key .event[data-event^='tweet']:after,
+.event[data-event^='tweet'] .head a i:after,
+#key .event[data-event^='sign_in_with_twitter']:after,
+.event[data-event^='sign_in_with_twitter'] .head a i:after,
+#key .event[data-event^='log_in_with_twitter']:after,
+.event[data-event^='log_in_with_twitter'] .head a i:after { content: '\f099'; }
+#key .event[data-event^='signed_in_with_facebook']:after,
+.event[data-event^='signed_in_with_facebook'] .head a i:after,
+#key .event[data-event^='logged_in_with_facebook']:after,
+.event[data-event^='logged_in_with_facebook'] .head a i:after,
+#key .event[data-event^='sign_in_with_facebook']:after,
+.event[data-event^='sign_in_with_facebook'] .head a i:after,
+#key .event[data-event^='log_in_with_facebook']:after,
+.event[data-event^='log_in_with_facebook'] .head a i:after { content: '\f09a'; }
+#key .event[data-event^='signed_in_with_pinterest']:after,
+.event[data-event^='signed_in_with_pinterest'] .head a i:after,
+#key .event[data-event^='logged_in_with_pinterest']:after,
+.event[data-event^='logged_in_with_pinterest'] .head a i:after,
+#key .event[data-event^='sign_in_with_pinterest']:after,
+.event[data-event^='sign_in_with_pinterest'] .head a i:after,
+#key .event[data-event^='logg_in_with_pinterest']:after,
+.event[data-event^='logg_in_with_pinterest'] .head a i:after { content: '\f0d2'; }
+#key .event[data-event^='signed_in_with_google_plus']:after,
+.event[data-event^='signed_in_with_google_plus'] .head a i:after,
+#key .event[data-event^='logged_in_with_google_plus']:after,
+.event[data-event^='logged_in_with_google_plus'] .head a i:after,
+#key .event[data-event^='sign_in_with_google_plus']:after,
+.event[data-event^='sign_in_with_google_plus'] .head a i:after,
+#key .event[data-event^='log_in_with_google_plus']:after,
+.event[data-event^='log_in_with_google_plus'] .head a i:after { content: '\f0d5'; }
+#key .event[data-event^='signed_in_with_linked_in']:after,
+.event[data-event^='signed_in_with_linked_in'] .head a i:after,
+#key .event[data-event^='logged_in_with_linked_in']:after,
+.event[data-event^='logged_in_with_linked_in'] .head a i:after,
+#key .event[data-event^='signed_in_with_linkedin']:after,
+.event[data-event^='signed_in_with_linkedin'] .head a i:after,
+#key .event[data-event^='logged_in_with_linkedin']:after,
+.event[data-event^='logged_in_with_linkedin'] .head a i:after,
+#key .event[data-event^='sign_in_with_linked_in']:after,
+.event[data-event^='sign_in_with_linked_in'] .head a i:after,
+#key .event[data-event^='log_in_with_linked_in']:after,
+.event[data-event^='log_in_with_linked_in'] .head a i:after,
+#key .event[data-event^='sign_in_with_linkedin']:after,
+.event[data-event^='sign_in_with_linkedin'] .head a i:after,
+#key .event[data-event^='log_in_with_linkedin']:after,
+.event[data-event^='log_in_with_linkedin'] .head a i:after { content: '\f0e1'; }
+#key .event[data-event^='signed_in_with_github']:after,
+.event[data-event^='signed_in_with_github'] .head a i:after,
+#key .event[data-event^='logged_in_with_github']:after,
+.event[data-event^='logged_in_with_github'] .head a i:after,
+#key .event[data-event^='signe_in_with_github']:after,
+.event[data-event^='signe_in_with_github'] .head a i:after,
+#key .event[data-event^='log_in_with_github']:after,
+.event[data-event^='log_in_with_github'] .head a i:after { content: '\f09b'; }
+#key .event[data-event^='added_card']:after,
+.event[data-event^='added_card'] .head a i:after,
+#key .event[data-event^='add_card']:after,
+.event[data-event^='add_card'] .head a i:after { content: '\f09d'; }
+#key .event[data-event^='subscribed']:after,
+.event[data-event^='subscribed'] .head a i:after,
+#key .event[data-event^='subscribe']:after,
+.event[data-event^='subscribe'] .head a i:after { content: '\f09e'; }
+#key .event[data-event^='invited']:after,
+.event[data-event^='invited'] .head a i:after,
+#key .event[data-event^='invite']:after,
+.event[data-event^='invite'] .head a i:after { content: '\f0a1'; }
+#key .event[data-event^='certified']:after,
+.event[data-event^='certified'] .head a i:after
+#key .event[data-event^='certify']:after,
+.event[data-event^='certify'] .head a i:after { content: '\f0a3'; }
+#key .event[data-event^='viewed_page']:after,
+.event[data-event^='viewed_page'] .head a i:after,
+#key .event[data-event^='page_view']:after,
+.event[data-event^='page_view'] .head a i:after,
+#key .event[data-event^='view_page']:after,
+.event[data-event^='view_page'] .head a i:after,
+#key .event[data-event^='page_viewed']:after,
+.event[data-event^='page_viewed'] .head a i:after { content: '\f0ac'; }
+#key .event[data-event^='filtered']:after,
+.event[data-event^='filtered'] .head a i:after,
+#key .event[data-event^='filter']:after,
+.event[data-event^='filter'] .head a i:after { content: '\f0b0'; }
+#key .event[data-event^='linked']:after,
+.event[data-event^='linked'] .head a i:after,
+#key .event[data-event^='link']:after,
+.event[data-event^='link'] .head a i:after { content: '\f0c1'; }
+#key .event[data-event^='cut']:after,
+.event[data-event^='cut'] .head a i:after { content: '\f0c4'; }
+#key .event[data-event^='duplicated']:after,
+.event[data-event^='duplicated'] .head a i:after,
+#key .event[data-event^='copied']:after,
+.event[data-event^='copied'] .head a i:after,
+#key .event[data-event^='duplicate']:after,
+.event[data-event^='duplicate'] .head a i:after,
+#key .event[data-event^='copy']:after,
+.event[data-event^='copy'] .head a i:after { content: '\f0c5'; }
+#key .event[data-event^='saved']:after,
+.event[data-event^='saved'] .head a i:after,
+#key .event[data-event^='save']:after,
+.event[data-event^='save'] .head a i:after { content: '\f0c7'; }
+#key .event[data-event^='delivered']:after,
+.event[data-event^='delivered'] .head a i:after,
+#key .event[data-event^='delivere']:after,
+.event[data-event^='delivere'] .head a i:after { content: '\f0d1'; }
+#key .event[data-event^='purchased']:after,
+.event[data-event^='purchased'] .head a i:after,
+#key .event[data-event^='checked_out']:after,
+.event[data-event^='checked_out'] .head a i:after,
+#key .event[data-event^='bought']:after,
+.event[data-event^='bought'] .head a i:after,
+#key .event[data-event^='purchase']:after,
+.event[data-event^='purchase'] .head a i:after,
+#key .event[data-event^='check_out']:after,
+.event[data-event^='check_out'] .head a i:after,
+#key .event[data-event^='buy']:after,
+.event[data-event^='buy'] .head a i:after  { content: '\f0d6'; }
+#key .event[data-event^='undid']:after,
+.event[data-event^='undid'] .head a i:after,
+#key .event[data-event^='undo']:after,
+.event[data-event^='undo'] .head a i:after { content: '\f0e2'; }
+#key .event[data-event^='downloaded']:after,
+.event[data-event^='downloaded'] .head a i:after,
+#key .event[data-event^='download']:after,
+.event[data-event^='download'] .head a i:after { content: '\f0ed'; }
+#key .event[data-event^='ate']:after,
+.event[data-event^='ate'] .head a i:after,
+#key .event[data-event^='eat']:after,
+.event[data-event^='eat'] .head a i:after { content: '\f0f5'; }
+#key .event[data-event^='drank']:after,
+.event[data-event^='drank'] .head a i:after,
+#key .event[data-event^='drink']:after,
+.event[data-event^='drink'] .head a i:after { content: '\f0fc'; }
+#key .event[data-event^='replied']:after,
+.event[data-event^='replied'] .head a:after,
+#key .event[data-event^='reply']:after,
+.event[data-event^='reply'] .head a:after { content: '\f112'; }
+
+.events .index {
+  margin-top: 20px;
+  .event {
+    dl {
+      dt {
+        width: 85px;
+      }
+      dd {
+        padding-left: 85px;
+      }
+    }
+  }
+}

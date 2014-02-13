@@ -1,0 +1,63 @@
+---
+title: Context
+---
+
+%h2 Context
+
+:markdown
+
+  The[track](/track.html) methods can take a hash of additional properties that you can use to describe the context in which the event occured.
+
+  This might include the current version of your application, the browser user agent, data related to an A/B test, or the time the event occured.
+
+%div.for-http
+
+  %h4 HTTP
+
+  %code.bash
+    :escaped
+      $ curl https://api.trak.io/v1/track \
+        --data token=YOUR_API_TOKEN\
+        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Mobile Web App", "properties": { "name": "Matthew Spence" }, "context": { "version": "v123", "user_agent": user_agent }}'
+
+%div.for-javascript
+
+  %h4 JavaScript
+
+
+  %code.javascript
+    :escaped
+      trak.io.track('Signed in', {}, {experiment: "New sign in form", group: 'A'})
+
+%p trak.io's JavaScript library will automatically attach a number of properties to the context hash for you but you can override these or provide additional properties. They include:
+
+%ul
+  %li <strong>time</strong> - the current time
+  %li <strong>ip</strong> - the clients ip address
+  %li <strong>user_agent</strong> - the browser's user agent
+  %li <strong>url</strong> - the page's current url
+  %li <strong>referer</strong> - the previous's page's url
+  %li <strong>params</strong> - a hash of the current page's url query params
+  %li <strong>referer_params</strong> - a hash of the previous's page's url query params
+  %li <strong>title</strong> - the title of the current page
+
+%p When interfacing with the HTTP API you will have to provide these properties yourself (although they are not required), they are reserved and are treated as defined above in your trak.io dashboard. The following are <strong>not</strong> automatically determined by the JavaScript library but they are also reversed and have specific menaing:
+
+%ul
+  %li <strong>version</strong> - the current version of the channel the user is using, it is a string value and can take which ever version format your team use for versioning.
+
+%div.for-javascript
+
+  %h3 Setting context once
+
+  %p More often than not a lot of your context hash will not change between events, you can use <code>trak.io.context</code> to set the current context for any following events.
+
+  %p This context is also set in the user's cookie and will persist across requests, within the current subdomain.
+
+
+  %code.javascript
+    :escaped
+      trak.io.context({ version: '1.2.1' })
+
+
+

@@ -1,0 +1,131 @@
+---
+title: Properties
+---
+
+
+%h2 Properties
+
+%p When identifying a user or tracking an event you can send a hash of properties that describe it or them.
+
+%h5 Keys
+
+%p The property's keys (included those of nested hashes) are standardized before storage, for more information see [notes on data keys](/data_keys.html)
+
+%h5 Values
+
+%p You can send just about any value you wish, string, integer, array, nested hashes.
+
+#person
+
+  %h3 People Properties
+
+  %h4 Email
+
+  %p When sending properties for people the email property behaves a little differently. It must be a string or an array of strings, and the value or values that are sent will be merged with any existing emails for that person. We do not validate that they are correctly formatted email addresses.
+
+  %h4 Reserved Properties
+
+  %p The following properties are reserved and are set by trak.io. You may set them yourself using the <code><a href='/identify.html'>trak.io.identify()</a></code> method but they are at risk of being overridden.
+
+  %ul
+    %li <code>referring_url</code> - The HTTP referer for the person's first event.
+    %li <code>referring_domain</code> - The domain of the HTTP referer for the person's first event.
+    %li <code>first_channel</code> - The first channel this person was seen on.
+
+  #special
+
+    %h4 Special Properties
+
+    %p Whilst the following properties are not reserved (you can, if you wish, use them for what ever you want) your trak.io dashboard assumes they have certain meaning and will display and use them as such:
+
+    %ul
+      %li <code>email</code> - see above for more information
+      %li <code>primary_email</code> - if there are multiple values for email, this will set the primary, otherwise it will use the latest
+      %li <code>avatar_url</code> - used for the users profile picture
+      %li <code>name</code> - the person's name
+      %li <code>first_name last_name</code> - if the person's name is missing these will be joined in its absense
+      %li <code>gender</code> - male or female, if missing we'll guess based on name
+      %li <code>position</code> - current job position
+      %li <code>company</code> - current company
+      %li <code>organization</code> - used in the same way as company if that is absent
+      %li <code>positions</code> - employment history
+      %li <code>industry</code> - the industry the person works or has experience in
+      %li <code>location</code> - can be any string you wish, if this is missing we'll try and determine it from the <code>latlng</code> property, or ip data
+      %li <code>latlng</code> - can be any string you wish, if this is missing we'll try and determine it from the <code>location</code> property
+      %li <code>languages</code> - string or array of langauges the person speaks
+      %li <code>birthday</code> - the person's date of birth
+      %li <code>tags</code> - an array of tags you would like to attribute to the person
+      %li <code>headline</code> - used as a sub title for people, if missing a headline will be formed from their position and company properties
+      %li <code>account_id</code> - if you are tracking users that may share an account, give us an id to their account and you'll be able to build metrics based on the number of times an event was performed by an account rather than a person
+
+    %code.javascript.spread
+      :escaped
+        trak.io.identify({
+          name: "Matthew Spence",
+          email: "matt@trak.io",
+          gender: "male",
+          position: "CTO & Cofounder",
+          company: "trak.io",
+          industry: "Web Analytics",
+          location: "Canterbury, Kent, UK",
+          birthday: "1985-11-21" // Will any one reading this think to email me happy birthday I wonder?
+        })
+
+  %h4 Social Network Properties
+
+  %p You can also send us information on a user's social network accounts, each hash should use the same structure as the respective network's api.
+
+  %p If any of the above properties are missing we will try to determine a value from one of social network's properties.
+
+  %ul
+    %li <code>twitter</code> - <a href='https://dev.twitter.com/docs/api/1.1/get/users/show' target='_blank'>Twitter documentation</a>
+    %li <code>facebook</code> - <a href='https://developers.facebook.com/docs/reference/api/user/' target='_blank'>Facebook documentation</a>
+    %li <code>linked_in</code> - <a href='http://developer.linkedin.com/documents/profile-fields' target='_blank'>LinkedIn documentation</a>
+
+  %p Here's how to store a person's social networking id, we'll be writing up more in depth examples in a future cook book recipe.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.identify({
+        facebook: { id: 'xxxxxxxxxxxxx' },
+        twitter: { user_id: 'xxxxxxxxxxxxx' },
+        linked_in: { id: 'xxxxxxxxxxxxx' }
+      })
+
+#event
+
+  %h3 Event Properties
+
+  %h4 Special Properties
+
+  %p Whilst the following properties are not reserved (you can, if you wish, use them for what ever you want) your trak.io dashboard assumes they have certain meaning and will display and use them as such:
+
+  %ul
+    %li#direction <code>direction</code> - whether the action was performed by the person "inbound" or by you towards the person "outbound", default is "inbound"
+    %li#revenue <code>revenue</code> - must be a float, integer or string, and will be converted to a float. If the event is a purchase, revenue can be used to indicate the amount (can be negative). The currency cannot be specified for individual events, but can be set for all events in your account settings
+    %li
+      <code>products</code> - if the event involves products of some description you can send an array of objects to describe them. Each product can have the following properties:
+      %ul
+        %li <code>name</code> - the name of the product
+        %li <code>sku</code> - the unique stock identifier for the product
+        %li <code>price</code> - the price of the product
+        %li <code>description</code> - a description of the product
+    %li <code>referred_by</code> - if you know the person that referred this event you can send either their trak.io id or any one of their distinct_ids in this property
+
+  %code.javascript.spread
+    :escaped
+      // Track a purchase
+      trak.io.track('checked out', {
+        revenue: 29.98,
+        order_id: '0034567',
+        products: [
+          { sku: '0001935', name: 'Hat', price: 9.99 },
+          { sku: '0003734', name: 'Tee', price: 19.99 }
+        ]
+      })
+      // Track a refund
+      trak.io.track('refunded', {
+        revenue: 29.98,
+        order_id: '0034567',
+        direction: 'outbound'
+      })

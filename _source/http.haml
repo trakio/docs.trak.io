@@ -1,0 +1,70 @@
+---
+title: HTTP API Introduction
+---
+
+%h2 HTTP API Introduction
+
+%p
+  :markdown
+    The trak.io HTTP API endpoint is at `https://api.trak.io/v1/` and supports three actions all of which are avaliable with `POST` and `GET` requests.
+
+%p.note
+  The HTTP API supports both HTTP and HTTPS, however <strong>we strongly recommend you only use HTTPS</strong> when connecting. All trak.io's API libraries use HTTPS.
+
+%ul
+  %li
+    %a{href: '/identify.html'} POST\GET https://api.trak.io/v1/identify
+  %li
+    %a{href: '/alias.html'} POST\GET https://api.trak.io/v1/alias
+  %li
+    %a{href: '/track.html'} POST\GET https://api.trak.io/v1/track
+  %li
+    %a{href: '/annotate.html'} POST\GET https://api.trak.io/v1/annotate
+
+%p Any request expects the following, as url parameters when sending a GET request or as form data when sending a POST request:
+
+%table.table.spread
+  %thead
+    %tr
+      %th Parameter
+      %th Type
+      %th Default
+      %th Description
+  %tbody
+    %tr
+      %th token
+      %td String
+      %td
+        %em Required
+      %td Your API token can be found in your account settings and associates the data you are sending to your account.
+    %tr
+      %th callback
+      %td String
+      %td null
+      %td If you are making a JSONP ajax call you can provide a callback method that will wrap the returning data. Setting a callback will change the force_200 default from false to true.
+    %tr#data
+      %th data
+      %td String
+      %td
+        %em Required
+      %td The data argument is a JSON string of information to be sent to trak.io, its structure depends on which action you are calling. The links to each action above document the structure of this parameter.
+    %tr
+      %th force_200
+      %td Boolean
+      %td 0, 1 if callback provided
+      %td You can force a 200 status code by setting force_200 to true, this is designed specifically so that if you are using JSONP and there is an error you can still recieve the data.
+    %tr
+      %th img
+      %td Boolean
+      %td 0
+      %td If true the response will display a 1x1 transparent png image. This is useful, in situations where you cannot run logic, for example when sending emails.
+
+%h3#full-json Sending Requests As JSON
+
+%p You can send the above request parameters as encoded JSON, as apposed to GET parameters or POST form data, by setting your `Content-Type` request HTTP header to `application/json`.
+
+%code.bash.spread
+  :escaped
+    $ curl https://api.trak.io/v1/track \
+      --header "Content-Type: application/json" \
+      --data '{"token":"YOUR_API_TOKEN", "data":{"distinct_id": 12346789, "event": "Page view", "channel": "Web site", "properties": { "title": "Matts Home Page" }, "context": { "time_zone": "GMT" }}}'
