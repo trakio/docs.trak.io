@@ -4,4 +4,61 @@ title: Ruby API Introduction
 
 %h2 Ruby API Introduction
 
-%p  We have an official ruby library it is published as a <a target="_blank" href="http://rubygems.org/gems/trakio-ruby">ruby gem</a> and the <a target="_blank" href="https://github.com/trakio/trakio-ruby">source code</a> is avaliable on GitHub. Documentation is still to come though.
+%p We have an official ruby library it is published as a <a target="_blank" href="http://rubygems.org/gems/trakio-ruby">ruby gem</a> and the <a target="_blank" href="https://github.com/trakio/trakio-ruby">source code</a> is avaliable on GitHub.
+%p To get started simply add <code>trakio-ruby</code> to your Gemfile
+
+%p
+  The Ruby library is slightly different from the JavaScript library, in the Ruby library there is the ability to have a default instance.
+  The default instance is the same as an instance created by you, however you cannot specify a <code>distinct_id</code> for the default instance.
+
+%h3 Options
+%p Options are passed to the library as a hash. An example of creating an instance is shown below.
+
+%code.ruby
+  :escaped
+    # create a normal instance
+    trakio = Trakio.new 'my_api_token', channel: 'my-channel-here'
+    # create a default instance
+    Trakio.init 'my_api_token', channel: 'my-channel-here'
+
+%table.table.spread
+  %thead
+    %tr
+      %th Option
+      %th Type
+      %th Description
+  %tbody
+    %tr
+      %td distinct_id
+      %td String
+      %td The distinct_id you wish to set. See the <a href="/distinct_id.html">distinct_id</a> documentation for more information. Note you cannot set this on the default instance.
+    %tr
+      %td channel
+      %td String
+      %td The channel you wish to set. See the <a href="/channel.html">channel</a> documentation for more information.
+
+%h3 Methods
+%p Below is a summary of the available methods when using the Ruby library. All arguments are passed as a hash. An example is shown below.
+
+%code.ruby
+  :escaped
+    # create an instance
+    trakio = Trakio.new 'my_api_token', channel: 'my-channel-here'
+    # tracks the event, takes channel from the instance...
+    trakio.track distinct_id: 'my-distinct-id', event: 'my-fake-event'
+
+%ul
+  %li
+    <code>track</code>
+    \- the arguments for this function are shown below, see <a href="/track.html">here</a> for more information.
+    %ul
+      %li distinct_id
+      %li event
+      %li channel
+      %li properties
+  %li
+    <code>identify</code>
+    \- the arguments for this function are shown below, see <a href="/identify.html">here</a> for more information.
+    %ul
+      %li distinct_id
+      %li properties
