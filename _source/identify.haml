@@ -122,7 +122,7 @@ title: Identify
   %h4 Basic Usage
 
   %code.ruby.spread
-    :escaped
+    :preserve
       Trakio.init 'my-api-token'
       Trakio.identify distinct_id: 'tobie@trak.io', properties: {
         name: 'Tobie', email: 'tobie@trak.io', occupation: 'Developer' }
@@ -153,7 +153,7 @@ title: Identify
   %p The return value from identify is a Ruby <code>Hash</code> similar to the one shown below.
 
   %code.ruby.spread
-    :escaped
+    :preserve
       {
         status: 'success',
         trak_id: '123456',

@@ -89,7 +89,7 @@ title: Alias
   %p Alias allows a user to have more than one <code>distinct_id</code>
 
   %code.ruby.spread
-    :escaped
+    :preserve
       Trakio.init 'my-api-token'
       Trakio.alias distinct_id: 'tobie@trak.io', alias: 'tobie@example.com'
       Trakio.alias distinct_id: 'tobie@trak.io', alias: ['tobie@example.com', 'tobie@tobie.com']
@@ -115,17 +115,17 @@ title: Alias
         %td Raises error if not set
         %td The other distinct_id's you wish to set for this user
 
-    %h4 Return Value
+  %h4 Return Value
 
-    %p The return value of alias is a Ruby <code>Hash</code> similar to the one below.
+  %p The return value of alias is a Ruby <code>Hash</code> similar to the one below.
 
-    %code.ruby.spread
-      :escaped
-        {
-          status: 'success',
-          trak_id: '123456',
-          distinct_ids: ['tobie@trak.io', 'tobie@example.com']
-        }
+  %code.ruby.spread
+    :preserve
+      {
+        status: 'success',
+        trak_id: '123456',
+        distinct_ids: ['tobie@trak.io', 'tobie@example.com']
+      }
 
 .for-http
 
