@@ -123,6 +123,7 @@ title: Identify
 
   %code.ruby.spread
     :escaped
+      Trakio.init 'my-api-token'
       Trakio.identify distinct_id: 'tobie@trak.io', properties: {
         name: 'Tobie', email: 'tobie@trak.io', occupation: 'Developer' }
 
@@ -151,7 +152,7 @@ title: Identify
 
   %p The return value from identify is a Ruby <code>Hash</code> similar to the one shown below.
 
-  %code
+  %code.ruby.spread
     :escaped
       {
         status: 'success',
