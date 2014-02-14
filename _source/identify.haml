@@ -6,7 +6,7 @@ title: Identify
 
 %p Identify is how you send trak.io <a href='/properties.html#person'>properties</a> about a person like Email, Name, Account Type, Age, etc.
 
-%div.for-javascript
+.for-javascript
 
   %h3.first JavaScript
 
@@ -114,8 +114,52 @@ title: Identify
         "status": "unnecessary"
       }
 
+.for-ruby
+  %h3.first Ruby
 
-%div.for-http
+  %p The most common usage for <code>Trakio.identify()</code> is simply to send a hash of <a href='/properties.html#person'>properties</a> for a person.
+
+  %h4 Basic Usage
+
+  %code.ruby.spread
+    :escaped
+      Trakio.identify distinct_id: 'tobie@trak.io', properties: {
+        name: 'Tobie', email: 'tobie@trak.io', occupation: 'Developer' }
+
+  %h4 Arguments
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Argument
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %td distinct_id
+        %td String
+        %td The instance's distinct_id or raises error
+        %td The distinct id for the person you wish to assign these properties to.
+      %tr
+        %td properties
+        %td Hash
+        %td Raises error if not set
+        %td The properties you wish to assign to this person
+
+  %h4 Return Value
+
+  %p The return value from identify is a Ruby <code>Hash</code> similar to the one shown below.
+
+  %code
+    :escaped
+      {
+        status: 'success',
+        trak_id: '123456',
+        distinct_ids: ['tobie@trak.io']
+      }
+
+.for-http
 
   %h3.first HTTP
 
@@ -166,4 +210,3 @@ title: Identify
         "trak_id": "516d2737b1b92244bb000001", // trak.io's id for the person
         "distinct_ids": ["1234567","twitter:msaspence"] // an array of existing distinct_ids for the person
       }
-

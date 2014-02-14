@@ -21,6 +21,8 @@ title: Ruby API Introduction
     # create a default instance
     Trakio.init 'my_api_token', channel: 'my-channel-here'
 
+%p The arguments you may pass are shown below, note that <code>distinct_id</code> <b>cannot</b> be set on the default instance.
+
 %table.table.spread
   %thead
     %tr
@@ -36,29 +38,3 @@ title: Ruby API Introduction
       %td channel
       %td String
       %td The channel you wish to set. See the <a href="/channel.html">channel</a> documentation for more information.
-
-%h3 Methods
-%p Below is a summary of the available methods when using the Ruby library. All arguments are passed as a hash. An example is shown below.
-
-%code.ruby
-  :escaped
-    # create an instance
-    trakio = Trakio.new 'my_api_token', channel: 'my-channel-here'
-    # tracks the event, takes channel from the instance...
-    trakio.track distinct_id: 'my-distinct-id', event: 'my-fake-event'
-
-%ul
-  %li
-    <code>track</code>
-    \- the arguments for this function are shown below, see <a href="/track.html">here</a> for more information.
-    %ul
-      %li distinct_id
-      %li event
-      %li channel
-      %li properties
-  %li
-    <code>identify</code>
-    \- the arguments for this function are shown below, see <a href="/identify.html">here</a> for more information.
-    %ul
-      %li distinct_id
-      %li properties
