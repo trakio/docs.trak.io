@@ -6,7 +6,7 @@ title: Identify
 
 %p Identify is how you send trak.io <a href='/properties.html#person'>properties</a> about a person like Email, Name, Account Type, Age, etc.
 
-.for-javascript
+#javascript.for-javascript
 
   %h3.first JavaScript
 
@@ -114,18 +114,20 @@ title: Identify
         "status": "unnecessary"
       }
 
-.for-ruby
+#ruby.for-ruby
   %h3.first Ruby
 
-  %p The most common usage for <code>Trakio.identify()</code> is simply to send a hash of <a href='/properties.html#person'>properties</a> for a person.
+  %p The most common usage for <code>Trakio.identify</code> is simply to send a hash of <a href='/properties.html#person'>properties</a> for a person.
 
   %h4 Basic Usage
 
   %code.ruby.spread
     :preserve
-      Trakio.init 'my-api-token'
       Trakio.identify distinct_id: 'tobie@trak.io', properties: {
-        name: 'Tobie', email: 'tobie@trak.io', occupation: 'Developer' }
+        name: 'Tobie',
+        email: 'tobie@trak.io',
+        occupation: 'Developer'
+      }
 
   %h4 Arguments
 
@@ -140,12 +142,13 @@ title: Identify
       %tr
         %td distinct_id
         %td String
-        %td The instance's distinct_id or raises error
+        %td
+          %em The <code>Trakio</code> instance's distinct_id, otherwise required
         %td The distinct id for the person you wish to assign these properties to.
       %tr
         %td properties
         %td Hash
-        %td Raises error if not set
+        %td {}
         %td The properties you wish to assign to this person
 
   %h4 Return Value
@@ -160,7 +163,7 @@ title: Identify
         distinct_ids: ['tobie@trak.io']
       }
 
-.for-http
+#http.for-http
 
   %h3.first HTTP
 

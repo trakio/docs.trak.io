@@ -6,7 +6,7 @@ title: Channel
 
 %p Every time you trigger an event with <a href='/track.html'><code>trak.io.track()</code></a> you can pass it a channel argument, however this is unlikely to change with a single user session so you can set it with <code>trak.io.channel()</code>.
 
-.for-javascript
+#javascript.for-javascript
 
   %h3.first JavaScript
 
@@ -26,24 +26,24 @@ title: Channel
 
   %p.note The value you set will be stored in the user's cookie and persist across requests, within the current subdomain. This is in contast to <a href='/distinct_id.html'>distinct id</a> which persists across requests for the root domain and all its subdomains.
 
-.for-ruby
+#ruby.for-ruby
   %h3.first Ruby
 
   %p
     You can send the channel with any of the methods available, you can
-    also set a default one by specifying it alongside the constructor, this is
+    also set a default one by providing it as and option when initializing the library, this is
     also possible with the default instance.
 
   %code.ruby.spread
     :preserve
-      Trakio.init 'my-api-token', channel: 'website' # set on default instance
+      Trakio.init 'my-api-token', channel: 'my_really_cool_app'
 
       trak = Trakio.new 'my-api-token'
-      trak.channel = 'website'
+      trak.channel = 'my_really_cool_app'
 
-      trak = Trakio.new 'my-api-token', channel: 'website' # set it globally
+      trak = Trakio.new 'my-api-token', channel: 'my_really_cool_app'
 
-.for-http
+#http.for-http
 
   %h3.first HTTP
 

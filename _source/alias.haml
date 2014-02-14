@@ -6,7 +6,7 @@ title: Alias
 
 %p Alias is how you set additional distinct ids for a person. This is useful if you initially use trak.io's automatically generated distinct id to identify or track a person but then they login or register and you want to identify them by their email address or your application's id for them. Doing this will allow you to identify users across sessions and devices. But of course you want to tie their activity before and after they logged in together, <code>trak.io.alias()</code> will do this for you.
 
-.for-javascript
+#javascript.for-javascript
 
   %h3.first JavaScript
 
@@ -82,7 +82,7 @@ title: Alias
       }
 
 
-.for-ruby
+#ruby.for-ruby
 
   %h3.first Ruby
 
@@ -90,7 +90,6 @@ title: Alias
 
   %code.ruby.spread
     :preserve
-      Trakio.init 'my-api-token'
       Trakio.alias distinct_id: 'tobie@trak.io', alias: 'tobie@example.com'
       Trakio.alias distinct_id: 'tobie@trak.io', alias: ['tobie@example.com', 'tobie@tobie.com']
 
@@ -107,12 +106,14 @@ title: Alias
       %tr
         %td distinct_id
         %td String
-        %td The instance's distinct_id or raises error
+        %td
+          %em The <code>Trakio</code> instance's distinct_id, otherwise required
         %td The distinct id for the person you wish to assign the alias' to.
       %tr
         %td alias
         %td String or Array
-        %td Raises error if not set
+        %td
+          %em Required
         %td The other distinct_id's you wish to set for this user
 
   %h4 Return Value
@@ -127,7 +128,7 @@ title: Alias
         distinct_ids: ['tobie@trak.io', 'tobie@example.com']
       }
 
-.for-http
+#http.for-http
 
   %h3.first HTTP
 

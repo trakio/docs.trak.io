@@ -6,7 +6,7 @@ title: Track
 
 %p Track is how you record the actions people perform. You can also record properties specific to those actions. For a "Purchased shirt" event, you might record properties like <a href='/properties.html#revenue'>revenue</a>, size, etc.
 
-.for-javascript
+#javascript.for-javascript
 
   %h3.first JavaScript
 
@@ -99,18 +99,20 @@ title: Track
 
   %p The JavaScript method will make the track HTTP request asynchronously, returning the <code>trak.io</code> instance immediately. The <a href='#return'>return value</a> of the HTTP request it makes will be passed to the callback function as the first argument.
 
-.for-ruby
+#ruby.for-ruby
 
   %h3.first Ruby
 
-  %p Track tracks an event which is specified, and linked to the user with the specified <code>distinct_id</code>.
+  %p Tracks a specified event, for the person with the specified <code>distinct_id</code>.
 
   %code.ruby.spread
     :preserve
-      Trakio.init 'my-api-token'
-      Trakio.track distinct_id: 'tobie@trak.io', event: 'user created', channel: 'web'
-      Trakio.track distinct_id: 'tobie@trak.io', event: 'user created', channel: 'web',
-        properties: { name: 'Tobie', location: 'London' }
+
+      Trakio.track distinct_id: 'tobie@trak.io', event: 'user created', channel: 'web_app'
+
+      Trakio.track distinct_id: 'tobie@trak.io', event: 'user created', channel: 'web_app', properties: {
+        location: 'London'
+      }
 
   %h4 Arguments
 
@@ -125,17 +127,20 @@ title: Track
       %tr
         %td distinct_id
         %td String
-        %td The instance's distinct_id or raises error
+        %td
+          %em The <code>Trakio</code> instance's <code>distinct_id</code>, otherwise required
         %td The distinct id for the person you wish to track
       %tr
         %td event
         %td String
-        %td Raises an error
+        %td
+          %em Required
         %td The event you wish to track
       %tr
         %td channel
         %td String
-        %td nil
+        %td
+          %em The <code>Trakio</code> instance's <code>channel</code>, otherwise nil
         %td The channel which this event is in, eg. web, api, dashboard
       %tr
         %td properties
@@ -155,7 +160,7 @@ title: Track
         trak_id: '123456'
       }
 
-.for-http
+#http.for-http
 
   %h3.first HTTP
 
