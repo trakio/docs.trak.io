@@ -79,6 +79,21 @@ title: Distinct ID
     :escaped
       http://example.com/my_page.html?trak_distinct_id=matt@trak.io
 
+.for-ruby
+  %h3.first Ruby
+
+  %p
+    You can send the distinct_id with any of the methods available, you can
+    also set a default one by specifying it alongside the constructor, this is
+    not possible with the default instance.
+
+  %code.ruby.spread
+    :preserve
+      trak = Trakio.new 'my-api-token'
+      trak.distinct_id = 'tobie@example.com'
+
+      trak = Trakio.new 'my-api-token', distinct_id: 'tobie@example.com' # set it globally
+
 .for-http
 
   %h3.first HTTP
