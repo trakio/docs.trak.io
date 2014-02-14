@@ -6,13 +6,61 @@ title: Annotate
 
 %p Annotate is a way of recording system wide events that affect everyone. Annotations are similar to events except they are not associated with any one person.
 
-%div.for-javascript
+#javascript.for-javascript
 
   %h3.first JavaScript
 
   %p Since annotations are system wide events and not triggered by your end users they are not supported by the JavaScript library. If you are building a JavaScript based client for trak.io and need to register annotations, <a href='mailto:support@trak.io?subject=I need annotate in the trak.io JavaScript library'>please let us know</a> and we'll work on adding it.
 
-%div.for-http
+#ruby.for-ruby
+
+  %h3.first Ruby
+
+  %code.ruby.spread
+    :preserve
+      Trakio.annotate event: 'Deployed Update', channel: 'Documentation'
+      Trakio.annotate event: 'Deployed Update', channel: 'Documentation', properties: { commit: '5ab430d' }
+
+  %h4 Arguments
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Argument
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %td event
+        %td String
+        %td
+          %em Required
+        %td The event you wish to record
+      %tr
+        %td channel
+        %td String
+        %td
+          %em The <code>Trakio</code> instance's <code>channel</code>, otherwise required
+        %td The channel this event falls into
+      %tr
+        %td properties
+        %td String or Array
+        %td {}
+        %td The properties you wish to set for this event
+
+  %h4 Return Value
+
+  %p The return value of annotate is a Ruby <code>Hash</code> similar to the one below.
+
+  %code.ruby.spread
+    :preserve
+      {
+        status: 'success',
+        trak_id: '123456',
+      }
+
+#http.for-http
 
   %h3.first HTTP
 

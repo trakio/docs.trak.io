@@ -4,4 +4,77 @@ title: Ruby API Introduction
 
 %h2 Ruby API Introduction
 
-%p  We have an official ruby library it is published as a <a target="_blank" href="http://rubygems.org/gems/trakio-ruby">ruby gem</a> and the <a target="_blank" href="https://github.com/trakio/trakio-ruby">source code</a> is avaliable on GitHub. Documentation is still to come though.
+%p We have an official ruby library it is published as a <a target="_blank" href="http://rubygems.org/gems/trakio-ruby">ruby gem</a> and the <a target="_blank" href="https://github.com/trakio/trakio-ruby">source code</a> is avaliable on GitHub.
+
+%h3 Installation
+
+%p To get started simply add the following to your to your Gemfile and run <code>bundle update</code>
+
+%code
+  gem 'trakio-ruby'
+
+%p Or install manually with <code>gem install trakio-ruby</code>
+
+
+%h3 Initialization and Configuration
+
+%p Your can either call methods off the <code>Trakio</code> class to use a single default instance. To do so you must first initialize it with the <code>#init</code> method and your api token.
+
+%code.ruby
+  :preserve
+    # Initialize the default instance
+    trakio = Trakio.init 'my_api_token', { channel: "my_uber_app"}
+    # Then call methods on the Trakio class
+    Trakio.track distinct_id: user.id, event: 'event'
+
+%p Or you can intialize your own <code>Trakio</code> instances:
+
+%code.ruby
+  :preserve
+    # Create your own instance
+    trakio = Trakio.new 'my_api_token', { channel: "my_uber_app"}
+    # Then call methods on that
+    trakio.track distinct_id: user.id, event: 'event'
+
+%p Options are passed to the library as a hash. An example of creating an instance is shown below. The options you may pass are shown below, note that <code>distinct_id</code> <strong>cannot</strong> be set on the default instance.
+
+%table.table.spread
+  %thead
+    %tr
+      %th Option
+      %th Type
+      %th Description
+  %tbody
+    %tr
+      %td distinct_id
+      %td String
+      %td The distinct_id you wish to set. See the <a href="/distinct_id.html#ruby">distinct_id</a> documentation for more information. Note you cannot set this on the default instance. And you should only set on your own instance if you are initializing one for each user.
+    %tr
+      %td channel
+      %td String
+      %td The channel you wish to set. See the <a href="/channel.html#ruby">channel</a> documentation for more information.
+
+#methods
+
+  %h3 Usage
+
+  %p The following methods are available to send data to trak.io:
+
+  %ul
+    %li
+      %a{href: '/identify.html#ruby'} <code>Trakio.identify</code>
+    %li
+      %a{href: '/alias.html#ruby'} <code>Trakio.alias</code>
+    %li
+      %a{href: '/track.html#ruby'} <code>Trakio.track</code>
+    %li
+      %a{href: '/annotate.html#ruby'} <code>Trakio.annotate</code>
+
+  %p You can also use the following to alter your initial configuration:
+
+  %ul
+    %li
+      %a{href: '/distinct_id.html#ruby'} <code>Trakio.distinct_id</code>
+    %li
+      %a{href: '/channel.html#ruby'} <code>Trakio.channel</code>
+

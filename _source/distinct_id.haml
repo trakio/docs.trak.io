@@ -17,7 +17,7 @@ title: Distinct ID
       %li keep track of your user's distinct id for you in a cookie so you don't have to provide it each time you call a method with the JS library
       %li share a user's distinct id across a root domain, (unlike <a href='/channel.html'>channel</a> which is only shared between requests on a subdomain) so that users can be tracked across subdomains
 
-.for-javascript
+#javascipt.for-javascript
 
   %h3.first JavaScript
 
@@ -79,7 +79,43 @@ title: Distinct ID
     :escaped
       http://example.com/my_page.html?trak_distinct_id=matt@trak.io
 
-.for-http
+#ruby.for-ruby
+
+  %h3.first Ruby
+
+  %p
+    You can provide distinct_id for any of the available methods:
+
+  %code.ruby.spread
+    :preserve
+      Trakio.track distinct_id: 'tobie@example.com', event: 'signed_up'
+
+  %p
+    You can also set a default one as on option when you create your own instance:
+
+  %code.ruby.spread
+    :preserve
+      trak = Trakio.new 'my-api-token'
+      trak.distinct_id = 'tobie@example.com'
+
+      # Or
+      trak = Trakio.new 'my-api-token', distinct_id: 'tobie@example.com'
+
+  %p.note
+    This is not possible with the default instance, you must provide it as an argument when calling methods:
+
+
+
+  %code.ruby.spread
+    :preserve
+      Trakio.init 'my-api-token', distinct_id: 'tobie@example.com'
+      # Will raise an exception
+
+      # Do this instead
+      Trakio.init 'my-api-token'
+      trak = Trakio.track distinct_id: 'tobie@example.com', event: 'signed_up'
+
+#http.for-http
 
   %h3.first HTTP
 
