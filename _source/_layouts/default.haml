@@ -16,7 +16,7 @@
         var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.trak.io/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
         trak.io.load('2513f6a1eb4a20198b07c1f343499ec0f4f88e57', { channel: 'Documentation' });
       }
-      $(document).ready(function(){$('code').each(function(i, e){hljs.highlightBlock(e)});});
+      hljs.configure({languages:[]});$(document).ready(function(){$('code').each(function(i, e){hljs.highlightBlock(e)});});
 
   %body
 
