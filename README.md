@@ -7,14 +7,14 @@
 
 ## Make Tasks
 
-### `make build`
+### Build
 `make build` compiles the file into static HTML.
 
-### `make server`
+### Server
 `make server` runs a server which serves the static HTML in `_site`. It's used when
 developing the documentation locally.
 
-### `make watch`
+### Watch
 `make watch` continuously builds the documentation, watching the files for changes.
 It's handy when developing, as you don't have to keep executing `make build`
 
