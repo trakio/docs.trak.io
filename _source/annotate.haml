@@ -68,9 +68,10 @@ title: Annotate
 
   %code.bash.spread
     :escaped
-      $ curl https://api.trak.io/v1/annotate \
-        --data token=YOUR_API_TOKEN\
-        --data data='{"event": "Deployed update", "channel": "Web site", "properties": { "details": "Added new super awesome feature!", "version": "V324" } }'
+      $ curl -v -XPOST \
+        --data token=YOUR_API_TOKEN \
+        --data data='{"event": "Deployed update", "channel": "Web site", "properties": { "details": "Added new super awesome feature!", "version": "V324" } }' \
+        https://api.trak.io/v1/annotate
 
   %h4 Data Object
 
