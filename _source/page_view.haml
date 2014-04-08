@@ -104,9 +104,10 @@ title: Page View
 
   %code.bash
     :escaped
-      $ curl https://api.trak.io/v1/track \
-        --data token=YOUR_API_TOKEN\
-        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Web site"}'
+      $ curl -v -XPOST \
+        --data token=YOUR_API_TOKEN \
+        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Web site"}' \
+        https://api.trak.io/v1/track
 
 
 %h3#return Return Value

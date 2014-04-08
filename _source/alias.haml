@@ -136,9 +136,10 @@ title: Alias
 
   %code.bash.spread
     :escaped
-      $ curl https://api.trak.io/v1/alias \
-        --data token=YOUR_API_TOKEN\
-        --data data='{"distinct_id": "liam@trak.io", "alias": "liam.gooding@trak.io"}'
+      $ curl -v -XPOST \
+        --data token=YOUR_API_TOKEN \
+        --data data='{"distinct_id": "liam@trak.io", "alias": "liam.gooding@trak.io"}' \
+        https://api.trak.io/v1/alias
 
   %h4 Data Object
 

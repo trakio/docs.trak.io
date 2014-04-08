@@ -168,9 +168,10 @@ title: Track
 
   %code.bash.spread
     :escaped
-      $ curl https://api.trak.io/v1/track \
-        --data token=YOUR_API_TOKEN\
-        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Web site", "properties": {}, "context": { "time_zone": "GMT" }}'
+      $ curl -v -XPOST \
+        --data token=YOUR_API_TOKEN \
+        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Web site", "properties": {}, "context": { "time_zone": "GMT" }}' \
+        https://api.trak.io/v1/track
 
   %h4 Data Object
 

@@ -171,9 +171,10 @@ title: Identify
 
   %code.bash.spread
     :escaped
-      $ curl https://api.trak.io/v1/identify \
-        --data token=YOUR_API_TOKEN\
-        --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}'
+      $ curl -v -XPOST \
+        --data token=YOUR_API_TOKEN \
+        --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}' \
+        https://api.trak.io/v1/identify
 
   %h4 Data Object
 
