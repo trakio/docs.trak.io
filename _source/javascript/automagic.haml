@@ -1,0 +1,90 @@
+---
+title: "JavaScript API: AutoMagic"
+---
+
+%h2 JavaScript API: AutoMagic
+
+%p The Trak.io AutoMagic library is a supplementary library that can easily be loaded in addition to the standard library that trys to take care of as much integration as possible for you "automagically".
+
+%p.note The JavaScript AutoMagic Library is a beta feature, its scope is fairly limited at the moment and will be expanded and refined on over time. We'll be keeping users up to date with developments via our mailing list.
+
+%h3 Enabling AutoMagic
+
+%p As a beta feature the AutoMagic library is opt in and can be enabled by passing true to the <code><a href='/javascript.html'>trak.io.load()</a></code> method.
+
+%code.html.spread
+  :escaped
+    <script>
+      var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+      trak.io.load("YOUR_API_TOKEN", { automagic: true });
+    </script>
+
+%p You can also pass the <code>automagic</code> option a configuration object if the defaults conflict with your site. <strong>Unless you are having problems with your Trak.io AutoMagic integration, you shouldn't need to worry about this</strong>.
+
+%h3 Identify
+
+%p The AutoMagic library will attempt to automatically identify your users by analyzing the structure of submitted html forms.
+
+%p The identify option can be used to have more control over which forms should be used to identify a user. You can disable this functionality by setting it to false:
+
+%code.javascript.spread
+  :escaped
+    trak.io.load("YOUR_API_TOKEN", { automagic: {
+      identify: false
+    } });
+
+%p You can also pass it a configuration object to contol which forms and fields should be used to identify a person.
+
+%table.table.spread
+  %thead
+    %tr
+      %th Option
+      %th Type
+      %th Description
+  %tbody
+    %tr
+      %th form_selector
+      %td String
+      %td A CSS selector that the form must match to qualify
+    %tr
+      %th property_map
+      %td Object
+      %td A set of key value pairs, where the keys are <a href='/properties.html#person'>properties</a> for the person and the values are the form field names.
+    %tr
+      %th has_any_fields
+      %td Array
+      %td The form will only qualify to identify a person if one or more of these properties can be determined based on the property map.
+    %tr
+      %th has_all_fields
+      %td Array
+      %td The form will only qualify to identify a person if all of these properties can be determined based on the property map.
+
+#defaults
+
+  %h3 Defaults
+
+  %p If you have just enabled the AutoMagic library the defaults mean that it is the equivilent of doing:
+
+  %code.javascript.spread
+    :escaped
+      trak.io.load("YOUR_API_TOKEN", { automagic: {
+        identify: {
+          form_selector: 'form',
+          property_map: {
+            username: /.*username.*/,
+            name: /.*name.*/,
+            first_name: /.*first.*name.*/,
+            last_name: /.*last.*name.*/,
+            email: /.*email.*/,
+            position: /.*position.*/,
+            company: /.*company.*/,
+            organization: /.*organi(z|s)ation.*/,
+            industry: /.*industry.*/,
+            location: /.*location.*/,
+            latlng: /.*latl(ng|on).*/,
+            birthday: /.*(birthday|dob|date.*of.*birth).*/
+          },
+          has_any_fields: ['username','name','first_name','last_name','email'],
+          has_all_fields: []
+        }
+      } });
