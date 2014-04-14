@@ -8,10 +8,10 @@ title: Distinct ID
 
 %ul
   %li A user can have one or more distinct ids
-  %li You can find a user's distinct ids by clicking the distinct id link in their person profile screen in the trak.io dashboard
+  %li You can find a user's distinct ids by clicking the distinct id link in their person profile screen in the Trak.io dashboard
   %li The <code><a href='/track.html'>trak.io.track()</a></code>, <code><a href='/identify.html'>trak.io.identify()</a></code> and <code><a href='/alias.html'>trak.io.alias()</a></code> actions must be provided with a distinct id when using the HTTP API
   %li
-    The trak.io JavaScript library will:
+    The Trak.io JavaScript library will:
     %ul
       %li automatically generate a distinct id for users that don't have one
       %li keep track of your user's distinct id for you in a cookie so you don't have to provide it each time you call a method with the JS library
@@ -45,7 +45,7 @@ title: Distinct ID
 
   %p You can override the scope of a person's distinct id with the <code><a href='/javascript.html#root_domain'>root_domain</a></code> option.
 
-  %p If for example you were running trak.io on blog.example.com and www.example.com, by default somebody visiting either of these sites will be identified as the same person.
+  %p If for example you were running Trak.io on blog.example.com and www.example.com, by default somebody visiting either of these sites will be identified as the same person.
 
   %p If however you were to set the root domain for your blog as blog.example.com and your site as www.example.com, they would be recognised as two different people, since they no longer share a distinct ID.
 

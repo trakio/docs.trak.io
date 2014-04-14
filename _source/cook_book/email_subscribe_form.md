@@ -6,7 +6,7 @@ title: "Example: Email Subscribe Form"
 
 ### Introduction
 
-This cookbook guide is a walkthrough of how to use trak.io's
+This cookbook guide is a walkthrough of how to use Trak.io's
 Javascript API for an email subscription form: perhaps a blog newsletter, a blog
 comment, or a beta waiting list. We want to use this opportunity to identify
 this visitor so that we can understand who is using our website, and how.
@@ -18,7 +18,7 @@ We recommend placing it where you have placed other JavaScript code. We've used 
 
 In this guide we'll cover:
 
--   Getting your trak.io API key and basic embed code
+-   Getting your Trak.io API key and basic embed code
 
 -   Using channels to label these events as 'Blog'
 
