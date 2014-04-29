@@ -49,7 +49,9 @@ title: "JavaScript API: AutoMagic"
     %tr
       %th property_map
       %td Object
-      %td A set of key value pairs, where the keys are <a href='/properties.html#person'>properties</a> for the person and the values are the form field names.
+      %td
+        A set of key value pairs, where the keys are <a href='/properties.html#person'>properties</a> for the person and the values are the form field names.
+        Note the values can be <a href='http://regexone.com'>Regular Expressions</a>.
     %tr
       %th has_any_fields
       %td Array
@@ -58,12 +60,18 @@ title: "JavaScript API: AutoMagic"
       %th has_all_fields
       %td Array
       %td The form will only qualify to identify a person if all of these properties can be determined based on the property map.
+    %tr
+      %th distinct_ids
+      %td Array
+      %td The name(s) of the field(s) which you would like to use as a <a href='/distinct_id.html'>distinct_id</a>, this will be an array and the first key it can find will be used.
 
 #defaults
 
   %h3 Defaults
 
-  %p If you have just enabled the AutoMagic library the defaults mean that it is the equivilent of doing:
+  %p By default AutoMagic will <b>NOT</b> identify passwords as an attept to retain user privacy.
+
+  %p If you have just enabled the AutoMagic library the defaults mean that it is the equivalent of doing:
 
   %code.javascript.spread
     :escaped
@@ -85,6 +93,7 @@ title: "JavaScript API: AutoMagic"
             birthday: /.*(birthday|dob|date.*of.*birth).*/
           },
           has_any_fields: ['username','name','first_name','last_name','email'],
-          has_all_fields: []
+          has_all_fields: [],
+          distinct_ids: ['email', 'username']
         }
       } });
