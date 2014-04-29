@@ -2,17 +2,23 @@
 title: "JavaScript API: AutoMagic"
 ---
 
-%h1 Note: This is a proposal, AutoMagic is <b>NOT</b> currently implemented, and there is no gurantee that this will stay the same.
+.alert.alert-info 
+  %h4 Note: This is a developer preview of the API to a new feature called AutoMagic
+  %p AutoMagic is NOT currently in production, and there is no gurantee that this documentation will stay the same once launched.
 
 %h2 JavaScript API: AutoMagic
 
-%p The Trak.io AutoMagic library is a supplementary library that can easily be loaded in addition to the standard library that trys to take care of as much integration as possible for you "automagically".
+%p We are developing a new feature to Trak.io called AutoMagic, which will remove the need to write any custom code when setting up Trak.io.
+
+%p AutoMagic makes installing Trak.io as simple as installing Google Analytics: just copy and paste one snippet of code. Thats it!
+
+%p The AutoMagic library is a supplementary library, which is loaded in addition to the standard library. This means advanced users will be able to disable it if you'd rather write all the custom code yourself (or you are experiencing issues with the library).
 
 %p.note The JavaScript AutoMagic Library is a beta feature, its scope is fairly limited at the moment and will be expanded and refined on over time. We'll be keeping users up to date with developments via our mailing list.
 
 %h3 Enabling AutoMagic
 
-%p As a beta feature the AutoMagic library is opt in and can be enabled by passing true to the <code><a href='/javascript.html'>trak.io.load()</a></code> method.
+%p As a beta feature the AutoMagic library is currently <b>opt in</b>. To use it, you should pass the following config value to the <code><a href='/javascript.html'>trak.io.load()</a></code> method.
 
 %code.html.spread
   :escaped
@@ -21,11 +27,15 @@ title: "JavaScript API: AutoMagic"
       trak.io.load("YOUR_API_TOKEN", { automagic: true });
     </script>
 
-%p You can also pass the <code>automagic</code> option a configuration object if the defaults conflict with your site. <strong>Unless you are having problems with your Trak.io AutoMagic integration, you shouldn't need to worry about this</strong>.
+%p The default settings of AutoMagic may conflict with your website. If so, you can add a configuration object to the automagic object. (The defaults should work fine for most users).
 
-%h3 Identify
+#identify
+
+%h3 Identify Users Without Any Coding
 
 %p The AutoMagic library will attempt to automatically identify your users by analyzing the structure of submitted html forms.
+
+%p For example, this means we try and detect forms like Registration, Log In or Email subscribe automatically.
 
 %p The identify option can be used to have more control over which forms should be used to identify a user. You can disable this functionality by setting it to false:
 
@@ -35,7 +45,7 @@ title: "JavaScript API: AutoMagic"
       identify: false
     } });
 
-%p You can also pass it a configuration object to contol which forms and fields should be used to identify a person.
+%p You can pass it a configuration object to contol which forms and fields should be used to identify a person:
 
 %table.table.spread
   %thead
@@ -67,11 +77,27 @@ title: "JavaScript API: AutoMagic"
       %td Array
       %td The name(s) of the field(s) which you would like to use as a <a href='/distinct_id.html'>distinct_id</a>, this will be an array and the first key it can find will be used.
 
+%p Form submissions will also cause an event to be tracked.
+
+#clicks
+
+  %h3 Tracking All Clicks
+  
+  %p AutoMagic will soon track all click activity automatically. This will make it easy for novice marketers to create complex funnel reports based on which actions users perform within the app.
+  
+  %p By default, AutoMagic causes a short delay on link clicks in order to guarantee the click has been logged in the API. This delay has a current max limit of 200ms - if the Trak.io API has not responded in this time, then the default click behaviour is resumed.
+
+#pageviews
+
+  %h3 Tracking All Pageviews
+  
+  %p Trak.io already tracks pageviews by default with the JS library, however AutoMagic will soon replace this functionality. Automatically tracking pageviews will make it easy for novice marketers to build complex funnel reports and segments based on features.
+  
 #defaults
 
   %h3 Defaults
 
-  %p By default AutoMagic will <b>NOT</b> identify passwords as an attept to retain user privacy.
+  %p AutoMagic will <b>NEVER</b> store passwords from forms. Password type input fields are ignored.
 
   %p If you have just enabled the AutoMagic library the defaults mean that it is the equivalent of doing:
 
@@ -99,3 +125,4 @@ title: "JavaScript API: AutoMagic"
           distinct_ids: ['email', 'username']
         }
       } });
+  %p To make the most of this, you will need to ensure your app uses unique URL's for features. Dynamic AJAX applications will probably need to continue to use our custom API to track events
