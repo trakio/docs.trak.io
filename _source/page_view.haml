@@ -21,7 +21,7 @@ title: Page View
   :escaped
     trak.io.track('Page view')
 
-%div.for-javascript
+#javascript.for-javascript
 
   %h3.first JavaScript
 
@@ -95,8 +95,52 @@ title: Page View
 
   %p The JavaScript method will make the page view HTTP request asynchronously, returning the <code>trak.io</code> instance immediately. The <a href='#return'>return value</a> of the HTTP request it makes will be passed to the callback function as the first argument.
 
+#ruby.for-ruby
 
-%div.for-http
+  %h3.first Ruby
+
+  %p <code>page_view</code> uses <code>track</code> internally.
+
+  %h4 Basic Usage
+
+  %code.ruby.spread
+    :preserve
+      Trakio.page_view title: 'Title', url: 'https://trak.io/title'
+
+  %h4 Arguments
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Argument
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %td title
+        %td String
+        %td required
+        %td The title of the page.
+      %tr
+        %td url
+        %td String
+        %td required
+        %td The url of the page.
+
+  %h4 Return Value
+
+  %p The return value from page_view is a Ruby <code>Hash</code> similar to the one shown below.
+
+  %code.ruby.spread
+    :preserve
+      {
+        status: 'success',
+        trak_id: '123456',
+      }
+
+
+#http.for-http
 
   %h3.first HTTP
 
