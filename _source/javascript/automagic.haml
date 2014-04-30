@@ -1,0 +1,128 @@
+---
+title: "JavaScript API: AutoMagic"
+---
+
+.alert.alert-info 
+  %h4 Note: This is a developer preview of the API to a new feature called AutoMagic
+  %p AutoMagic is NOT currently in production, and there is no gurantee that this documentation will stay the same once launched.
+
+%h2 JavaScript API: AutoMagic
+
+%p We are developing a new feature to Trak.io called AutoMagic, which will remove the need to write any custom code when setting up Trak.io.
+
+%p AutoMagic makes installing Trak.io as simple as installing Google Analytics: just copy and paste one snippet of code. Thats it!
+
+%p The AutoMagic library is a supplementary library, which is loaded in addition to the standard library. This means advanced users will be able to disable it if you'd rather write all the custom code yourself (or you are experiencing issues with the library).
+
+%p.note The JavaScript AutoMagic Library is a beta feature, its scope is fairly limited at the moment and will be expanded and refined on over time. We'll be keeping users up to date with developments via our mailing list.
+
+%h3 Enabling AutoMagic
+
+%p As a beta feature the AutoMagic library is currently <b>opt in</b>. To use it, you should pass the following config value to the <code><a href='/javascript.html'>trak.io.load()</a></code> method.
+
+%code.html.spread
+  :escaped
+    <script>
+      var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+      trak.io.load("YOUR_API_TOKEN", { automagic: true });
+    </script>
+
+%p The default settings of AutoMagic may conflict with your website. If so, you can add a configuration object to the automagic object. (The defaults should work fine for most users).
+
+#identify
+
+%h3 Identify Users Without Any Coding
+
+%p The AutoMagic library will attempt to automatically identify your users by analyzing the structure of submitted html forms.
+
+%p For example, this means we try and detect forms like Registration, Log In or Email subscribe automatically.
+
+%p The identify option can be used to have more control over which forms should be used to identify a user. You can disable this functionality by setting it to false:
+
+%code.javascript.spread
+  :escaped
+    trak.io.load("YOUR_API_TOKEN", { automagic: {
+      identify: false
+    } });
+
+%p You can pass it a configuration object to contol which forms and fields should be used to identify a person:
+
+%table.table.spread
+  %thead
+    %tr
+      %th Option
+      %th Type
+      %th Description
+  %tbody
+    %tr
+      %th form_selector
+      %td String
+      %td A CSS selector that the form must match to qualify
+    %tr
+      %th property_map
+      %td Object
+      %td
+        A set of key value pairs, where the keys are <a href='/properties.html#person'>properties</a> for the person and the values are the form field names.
+        Note the values can be <a href='http://regexone.com'>Regular Expressions</a>.
+    %tr
+      %th has_any_fields
+      %td Array
+      %td The form will only qualify to identify a person if one or more of these properties can be determined based on the property map.
+    %tr
+      %th has_all_fields
+      %td Array
+      %td The form will only qualify to identify a person if all of these properties can be determined based on the property map.
+    %tr
+      %th distinct_ids
+      %td Array
+      %td The name(s) of the field(s) which you would like to use as a <a href='/distinct_id.html'>distinct_id</a>, this will be an array and the first key it can find will be used.
+
+%p Form submissions will also cause an event to be tracked.
+
+#clicks
+
+  %h3 Tracking All Clicks
+  
+  %p AutoMagic will soon track all click activity automatically. This will make it easy for novice marketers to create complex funnel reports based on which actions users perform within the app.
+  
+  %p By default, AutoMagic causes a short delay on link clicks in order to guarantee the click has been logged in the API. This delay has a current max limit of 200ms - if the Trak.io API has not responded in this time, then the default click behaviour is resumed.
+
+#pageviews
+
+  %h3 Tracking All Pageviews
+  
+  %p Trak.io already tracks pageviews by default with the JS library, however AutoMagic will soon replace this functionality. Automatically tracking pageviews will make it easy for novice marketers to build complex funnel reports and segments based on features.
+  
+#defaults
+
+  %h3 Defaults
+
+  %p AutoMagic will <b>NEVER</b> store passwords from forms. Password type input fields are ignored.
+
+  %p If you have just enabled the AutoMagic library the defaults mean that it is the equivalent of doing:
+
+  %code.javascript.spread
+    :escaped
+      trak.io.load("YOUR_API_TOKEN", { automagic: {
+        identify: {
+          form_selector: 'form',
+          property_map: {
+            username: /.*username.*/,
+            name: /.*name.*/,
+            first_name: /.*first.*name.*/,
+            last_name: /.*last.*name.*/,
+            email: /.*email.*/,
+            position: /.*position.*/,
+            company: /.*company.*/,
+            organization: /.*organi(z|s)ation.*/,
+            industry: /.*industry.*/,
+            location: /.*location.*/,
+            latlng: /.*latl(ng|on).*/,
+            birthday: /.*(birthday|dob|date.*of.*birth).*/
+          },
+          has_any_fields: ['username','name','first_name','last_name','email'],
+          has_all_fields: [],
+          distinct_ids: ['email', 'username']
+        }
+      } });
+  %p To make the most of this, you will need to ensure your app uses unique URL's for features. Dynamic AJAX applications will probably need to continue to use our custom API to track events
