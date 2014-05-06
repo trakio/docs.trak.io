@@ -21,8 +21,6 @@ In this guide we'll cover:
 
 -   Tracking a custom event called 'Registered'
 
--   Associating anonymous browsing behaviour of a known person using the [`trak.io.alias()`](/alias.html) method after they have registered (or logged in)
-
 -   Saving properties about a person using [`trak.io.identify()`](/identify.html)
 
 ### Step 1: Add the Basic Code
@@ -128,9 +126,6 @@ So to bring it all together, the registration success page in our app now has th
         // Track a custom Registered event
         trak.io.track("Registered");
 
-        // Alias this user to merge with any anonymous browsing behaviour
-        trak.io.alias("john@johnsmith.com");
-
         // Save properties that we know about this user
         trak.io.identify({
           "email": "john@johnsmith.com",
@@ -139,4 +134,3 @@ So to bring it all together, the registration success page in our app now has th
           "twitter": { "screen_name": "johnSmithy86" }
         });
     </script>
-
