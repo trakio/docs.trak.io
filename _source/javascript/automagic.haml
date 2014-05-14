@@ -2,19 +2,21 @@
 title: "JavaScript API: AutoMagic"
 ---
 
-.alert.alert-info 
-  %h4 Note: This is a developer preview of the API to a new feature called AutoMagic
-  %p AutoMagic is NOT currently in production, and there is no gurantee that this documentation will stay the same once launched.
+.alert.alert-info
+  %p AutoMagic is a new feature that we are currently testing. If you experience any problems using it on your site, please email us at <a href="mailto:hello@trak.io">hello@trak.io</a>
 
 %h2 JavaScript API: AutoMagic
 
-%p We are developing a new feature to Trak.io called AutoMagic, which will remove the need to write any custom code when setting up Trak.io.
+%p
+  <iframe src="//fast.wistia.net/embed/iframe/u57kw9dmpg" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="533" height="328"></iframe>
+
+%p We have developed a new feature to Trak.io called AutoMagic, which removes the need to write any custom code when setting up Trak.io.
 
 %p AutoMagic makes installing Trak.io as simple as installing Google Analytics: just copy and paste one snippet of code. Thats it!
 
 %p The AutoMagic library is a supplementary library, which is loaded in addition to the standard library. This means advanced users will be able to disable it if you'd rather write all the custom code yourself (or you are experiencing issues with the library).
 
-%p.note The JavaScript AutoMagic Library is a beta feature, its scope is fairly limited at the moment and will be expanded and refined on over time. We'll be keeping users up to date with developments via our mailing list.
+%p.note The JavaScript AutoMagic Library is a new feature, its scope is fairly limited at the moment and will be expanded and refined on over time. We'll be keeping users up to date with developments via our mailing list.
 
 %h3 Enabling AutoMagic
 
@@ -82,17 +84,17 @@ title: "JavaScript API: AutoMagic"
 #clicks
 
   %h3 Tracking All Clicks
-  
+
   %p AutoMagic will soon track all click activity automatically. This will make it easy for novice marketers to create complex funnel reports based on which actions users perform within the app.
-  
+
   %p By default, AutoMagic causes a short delay on link clicks in order to guarantee the click has been logged in the API. This delay has a current max limit of 200ms - if the Trak.io API has not responded in this time, then the default click behaviour is resumed.
 
 #pageviews
 
   %h3 Tracking All Pageviews
-  
+
   %p Trak.io already tracks pageviews by default with the JS library, however AutoMagic will soon replace this functionality. Automatically tracking pageviews will make it easy for novice marketers to build complex funnel reports and segments based on features.
-  
+
 #defaults
 
   %h3 Defaults
