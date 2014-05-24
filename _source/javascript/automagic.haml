@@ -2,26 +2,31 @@
 title: "JavaScript API: AutoMagic"
 ---
 
-.alert.alert-info
-  %h4 Note: This is a developer preview of the API to a new feature called AutoMagic
-  %p AutoMagic is NOT currently in production, and there is no gurantee that this documentation will stay the same once launched.
-
 %h2 JavaScript API: AutoMagic
 
 %p We are developing a new feature for Trak.io called AutoMagic, which will remove the need to write any custom code when setting up Trak.io.
 
 .alert.alert-danger
-  %p.note The JavaScript AutoMagic Library is a beta feature, its scope is fairly limited at the moment and will be expanded and refined over time. We'll be keeping users up to date with developments via our mailing list.
+  %p.note AutoMagic is a new feature that we are still developing and testing. If you experience any problems using it on your site, please email us at <a href="mailto:hello@trak.io">hello@trak.io</a>
   %p
     %em If you are attaching JavaScript events to clicks or form submittions (or have libararies that do) it may cause problems with Automagic and we recomment you don't use it at this time.
+
+%h2 JavaScript API: AutoMagic
+
+%p
+  <iframe src="//fast.wistia.net/embed/iframe/u57kw9dmpg" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="533" height="328"></iframe>
+
+%p We have developed a new feature for Trak.io called AutoMagic, which removes the need to write any custom code when setting up Trak.io.
 
 %p AutoMagic makes installing Trak.io as simple as installing Google Analytics: just copy and paste one snippet of code. Thats it!
 
 %p The AutoMagic library is a supplementary library, which is loaded in addition to the standard library. This means advanced users will be able to disable it if you'd rather write all the custom code yourself (or you are experiencing issues with the library).
 
+%p.note The JavaScript AutoMagic Library is a new feature, its scope is fairly limited at the moment and will be expanded and refined on over time. We'll be keeping users up to date with developments via our mailing list.
+
 %h3 Enabling AutoMagic
 
-%p As a beta feature the AutoMagic library is currently <b>opt in</b>. To use it, you should pass the following config value to the <code><a href='/javascript.html'>trak.io.load()</a></code> method.
+%p As a beta feature the AutoMagic library is currently <strong>opt in</strong>. To use it, you should pass the following config value to the <code><a href='/javascript.html'>trak.io.load()</a></code> method.
 
 %code.html.spread
   :escaped
@@ -87,6 +92,7 @@ title: "JavaScript API: AutoMagic"
   %h3 Passwords and Other Sensitive Information
 
   %p By default passwords will be not be tracked by Automagic due to the <code>exclude_field_selector</code> option being set to <code>[type=password]</code>. If you have passwords or other sensitive infomation you need to ensure is not sent to Trak.io you may need to adjust this value.
+
 
 #defaults
 

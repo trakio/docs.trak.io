@@ -109,7 +109,7 @@
 
     .footer
       .container
-        .copyright &copy; Trak.io 2013 all rights reserved
+        .copyright &copy; Trak.io 2014 all rights reserved
         %ul.links
           %li
             %a{href: "http://blog.trak.io"} Blog
@@ -125,3 +125,20 @@
             %a{href: "http://help.trak.io"} Help
           %li
             %a{href: "mailto:hello@trak.io"} Contact
+
+    :javascript
+      adroll_adv_id = "FVCHKTRYYJA35NZXWA2FWO";
+      adroll_pix_id = "XPVZRF5Y7NAI5AW6G75WGW";
+      (function () {
+      var oldonload = window.onload;
+      window.onload = function(){
+         __adroll_loaded=true;
+         var scr = document.createElement("script");
+         var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+         scr.setAttribute('async', 'true');
+         scr.type = "text/javascript";
+         scr.src = host + "/j/roundtrip.js";
+         ((document.getElementsByTagName('head') || [null])[0] ||
+          document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+         if(oldonload){oldonload()}};
+      }());
