@@ -4,7 +4,7 @@ title: "JavaScript API: AutoMagic"
 
 %h2 JavaScript API: AutoMagic
 
-%p We are developing a new feature for Trak.io called AutoMagic, which will remove the need to write any custom code when setting up Trak.io.
+%p We are developing a new feature for Trak.io called AutoMagic, which will remove the need to write any custom code when getting started with Trak.io.
 
 .alert.alert-danger
   %p.note AutoMagic is a new feature that we are still developing and testing. If you experience any problems using it on your site, please email us at <a href="mailto:hello@trak.io">hello@trak.io</a>
@@ -16,11 +16,9 @@ title: "JavaScript API: AutoMagic"
 %p
   <iframe src="//fast.wistia.net/embed/iframe/u57kw9dmpg" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="533" height="328"></iframe>
 
-%p We have developed a new feature for Trak.io called AutoMagic, which removes the need to write any custom code when setting up Trak.io.
-
 %p AutoMagic makes installing Trak.io as simple as installing Google Analytics: just copy and paste one snippet of code. Thats it!
 
-%p The AutoMagic library is a supplementary library, which is loaded in addition to the standard library. This means advanced users will be able to disable it if you'd rather write all the custom code yourself (or you are experiencing issues with the library).
+%p The AutoMagic library is a supplementary library, which is loaded in addition to the standard library. This means advanced users will be able to disable it if you'd rather integrate Trak.io yourself or it is causing problem on your site.
 
 %p.note The JavaScript AutoMagic Library is a new feature, its scope is fairly limited at the moment and will be expanded and refined on over time. We'll be keeping users up to date with developments via our mailing list.
 
@@ -35,57 +33,166 @@ title: "JavaScript API: AutoMagic"
       trak.io.load("YOUR_API_TOKEN", { automagic: true });
     </script>
 
-%p The default settings of AutoMagic may conflict with your website. If so, you can add a configuration object to the automagic object. (The defaults should work fine for most users).
+%h4 And that's it!
+
+%p Continue reading if your are having problems with AutoMagic and need to tweak the configuration or want to learn how to track events that are specific for your site.
+
+#top_config
+
+  %h3 AutoMagic Configuration
+
+  %p The default settings of AutoMagic may conflict with your website. If so, you can provied a configuration object rather than the standard value of <code>true</code>. (The defaults should work fine for most users).
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Option
+        %th Type
+        %th Default
+        %th Description
+      %tr
+        %td bind_events
+        %td Boolean
+        %td true
+        %td Whether AutoMagic should bind events to HTML elements, setting to false will effectively disable AutoMagic, but it is possible to bind the events manually if you are a sufficiently advanced user.
+      %tr
+        %td selector
+        %td String
+        %td "form"
+        %td A CSS selector that the element in question must match to either <a href="#identify">trigger identify</a> or <a href="#track">track events</a>.
+      %tr
+        %td identify
+        %td Object|Boolean
+        %td
+          %em <a href="#identify">See below</a>
+        %td False to disable identify functionality, or a configuration object, details for which can be found in the <a href="#identify">identify documentation</a>.
+      %tr
+        %td track
+        %td Object|Boolean
+        %td
+          %em <a href="#track">See below</a>
+        %td False to disable event tracking functionality, or a configuration object, details for which can be found in the <a href="#track">track documentation</a>.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.load("YOUR_API_TOKEN", { automagic: {
+        selector: 'form.automagic-form'
+      } });
 
 #identify
 
-%h3 Identify Users Without Any Coding
+  %h3 Identify Users Without Any Coding
 
-%p The AutoMagic library will attempt to automatically identify your users by analyzing the structure of submitted html forms. For example, this means we try and detect forms like Registration, Log In or Email subscribe automatically.
+  %p The AutoMagic library will attempt to automatically identify your users by analyzing the structure of submitted html forms. This means we try and detect forms like Registration, Log In or Email and identify your users based on the submitted values.
 
-%p The identify option can be used to have more control over which forms should be used to identify a user. You can disable this functionality by setting it to false:
+  %p The identify option can be used to have more control over which forms and fields should be used to identify a user. You can disable this functionality by setting it to false:
 
-%code.javascript.spread
-  :escaped
-    trak.io.load("YOUR_API_TOKEN", { automagic: {
-      identify: false
-    } });
+  %code.javascript.spread
+    :escaped
+      trak.io.load("YOUR_API_TOKEN", { automagic: {
+        identify: false
+      } });
 
-%p You can pass it a configuration object to contol which forms and fields should be used to identify a person:
+  %p You can pass it a configuration object to contol which forms and fields should be used to identify a person:
 
-%table.table.spread
-  %thead
-    %tr
-      %th Option
-      %th Type
-      %th Description
-  %tbody
-    %tr
-      %th form_selector
-      %td String
-      %td A CSS selector that the form must match to qualify
-    %tr
-      %th exclude_field_selector
-      %td String
-      %td A CSS selector, all fields that match this selector will be excluded.
-    %tr
-      %th property_map
-      %td Object
-      %td
-        A set of key value pairs, where the keys are <a href='/properties.html#person'>properties</a> for the person and the values are the form field names.
-        Note the values can be <a href='http://regexone.com'>Regular Expressions</a>.
-    %tr
-      %th has_any_fields
-      %td Array
-      %td The form will only qualify to identify a person if one or more of these properties can be determined based on the property map.
-    %tr
-      %th has_all_fields
-      %td Array
-      %td The form will only qualify to identify a person if all of these properties can be determined based on the property map.
-    %tr
-      %th distinct_ids
-      %td Array
-      %td The name(s) of the field(s) which you would like to use as a <a href='/distinct_id.html'>distinct_id</a>, this will be an array and the first key it can find will be used.
+  %table.table.spread
+    %thead
+      %tr
+        %th Option
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %td form_selector
+        %td String
+        %td "form"
+        %td A CSS selector that the form must match to qualify
+      %tr
+        %td exclude_field_selector
+        %td String
+        %td "[type=password]"
+        %td A CSS selector, all fields that match this selector will be excluded.
+      %tr
+        %td property_map
+        %td Object
+        %td
+          %em <a href="#defaults">See below</a>
+        %td
+          A set of key value pairs, where the keys are <a href='/properties.html#person'>properties</a> for the person and the values are the form field names or regular expressions the form field names should match.
+          Note the values can be <a href='http://regexone.com'>Regular Expressions</a>.
+      %tr
+        %td has_any_fields
+        %td Array
+        %td
+          :escaped
+            [
+            'username', 'name', 'first_name', 'last_name', 'email']
+        %td The form will only qualify to identify a person if one or more of these properties can be determined based on the property map.
+      %tr
+        %td has_all_fields
+        %td Array
+        %td []
+        %td The form will only qualify to identify a person if all of these properties can be determined based on the property map.
+      %tr
+        %td distinct_ids
+        %td Array
+        %td ['email', 'username']
+        %td The name(s) of the field(s) which you would like to use as a <a href='/distinct_id.html'>distinct_id</a>, this will be an array and the first key it can find will be used.
+      %tr
+        %td should_identify
+        %td Function
+        %td
+          %em <a href="#defaults">See below</a>
+        %td
+          A callback to determine if <a href="/identify.html"><code>trak.io.identify()</code></a> should be called.
+          Returning true will fire the <a href="/identify.html"><code>trak.io.identify()</code></a> function, returning false will not.
+          The function is called from the scope of (ie <code>this</code> is equal to) <code>trak.io.automagic</code>.
+          It recieves the element that triggered the event as its first argument and the event object as the second.
+
+#track
+
+  %h3 Tracking Events
+
+  %p
+    The AutoMagic library will attempt to automatically track user behaviour as they use your site/application.
+    The scope of automatic event tracking is fairly limit but we'll be adding to it over time.
+    You can always supplement it by adding <a href="/track.html">mannual tracking</a> to your site/application,
+    most sites/application will need some mannual integration for events specific to them to get the most out of Trak.io.
+
+
+  %p The track option can be used to have more control over which events should be tracked and when they should be fired. You can disable this functionality by setting it to false:
+
+  %code.javascript.spread
+    :escaped
+      trak.io.load("YOUR_API_TOKEN", { automagic: {
+        track: false
+      } });
+
+  %p It will be possible to configure which events to track and when they should be fired but we are still refining this functionality.
+
+  %p Automagically will automatically track the following events:
+
+  %h5 signed_in
+
+  %p
+    Any time a sign in form is submitted.
+    A sign in form is defined as a form with up to one checkbox (for remember me), a password field and either a username or email field.
+    The submit button for the form cannot contain any of the following phrases for its value: signup, sign up, register or create.
+
+  %h5 signed_up
+
+  %p
+    Any time a registration form is submitted.
+    A registration form is defined as a form that does not match the criteria for a sign in form, has two or more fields, one of which must be either a username or email field.
+
+  %h5 subscribed_with_email
+
+  %p Any time a subscribed with email form is submitted. A subscribed with email form is defined as a form with a single email form field.
+
+  %h5 submitted_form
+
+  %p Any time an form is submitted.
 
 #passwords
 
@@ -103,8 +210,10 @@ title: "JavaScript API: AutoMagic"
   %code.javascript.spread
     :escaped
       trak.io.load("YOUR_API_TOKEN", { automagic: {
+        bind_events: true,
+        selector: 'form',
         identify: {
-          form_selector: 'form',
+          selector: 'form',
           exclude_fields: '[type=password]',
           property_map: {
             username: /.*username.*/,
@@ -122,7 +231,14 @@ title: "JavaScript API: AutoMagic"
           },
           has_any_fields: ['username','name','first_name','last_name','email'],
           has_all_fields: [],
-          distinct_ids: ['email', 'username']
-        }
+          distinct_ids: ['email', 'username'],
+          should_identify: function() {
+            properties = this.map_properties(element);
+            has_any = _.filter(properties,function (value,key) { _.contains(this.identify.options.has_any_fields, key) } ).length > 0
+            has_all = _.filter(properties,function (value,key) { _.contains(this.identify.options.has_all_fields, key) } ).length >= this.identify.options.has_all_fields.length
+            has_any && has_all
+          }
+        },
+        track: true
       } });
 
