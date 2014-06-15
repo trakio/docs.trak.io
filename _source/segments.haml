@@ -1,0 +1,58 @@
+---
+title: Segments
+---
+
+%h2 Segments
+
+%h3 Webhooks
+
+%p The Segment webhook allows you to be immediately notified when a person enters/exits a segment.
+
+%p If you've provided a webhook URL in your account, when a person enters/exits a segment we will POST some JSON to the specified webhook URL.
+
+%h4 Properties
+
+%table.table.spread
+  %thead
+    %tr
+      %th Option
+      %th Description
+  %tbody
+    %tr
+      %td Action
+      %td Whether the person was added or removed from specified segment.
+    %tr
+      %td Mass
+      %td Whether the person was added or removed in bulk (via recalculation), or via an event.
+
+%p An example of the JSON which would be posted is shown below.
+
+%code.javascript.spread
+  :escaped
+    {
+      "action": "removed",
+      "mass": false,
+      "segment": {
+        "id": {
+          "$oid": "539e0375746f6241ea6f0100"
+        },
+        "title": "A segment title"
+      },
+      "person": {
+        "id": {
+          "$oid": "539e0375746f6241ea6d0100"
+        },
+        "name": "Test User Name",
+        "distinct_ids": [
+          "email@example.com"
+        ],
+        "properties": {
+          "email": [
+            "email@example.com"
+          ],
+          "test_user": true
+        },
+        "last_seen_at": null,
+        "first_seen_at": null
+      }
+    }
