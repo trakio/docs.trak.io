@@ -1,0 +1,29 @@
+---
+title: Sign Out
+---
+
+%h2 Sign Out
+
+%p
+  Resets the <code>`distinct_id`</code> cookie to a randomly generated GUID,
+  effectively creating a new session.
+
+%p.note
+  This method is only avaliable on the JavaScript library, if you are using Trak.io
+  server side, need to manage sessions your self out side of the Trak.io library
+  making this method redundant.
+
+#javascript.for-javascript
+
+  %h3.first JavaScript
+
+  %code.javascript
+    :escaped
+      trak.io.sign_out()
+
+  %p
+    If your users are likely to sign into your application with multiple accounts
+    and you wish to keep these accounts as separate people within Trak.io you
+    will need to generate a new Trak.io session for them when they logout.
+    Simply call <code>`trak.io.sign_out()`</code> when a user sign's out to pevent
+    unwanted merges when they sign in later with a different account.
