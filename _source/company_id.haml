@@ -1,0 +1,94 @@
+---
+title: Company ID
+---
+
+%h2 Company ID
+
+%p Trak.io libraries have the idea of a "current company" for a person. For most use cases you will only need to set this once. For more advanced use cases you may need to change it as a person switches accounts.
+
+%ul
+  %li A person can be a member of one or more companies.
+  %li You can update company properties
+
+#javascipt.for-javascript
+
+  %h3.first JavaScript
+
+  %p You can get the current company ID by calling the <code>trak.io.company_id()</code> method without any arguments.
+
+  %code
+    :escaped
+      trak.io.company_id() // returns the current company ID
+
+  %p
+    You can set the current company ID without making any calls to the API by calling the <code>trak.io.company_id()</code> method passing the company ID as the first argument.
+    -# Setting the current company ID <strong>does not</strong> automatically add that person to that company. To achieve this, they must track an event against the company.
+
+  %code
+    :escaped
+      trak.io.company_id('acme_ltd') // set the current company ID
+
+  %h4 Company ID Scope
+
+  %p Company ID is stored in the user's cookie and persisted across requests, for the current root domain and all its subdomains. This is in contast to <a href='/channel.html'>channel</a> which only persists across requests for the subdomain.
+
+  %p We determine the root domain as the highest domain we are able to set a cookie for. For example if your domain was 'sub.example.com' we would first try to set a cookie on 'com' which would fail, then on 'example.com' which would succeed therefore 'example.com' would be the root domain. If you domain was 'sub.example.co.uk', we would first try 'uk' and then 'co.uk', finally 'example.co.uk' would succeed so this would be your root domain.
+
+  %p The cookie name is unique to your account so even if you are running it on a shared platform like 'myblog.tumblr.com' it will not conflict with other trak.io users on tublr.
+
+  %h5 Setting Root Domain Manually
+
+  %p You can override the scope of a person's company ID (and distinct ID) with the <code><a href='/javascript.html#root_domain'>root_domain</a></code> option.
+
+  %p This is explained in more detail in the documentation covering <code><a href="/distinct_id.html#root-domain">trak.io.distinct_id()</a></code>.
+
+  %h4 Setting Company ID With Incoming Links
+
+  %p By default the JavaScript library will either look for a person's company ID in their cookies. You can specify a company ID for a person with the <code>trak_company_id</code> get url parameter.
+
+  %code
+    :escaped
+      http://example.com/my_page.html?trak_company_id=acme_ltd
+
+#ruby.for-ruby
+
+  %h3.first Ruby
+
+  %p
+    You can provide company_id for any of the available methods, where it makes sense to do so:
+
+  %code.ruby.spread
+    :preserve
+      Trakio.company company_id: 'acme_ltd', properties: { name: "Acme Ltd"}
+      Trakio.track company_id: 'acme_ltd', event: 'signed_up'
+
+  %p
+    You can also set a default one as on option when you create your own instance:
+
+  %code.ruby.spread
+    :preserve
+      trak = Trakio.new 'my-api-token'
+      trak.company_id = 'Acme Ltd'
+
+      # Or
+      trak = Trakio.new 'my-api-token', company_id: 'acme_ltd'
+
+  %p.note
+    This is not possible with the default instance, you must provide it as an argument when calling methods:
+
+
+
+  %code.ruby.spread
+    :preserve
+      Trakio.init 'my-api-token', company_id: 'acme_ltd'
+      # Will raise an exception
+
+      # Do this instead
+      Trakio.init 'my-api-token'
+      trak = Trakio.company company_id: 'acme_ltd', properties: { name: "Acme Ltd"}
+
+#http.for-http
+
+  %h3.first HTTP
+
+  %p The HTTP API doesn't manage session's for you, therefore does't have an endpoint to manage a session's current company ID, you will have to do this yourself.

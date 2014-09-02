@@ -92,6 +92,26 @@ title: Properties
         linked_in: { id: 'xxxxxxxxxxxxx' }
       })
 
+#company
+
+  %h3 Company Properties
+
+  #company-special
+
+    %h4 Special Properties
+
+    %p Whilst the following properties are not reserved (you can, if you wish, use them for what ever you want) your Trak.io dashboard assumes they have certain meaning and will display and use them as such:
+
+    %ul
+      %li <code>name</code> - the company name
+      %li <code>size</code> - the size of the company
+      %li <code>website</code> - a url to the companies website
+      %li <code>industry</code> - the industry the company operates in
+      %li <code>location</code> - can be any string you wish, if this is missing we'll try and determine it from the <code>latlng</code> property, or ip data
+      %li <code>latlng</code> - can be any string you wish, if this is missing we'll try and determine it from the <code>location</code> property
+      %li <code>headline</code> - used as a sub title for companies
+      %li <code>type</code> - if you need to distinguish between company types or even other organisation or group types (eg charity, non profits, etc)
+
 #event
 
   %h3 Event Properties

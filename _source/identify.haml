@@ -24,7 +24,7 @@ title: Identify
         company: "trak.io"
       })
 
-  %h4 Setting a Peron's Distinct ID
+  %h4 Setting a Person's Distinct ID
 
   %p If you want to set a person's distinct ID at the same time you can pass in a string value for a distinct ID as the first argument. This is just a short cut to <code><a href='/alias.html'>trak.io.alias()</a></code> and in fact calls that method internally. Check <a href='/alias.html'>docs.trak.io/alias.html</a> for more information specifically on <a href='/alias.html#merging'>merging people</a>.
 
@@ -64,7 +64,7 @@ title: Identify
       })
 
 
-  %p.note The HTTP request for identify will only be called if the identify method is passed properties to be set, ie if you just pass a distinct ID it will call <code><a href='/alias.html'>trak.io.alias()</a></code> for you but not send the identify HTTP request. If this is the case, the callback with be executed after the alias HTTP request has return and data will be the response from this.
+  %p.note The HTTP request for identify will only be called if the identify method is passed properties to be set, ie if you just pass a distinct ID it will call <code><a href='/alias.html'>trak.io.alias()</a></code> for you but not send the identify HTTP request. If this is the case, the callback will be executed after the alias HTTP request has return and data will be the response from this.
 
   %p.note If you pass a distinct ID, properties and a callback, the callback will be executed after both the alias and identify requests have returned.
 
@@ -210,8 +210,4 @@ title: Identify
 
   %code.json.spread
     :escaped
-      {
-        "status": "success",
-        "trak_id": "516d2737b1b92244bb000001", // Trak.io's id for the person
-        "distinct_ids": ["1234567","twitter:msaspence"] // an array of existing distinct_ids for the person
-      }
+      { "status": "success" }
