@@ -4,31 +4,31 @@ title: Distinct ID
 
 %h2 Distinct ID
 
-%p A user's distinct id is how we identify them when ever you send us their data or events.
+%p A user's distinct ID is how we identify them when ever you send us their data or events.
 
 %ul
   %li A user can have one or more distinct ids
-  %li You can find a user's distinct ids by clicking the distinct id link in their person profile screen in the Trak.io dashboard
-  %li The <code><a href='/track.html'>trak.io.track()</a></code>, <code><a href='/identify.html'>trak.io.identify()</a></code> and <code><a href='/alias.html'>trak.io.alias()</a></code> actions must be provided with a distinct id when using the HTTP API
+  %li You can find a user's distinct ids by clicking the distinct ID link in their person profile screen in the Trak.io dashboard
+  %li The <code><a href='/track.html'>trak.io.track()</a></code>, <code><a href='/identify.html'>trak.io.identify()</a></code> and <code><a href='/alias.html'>trak.io.alias()</a></code> actions must be provided with a distinct ID when using the HTTP API
   %li Your distinct ID will be converted to a string, for example 123 becomes "123"
   %li
     The Trak.io JavaScript library will:
     %ul
-      %li automatically generate a distinct id for users that don't have one
-      %li keep track of your user's distinct id for you in a cookie so you don't have to provide it each time you call a method with the JS library
-      %li share a user's distinct id across a root domain, (unlike <a href='/channel.html'>channel</a> which is only shared between requests on a subdomain) so that users can be tracked across subdomains
+      %li automatically generate a distinct ID for users that don't have one
+      %li keep track of your user's distinct ID for you in a cookie so you don't have to provide it each time you call a method with the JS library
+      %li share a user's distinct ID across a root domain, (unlike <a href='/channel.html'>channel</a> which is only shared between requests on a subdomain) so that users can be tracked across subdomains
 
 #javascipt.for-javascript
 
   %h3.first JavaScript
 
-  %p You can get the current distinct id by calling the <code>trak.io.distinct_id()</code> method without any arguments.
+  %p You can get the current distinct ID by calling the <code>trak.io.distinct_id()</code> method without any arguments.
 
   %code
     :escaped
       trak.io.distinct_id() // returns the current distinct id
 
-  %p You can set the current distinct id without making any calls to the API by calling the <code>trak.io.distinct_id()</code> method passing the distinct id as the first argument. Setting the current disinct id <strong>does not</strong> change the distinct id of the current user, it in effect changes the current user. To add a distinct id to the current user use <a href='/alias.html'>alias</a>.
+  %p You can set the current distinct ID without making any calls to the API by calling the <code>trak.io.distinct_id()</code> method passing the distinct ID as the first argument. Setting the current disinct ID <strong>does not</strong> change the distinct ID of the current user, it in effect changes the current user. To add a distinct ID to the current user use <a href='/alias.html'>alias</a>.
 
   %code
     :escaped
@@ -42,9 +42,9 @@ title: Distinct ID
 
   %p The cookie name is unique to your account so even if you are running it on a shared platform like 'myblog.tumblr.com' it will not conflict with other trak.io users on tublr.
 
-  %h5 Setting Root Domain Manually
+  %h5#root-domain Setting Root Domain Manually
 
-  %p You can override the scope of a person's distinct id with the <code><a href='/javascript.html#root_domain'>root_domain</a></code> option.
+  %p You can override the scope of a person's distinct ID with the <code><a href='/javascript.html#root_domain'>root_domain</a></code> option.
 
   %p If for example you were running Trak.io on blog.example.com and www.example.com, by default somebody visiting either of these sites will be identified as the same person.
 
@@ -74,7 +74,7 @@ title: Distinct ID
 
   %h4 Setting Distinct ID With Incoming Links
 
-  %p By default the JavaScript library will either look for a person's distinct id from their cookie or generate one. You can specify a distinct id for a person with the <code>trak_distinct_id</code> get url parameter.
+  %p By default the JavaScript library will either look for a person's distinct ID from their cookie or generate one. You can specify a distinct ID for a person with the <code>trak_distinct_id</code> get url parameter.
 
   %code
     :escaped
@@ -120,4 +120,4 @@ title: Distinct ID
 
   %h3.first HTTP
 
-  %p The HTTP API doesn't have an endpoint to set or get a distinct id since distinct id is what all other end points use to assign the data you are sending to a person. If you want to add a distinct id to a user you are probably looking for the <a href='/alias.html'>alias end point</a>.
+  %p The HTTP API doesn't have an endpoint to set or get a distinct ID since distinct ID is what all other end points use to assign the data you are sending to a person. If you want to add a distinct ID to a user you are probably looking for the <a href='/alias.html'>alias end point</a>.
