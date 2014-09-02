@@ -41,12 +41,7 @@ title: Track
   %h5 Tracking Events Against Just A Company
 
   %p
-    It is possible to track events to a company and not a person by not defining a distinct ID. To override either the distinct or company ID that are defined in the session and only track against the person or company respectively pass false.
-
-  %code.javascript.spread
-    :escaped
-      trak.io.track('matt@example.com', false, 'forget password', null)
-      trak.io.track(false, 'acme_ltd', 'payment failed', 'stripe', { ref: payment.ref })
+    It is possible to track events to a company and not a person by not defining a distinct ID.
 
   %h4 Channel
 
