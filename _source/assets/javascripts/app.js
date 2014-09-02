@@ -22,11 +22,16 @@ check_scroll = function() {
         })
       }
       hash_highlight.show();
+      hash_highlight.stop();
       hash_highlight.css({
         top: parseInt($(hash).position().top,10) + parseInt($(hash).css('margin-top'),10) -10,
         height: $(hash).height() + 20,
         left: $(hash).position().left - 10,
         width: $(hash).width() + 20
+      })
+      hash_highlight.css({
+        display: 'block',
+        opacity: 1,
       })
       setTimeout(function() {
         hash_highlight.fadeOut(2000);
@@ -37,6 +42,11 @@ check_scroll = function() {
 }
 $(document).ready(check_scroll);
 $(window).on('hashchange', check_scroll)
+$(document).on('click', 'a', function() {
+  if ($(this).attr('href').match(/^\#/)) {
+    check_scroll();
+  }
+})
 $(document).on('scroll', function () {
   if (user_scroll == false) {
     check_scroll()

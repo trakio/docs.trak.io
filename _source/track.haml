@@ -26,6 +26,28 @@ title: Track
     :escaped
       trak.io.track('added to basket', { sku: '002381', price: 9.99 })
 
+  %h4 Company
+
+  %p
+    A person's events will be tracked against the current session's <code><a href='/company_id.html'>company_id</a></code> if there is one. If it hasn't been defined, via either <code><a href='/company_id.html'>trak.io.company_id()</a></code>, <code><a href='/company.html'>trak.io.company()</a></code> or <code><a href='/javascript.html#options-company-id'>trak.io.init()</a></code>, the event will be tracked against just the person.
+
+  %p
+    It is possible to track a single event against a different company to the current <code><a href='/company_id.html'>company_id</a></code> by passing in a company ID <a href='#javascript-arguments-company-id'>argument</a>. You must pass in arguments for all other string arguments, but you can pass <code>null</code> to use the defaults.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.track(null, 'acme_ltd', 'added to basket', null, { sku: '002381', price: 9.99 })
+
+  %h5 Tracking Events Against Just A Company
+
+  %p
+    It is possible to track events to a company and not a person by not defining a distinct ID. To override either the distinct or company ID that are defined in the session and only track against the person or company respectively pass false.
+
+  %code.javascript.spread
+    :escaped
+      trak.io.track('matt@example.com', false, 'forget password', null)
+      trak.io.track(false, 'acme_ltd', 'payment failed', 'stripe', { ref: payment.ref })
+
   %h4 Channel
 
   %p The track method will, by default, use the current session's <a href='/channel.html'>channel</a>, to override this you can pass in a channel as a string for the second argument.
@@ -49,51 +71,60 @@ title: Track
         console.log(data) // the return value for track
       })
 
-  %h4 Arguments
+  #javascript-arguments
+    %h4 Arguments
 
-  %p To achieve this versatility with arguments the Trak.io library analyses the type of each argument to determine what it is. These are the three possible patterns, listing each argument, its type, and using square brackets to indicate whether the argument is optional.
+    %p To achieve this versatility with arguments the Trak.io library analyses the type of each argument to determine what it is. These are the four possible patterns, listing each argument, its type, and using square brackets to indicate whether the argument is optional.
 
-  %code.javascript.spread
-    :escaped
-      trak.io.track(event:String [, properties:Object [, callback:Function ]]])
-      trak.io.track(event:String, channel:String [, properties:Object [, callback:Function ]]])
+    %code.javascript.spread
+      :escaped
+        trak.io.track(event:String [, properties:Object [, callback:Function ]]])
+        trak.io.track(event:String, channel:String [, properties:Object [, callback:Function ]]])
+        trak.io.track(distinct_id:String, event:String, channel:String [, properties:Object [, callback:Function ]]])
+        trak.io.track(distinct_id:String, company_id:String, event:String, channel:String [, properties:Object [, callback:Function ]]])
 
-  %table.table.spread
-    %thead
-      %tr
-        %th Argument
-        %th Type
-        %th Default
-        %th Description
-    %tbody
-      %tr
-        %th distinct_id
-        %td String
-        %td
-          %em Current session's distinct id
-        %td The distinct id of the person you wish to register this event against. When ommited the current session's <a href='/distinct_id.html'>distinct id</a> is used.
-      %tr
-        %th event
-        %td String
-        %td
-          %em Required
-        %td The key for this event, this value will be <a href='/data_keys.html'>standardized server side</a>.
-      %tr
-        %th channel
-        %td String
-        %td
-          %em Current session's channel
-        %td The channel this event occurred in. When ommitted the current session's <a href='/channel.html'>channel</a> is used.
-      %tr
-        %th properties
-        %td Object
-        %td {}
-        %td A set of key value <a href='/properties.html#event'>properties</a> that describe the event.
-      %tr
-        %th callback
-        %td function
-        %td null
-        %td A callback function that will be called when the API request completes. It will be passed a <a href='#return'>return value</a> as the first argument.
+    %table.table.spread
+      %thead
+        %tr
+          %th Argument
+          %th Type
+          %th Default
+          %th Description
+      %tbody
+        %tr
+          %th distinct_id
+          %td String
+          %td
+            %em Current session's distinct ID
+          %td The distinct ID of the person you wish to register this event against. When ommited the current session's <a href='/distinct_id.html'>distinct ID</a> is used.
+        %tr#javascript-arguments-company-id
+          %th company_id
+          %td String
+          %td
+            %em Current session's company ID
+          %td The company ID of the company you wish to register this event against. When ommited the current session's <a href='/company_id.html'>company ID</a> is used.
+        %tr
+          %th event
+          %td String
+          %td
+            %em Required
+          %td The key for this event, this value will be <a href='/data_keys.html'>standardized server side</a>.
+        %tr
+          %th channel
+          %td String
+          %td
+            %em Current session's channel
+          %td The channel this event occurred in. When ommitted the current session's <a href='/channel.html'>channel</a> is used.
+        %tr
+          %th properties
+          %td Object
+          %td {}
+          %td A set of key value <a href='/properties.html#event'>properties</a> that describe the event.
+        %tr
+          %th callback
+          %td function
+          %td null
+          %td A callback function that will be called when the API request completes. It will be passed a <a href='#return'>return value</a> as the first argument.
 
   %h4 Return Value
 
@@ -107,13 +138,46 @@ title: Track
 
   %code.ruby.spread
     :preserve
-
-      Trakio.track distinct_id: 'tobie@trak.io', event: 'user created', channel: 'web_app'
-
       Trakio.track distinct_id: 'tobie@trak.io', event: 'user created', channel: 'web_app', properties: {
         location: 'London'
       }
 
+      trakio = Trakio.new 'my_api_token', { distinct_id: 'tobie@trak.io', channel: 'web_app' }
+      trakio.track event: 'user created'
+
+  %h4 Company
+
+  %p
+    A person's events will be tracked against a <code>Trakio</code> instances's <code><a href='/company_id.html'>company_id</a></code> if there is one. If it hasn't been defined, via either <code><a href='/company_id.html'>trakio.company_id</a></code> or <code><a href='/ruby.html#options-company-id'>Trak.new</a></code>, the event will be tracked against just the person.
+
+  %p
+    It is possible to track a single event against a different company to the current <code><a href='/company_id.html'>company_id</a></code> by passing in a company ID <a href='#ruby-arguments-company-id'>argument</a>.
+
+  %code.ruby.spread
+    :escaped
+      Trakio.track distinct_id: 'matt@trak.io', company_id: 'acme_ltd', event: 'user created', channel: 'web_app'
+
+      trakio = Trakio.new 'my_api_token', { company_id: "acme_ltd" }
+      trakio.track event: 'payment failed'
+
+      trakio = Trakio.new 'my_api_token', { company_id: acme_ltd', distinct_id: 'matt@trak.io' }
+      trakio.track event: 'payment failed', distinct_id: false
+
+  %h5 Tracking Events Against Just A Company
+
+  %p
+    It is possible to track events to a company and not a person by not defining a distinct ID. To override either the distinct or company ID that are defined in the session and only track against the person or company respectively, pass false.
+
+  %code.ruby.spread
+    :escaped
+      trakio = Trakio.new 'my_api_token', { company_id: "acme_ltd" }
+      trakio.track event: 'payment failed' # tracked against only the company
+
+      trakio = Trakio.new 'my_api_token', { company_id: "acme_ltd, distinct_id: 'matt@trak.io' }
+      trakio.track event: 'payment failed', distinct_id: false # tracked against only the company
+      trakio.track event: 'payment failed', company_id: false # tracked against only the person
+
+  
   %h4 Arguments
 
   %table.table.spread
@@ -129,7 +193,13 @@ title: Track
         %td String
         %td
           %em The <code>Trakio</code> instance's <code>distinct_id</code>, otherwise required
-        %td The distinct id for the person you wish to track
+        %td The distinct ID for the person you wish to track
+      %tr#ruby-arguments-company-id
+        %td company_id
+        %td String
+        %td
+          %em The <code>Trakio</code> instance's <code>company_id</code>, otherwise nil
+        %td The company ID for the company you wish to track this event against
       %tr
         %td event
         %td String
@@ -155,10 +225,7 @@ title: Track
 
   %code.ruby.spread
     :preserve
-      {
-        status: 'success',
-        trak_id: '123456'
-      }
+      { status: 'success' }
 
 #http.for-http
 
@@ -170,8 +237,13 @@ title: Track
     :escaped
       $ curl -v -XPOST \
         --data token=YOUR_API_TOKEN \
-        --data data='{"distinct_id": "12346789", "event": "Page view", "channel": "Web site", "properties": {}, "context": { "time_zone": "GMT" }}' \
+        --data data='{"distinct_id": "12346789", "company_id": "acme_ltd", "event": "Page view", "channel": "Web site", "properties": {}, "context": { "time_zone": "GMT" }}' \
         https://api.trak.io/v1/track
+
+  %h4 Company
+
+  %p
+    A person's events will be tracked to just them, and not their company, unless you provide a <code><a href='#http-argument-company-id'>company_id</a></code>. If you provide a <code><a href='#http-argument-distinct-id'>distinct_id</a></code> and <code><a href='#http-argument-company-id'>company_id</a></code> it will be tracked against both. You can track events to just a company and not a person by providing a <code><a href='#http-argument-company-id'>company_id</a></code> and not a <code><a href='#http-argument-distinct-id'>distinct_id</a></code>.
 
   %h4 Data Object
 
@@ -183,12 +255,18 @@ title: Track
         %th Default
         %th Description
     %tbody
-      %tr
+      %tr#http-argument-distinct-id
         %th distinct_id
         %td String
         %td
-          %em Required
-        %td The distinct id of the person you wish to register this event against.
+          %em Required, unless <code><a href='#http-argument-company-id'>company_id</a></code> is provided
+        %td The distinct ID of the person you wish to register this event against.
+      %tr#http-argument-company-id
+        %th company_id
+        %td String
+        %td
+          %em Required, unless <code><a href='#http-argument-distinct-id'>distinct_id</a></code> is provided
+        %td The company ID of the company you wish to register this event against.
       %tr
         %th event
         %td String
@@ -219,7 +297,4 @@ title: Track
 
   %code.json
     :escaped
-      {
-        "status": "success",
-        "trak_id": "516d2737b1b92244bb000001", // Trak.io's id for the event
-      }
+      { "status": "success" }

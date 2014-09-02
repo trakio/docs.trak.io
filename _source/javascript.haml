@@ -21,6 +21,9 @@ title: JavaScript API Introduction
     %a{href: '/identify.html#javascript'} <code>trak.io.identify()</code>
     \- send trak.io data about a user
   %li
+    %a{href: '/company.html#javascript'} <code>trak.io.company()</code>
+    \- send trak.io data about a company
+  %li
     %a{href: '/alias.html#javascript'} <code>trak.io.alias()</code>
     \- merge the current user with one from another session
   %li
@@ -37,58 +40,69 @@ title: JavaScript API Introduction
     %a{href: '/distinct_id.html#javascript'} <code>trak.io.distinct_id()</code>
     \- get or set the current distinct id
   %li
+    %a{href: '/company_id.html#javascript'} <code>trak.io.company_id()</code>
+    \- get or set the current company id
+  %li
     %a{href: '/channel.html#javascript'} <code>trak.io.channel()</code>
     \- get or set the current channel
   %li
     %a{href: '/context.html#javascript'} <code>trak.io.context()</code>
     \- get or set the current context
 
-%h3 Options
+#options
 
-%p In addition to your API token you can also give <code>trak.io.load()</code> an options object.
+  %h3 Options
+
+  %p In addition to your API token you can also give <code>trak.io.load()</code> an options object.
 
 
-%code.html.spread
-  :escaped
-    <script>
-      var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
-      trak.io.load("YOUR_API_TOKEN", { distinct_id: 'matt@trak.io', channel: 'dashboard' });
-    </script>
+  %code.html.spread
+    :escaped
+      <script>
+        var trak=trak||[];trak.io=trak.io||{};trak.io.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d29p64779x43zo.cloudfront.net/v1/trak.io.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){trak.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["initialize","identify","track","alias","channel","source","host","protocol","page_view"];for(var s=0;s<i.length;s++) trak.io[i[s]]=r(i[s]);trak.io.initialize.apply(trak.io,arguments)};
+        trak.io.load("YOUR_API_TOKEN", { distinct_id: 'matt@trak.io', channel: 'dashboard' });
+      </script>
 
-%table.table.spread
-  %thead
-    %tr
-      %th Option
-      %th Type
-      %th Default
-      %th Description
-  %tbody
-    %tr
-      %td distinct_id
-      %td String
-      %td
-        %em Current session's distinct id
-      %td Providing this option will simply pass it to <code><a href='/distinct_id.html'>trak.io.distinct_id()</a></code>.
-    %tr#channel
-      %td channel
-      %td String
-      %td
-        %em Current session's channel
-      %td Providing this option will simply pass it to <code><a href='/channel.html'>trak.io.channel()</a></code>.
-    %tr
-      %td auto_track_page_views
-      %td Boolean
-      %td 1
-      %td Whether to automatically track page views, for more information see <a href='/page_view.html'>docs.trak.io/page_view.html</a>.
-    %tr#root_domain
-      %td root_domain
-      %td String
-      %td
-        %em Current root domain
-      %td The <a href='/distinct_id.html'>distinct id</a> cookie is set on the highest domain we can set one at, you can use this option to override this
-    %tr
-      %td automagic
-      %td Boolean or Object
-      %td false
-      %td Either true, false or a configuration object for the <a href='/javascript/automagic.html'>AutoMagic library</a>.
+  %table.table.spread
+    %thead
+      %tr
+        %th Option
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %td distinct_id
+        %td String
+        %td
+          %em Current session's distinct ID
+        %td Providing this option will simply pass it to <code><a href='/distinct_id.html'>trak.io.distinct_id()</a></code>.
+      %tr#options-company-id
+        %td company_id
+        %td String
+        %td
+          %em Current session's company ID
+        %td Providing this option will simply pass it to <code><a href='/company_id.html'>trak.io.company_id()</a></code>.
+      %tr#channel
+        %td channel
+        %td String
+        %td
+          %em Current session's channel
+        %td Providing this option will simply pass it to <code><a href='/channel.html'>trak.io.channel()</a></code>.
+      %tr
+        %td auto_track_page_views
+        %td Boolean
+        %td 1
+        %td Whether to automatically track page views, for more information see <a href='/page_view.html'>docs.trak.io/page_view.html</a>.
+      %tr#root_domain
+        %td root_domain
+        %td String
+        %td
+          %em Current root domain
+        %td The <a href='/distinct_id.html'>distinct id</a> cookie is set on the highest domain we can set one at, you can use this option to override this
+      %tr
+        %td automagic
+        %td Boolean or Object
+        %td false
+        %td Either true, false or a configuration object for the <a href='/javascript/automagic.html'>AutoMagic library</a>.
 
