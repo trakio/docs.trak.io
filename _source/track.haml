@@ -29,10 +29,24 @@ title: Track
   %h4 Company
 
   %p
-    A person's events will be tracked against the current session's <code><a href='/company_id.html'>company_id</a></code> if there is one. If it hasn't been defined, via either <code><a href='/company_id.html'>trak.io.company_id()</a></code>, <code><a href='/company.html'>trak.io.company()</a></code> or <code><a href='/javascript.html#options-company-id'>trak.io.init()</a></code>, the event will be tracked against just the person.
+    A person's events will be tracked against the current session's
+    <code><a href='/company_id.html'>company_id</a></code> if there is one.
+    If it hasn't been defined, via either
+    <code><a href='/company_id.html'>trak.io.company_id()</a></code>,
+    <code><a href='/company.html'>trak.io.company()</a></code> or
+    <code><a href='/javascript.html#options-company-id'>trak.io.init()</a></code>,
+    the event will be tracked against just the person.
+
+  %p.note
+    Tracking an event against a person and company will automatically add
+    them to that company.
 
   %p
-    It is possible to track a single event against a different company to the current <code><a href='/company_id.html'>company_id</a></code> by passing in a company ID <a href='#javascript-arguments-company-id'>argument</a>. You must pass in arguments for all other string arguments, but you can pass <code>null</code> to use the defaults.
+    It is possible to track a single event against a different company to the
+    current <code><a href='/company_id.html'>company_id</a></code> by passing
+    in a company ID <a href='#javascript-arguments-company-id'>argument</a>.
+    You must pass in arguments for all other string arguments, but you can
+    pass <code>null</code> to use the defaults.
 
   %code.javascript.spread
     :escaped
@@ -143,10 +157,21 @@ title: Track
   %h4 Company
 
   %p
-    A person's events will be tracked against a <code>Trakio</code> instances's <code><a href='/company_id.html'>company_id</a></code> if there is one. If it hasn't been defined, via either <code><a href='/company_id.html'>trakio.company_id</a></code> or <code><a href='/ruby.html#options-company-id'>Trak.new</a></code>, the event will be tracked against just the person.
+    A person's events will be tracked against a <code>Trakio</code>
+    instances's <code><a href='/company_id.html'>company_id</a></code>
+    if there is one. If it hasn't been defined, via either
+    <code><a href='/company_id.html'>trakio.company_id</a></code> or
+    <code><a href='/ruby.html#options-company-id'>Trak.new</a></code>,
+    the event will be tracked against just the person.
+
+  %p.note
+    Tracking an event against a person and company will automatically add
+    them to that company.
 
   %p
-    It is possible to track a single event against a different company to the current <code><a href='/company_id.html'>company_id</a></code> by passing in a company ID <a href='#ruby-arguments-company-id'>argument</a>.
+    It is possible to track a single event against a different company to
+    the current <code><a href='/company_id.html'>company_id</a></code> by
+    passing in a company ID <a href='#ruby-arguments-company-id'>argument</a>.
 
   %code.ruby.spread
     :escaped
@@ -172,7 +197,6 @@ title: Track
       trakio.track event: 'payment failed', distinct_id: false # tracked against only the company
       trakio.track event: 'payment failed', company_id: false # tracked against only the person
 
-  
   %h4 Arguments
 
   %table.table.spread
@@ -238,7 +262,17 @@ title: Track
   %h4 Company
 
   %p
-    A person's events will be tracked to just them, and not their company, unless you provide a <code><a href='#http-argument-company-id'>company_id</a></code>. If you provide a <code><a href='#http-argument-distinct-id'>distinct_id</a></code> and <code><a href='#http-argument-company-id'>company_id</a></code> it will be tracked against both. You can track events to just a company and not a person by providing a <code><a href='#http-argument-company-id'>company_id</a></code> and not a <code><a href='#http-argument-distinct-id'>distinct_id</a></code>.
+    A person's events will be tracked to just them, and not their company,
+    unless you provide a <code><a href='#http-argument-company-id'>company_id</a></code>.
+    If you provide a <code><a href='#http-argument-distinct-id'>distinct_id</a></code>
+    and <code><a href='#http-argument-company-id'>company_id</a></code> it
+    will be tracked against both. You can track events to just a company and
+    not a person by providing a <code><a href='#http-argument-company-id'>company_id</a></code>
+    and not a <code><a href='#http-argument-distinct-id'>distinct_id</a></code>.
+
+  %p.note
+    Tracking an event against a person and company will automatically add
+    them to that company.
 
   %h4 Data Object
 

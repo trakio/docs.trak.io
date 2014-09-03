@@ -6,6 +6,12 @@ title: Company
 
 %p Company is how you send Trak.io <a href='/properties.html#company'>properties</a> about a company like Name, Industry, Size, Website, etc.
 
+%p.note
+  If you want to track details on a person's association with a company rather
+  than the company itself, you can do this via the
+  <code><a href='/identify.html'>/identify</a></code> endpoint and the special
+  <a href='/properties.html#person-properties-companies'>company properties</a>.
+
 #javascript.for-javascript
 
   %h3.first JavaScript
@@ -22,6 +28,24 @@ title: Company
         size: "100-200",
         website: "www.acmeltd.com"
       })
+
+  #javascript-distinct-id
+
+    %h4 People
+
+    %p
+      If you have defined a <a href='/distinct_id.html'>distinct ID</a> it will
+      automatically be added to the people_distinct_ids property and the person will be
+      added to the company.
+
+    %code.javascript.spread
+      :escaped
+        trak.io.distinct_id('matt@trak.io')
+        trak.io.company_id('acme_ltd')
+        trak.io.company({
+          name: "Acme Ltd"
+          // people_distinct_ids: ['matt@trak.io']
+        })
 
   %h4 Callback
 
@@ -99,6 +123,23 @@ title: Company
         size: "100-200",
         website: "www.acmeltd.com"
       }
+
+  #ruby-distinct-id
+
+    %h4 People
+
+    %p
+      If you have defined a <a href='/distinct_id.html'>distinct ID</a> it will
+      automatically be added to the people_distinct_ids property and the person will be
+      added to the company.
+
+    %code.ruby.spread
+      :escaped
+        trakio = Trak.new 'my-api-token', company_id: 'acme_ltd', distinct_id: 'matt@trak.io'
+        trakio.company(properties: {
+          name: "Acme Ltd"
+          // people_distinct_ids: ['matt@trak.io']
+        })
 
   %h4 Arguments
 
