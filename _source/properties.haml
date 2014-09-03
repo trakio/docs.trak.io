@@ -9,7 +9,7 @@ title: Properties
 
 %h5 Keys
 
-%p The property's keys (included those of nested hashes) are standardized before storage, for more information see [notes on data keys](/data_keys.html)
+%p The property's keys (included those of nested hashes) are standardized before storage, for more information see <a href='/data_keys.html'>notes on data keys</a>.
 
 %h5 Values
 
@@ -51,7 +51,8 @@ title: Properties
         %li <code>gender</code> - male or female, if missing we'll guess based on name
         %li#person-special-properties-company-name
           <code>company_name</code> - company name
-        %li <code>position</code> - current job position
+        %li <code>position</code> - current position within the company
+        %li <code>role</code> - their role within their company account, <a href='#company-role'>see below</a> for more infomation
         %li <code>organization</code> - used in the same way as company if that is absent
         %li <code>positions</code> - employment history
         %li <code>industry</code> - the industry the person works or has experience in
@@ -114,6 +115,30 @@ title: Properties
         Each company must have a distinct company ID, which will link it with
         any company details provided to the
         <code><a href='/company.html'>/company</a></code> endpoint.
+
+    #company-role
+
+      %h5 Role
+
+      %p
+        Use the <code>role</code> property at the company level to define a person's role
+        within a company account. This should be a key and is in fact <a href='/data_keys.html'>standardized</a>.
+        It can be used later to decide who receives automatic emails when a
+        company rather than an individual triggers them.
+
+      %p
+        This is contrast to <code>position</code>, which should be used as a wordier
+        description of the person's position in the company at large.
+
+      %code.javascript
+        :escaped
+          trak.io.identify({
+            company: {
+              position: 'Director of EU Widget Sales',
+              role: 'sales'
+            }
+          })
+
 
 
     %h5 Multiple Companies
