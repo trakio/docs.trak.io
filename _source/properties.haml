@@ -49,7 +49,8 @@ title: Properties
         %li <code>name</code> - the person's name
         %li <code>first_name last_name</code> - if the person's name is missing these will be joined in its absense
         %li <code>gender</code> - male or female, if missing we'll guess based on name
-        %li <code>company_name</code> - company name
+        %li#person-special-properties-company-name
+          <code>company_name</code> - company name
         %li <code>position</code> - current job position
         %li <code>organization</code> - used in the same way as company if that is absent
         %li <code>positions</code> - employment history
@@ -151,35 +152,22 @@ title: Properties
           }
         })
 
-    %h5 String Values and Embedded Companies
+    %h5 String Values <em>Depreciated</em>
 
     %p
-      Your Trak.io implementation may already be using the <code>company</code>
-      property to send the company name as a string. You can still do this,
-      however the API will convert it into an object.
+      In the past it was posible to send the company name as a string in
+      the <code>company</code> property, this has been depreciated but is
+      still supported. To name a person's company without using the
+      <code><a href='/company.html'>/company</a></code> end point you should
+      now use the <code><a href='#person-special-properties-company-name'>company_name</a></code>
+      property. If you are still sending a string value to the <code>company</code>
+      property we will copy it over to the <code>company_name</code> property.
 
     %code.javascript
       :escaped
         trak.io.identify({ company: 'Acme Ltd' })
         // is the equivilent of
-        trak.io.identify({
-          company: {
-            company_id: 'acme_ltd',
-            company_name: 'Acme Ltd',
-          }
-        })
-
-    %p
-      In fact if you have a 1-1 relationship between companies and people
-      you can embed all your company infomation on people in this way.
-
-    %p.note
-      If you do integrate in this way companies will not be available in
-      the companies screen and if you have more than one person in the
-      same company you will have to duplicate data on each person. For
-      this reason we strongly suggest you send information about the
-      company itself to the <code><a href='/company.html'>/company</a></code>
-      endpoint.
+        trak.io.identify({ company_name: 'Acme Ltd' })
 
   #person-social-media-properties
 
