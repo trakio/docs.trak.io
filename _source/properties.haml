@@ -105,14 +105,12 @@ title: Properties
       <code>companies</code> and both will in fact take either a single company
       or an array of companies.
 
-    %h5 Linking with a Company
+    %h5 Company ID
 
     %p
-      To link a person's company role with a company that has been identified
-      via the <code><a href='/company.html'>/company</a></code> endpoint, you
-      will need to provide a <code>company_id</code> property. Each of the
-      following examples have a <code>company_id</code> property, but it is
-      not required.
+      Each company must have a distinct company ID, which will link it with
+      any company details provided to the
+      <code><a href='/company.html'>/company</a></code> endpoint.
 
 
     %h5 Multiple Companies
@@ -164,7 +162,12 @@ title: Properties
       :escaped
         trak.io.identify({ company: 'Acme Ltd' })
         // is the equivilent of
-        trak.io.identify({ company: { company_name: 'Acme Ltd' })
+        trak.io.identify({
+          company: {
+            company_id: 'acme_ltd',
+            company_name: 'Acme Ltd',
+          }
+        })
 
     %p
       In fact if you have a 1-1 relationship between companies and people
