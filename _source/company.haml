@@ -35,8 +35,8 @@ title: Company
 
     %p
       If you have defined a <a href='/distinct_id.html'>distinct ID</a> it will
-      automatically be added to the people_distinct_ids property and the person will be
-      added to the company.
+      automatically be added to the <code><a href='#people-distinct-ids'>people_distinct_ids</a></code>
+      parameter and the person will be added to the company.
 
     %code.javascript.spread
       :escaped
@@ -44,8 +44,7 @@ title: Company
         trak.io.company_id('acme_ltd')
         trak.io.company({
           name: "Acme Ltd"
-          // people_distinct_ids: ['matt@trak.io']
-        })
+        }) // matt@trak.io will be added to the acme_ltd company
 
   %h4 Callback
 
@@ -130,16 +129,15 @@ title: Company
 
     %p
       If you have defined a <a href='/distinct_id.html'>distinct ID</a> it will
-      automatically be added to the people_distinct_ids property and the person will be
-      added to the company.
+      automatically be added to the <code><a href='#people-distinct-ids'>people_distinct_ids</a></code>
+      parameter and the person will be added to the company.
 
     %code.ruby.spread
       :escaped
         trakio = Trak.new 'my-api-token', company_id: 'acme_ltd', distinct_id: 'matt@trak.io'
         trakio.company(properties: {
           name: "Acme Ltd"
-          // people_distinct_ids: ['matt@trak.io']
-        })
+        }) // matt@trak.io will be added to acme_ltd
 
   %h4 Arguments
 
@@ -206,6 +204,12 @@ title: Company
         %td
           %em Required
         %td The properties you wish to assign to this company
+      %tr#people-distinct-ids
+        %th people_distinct_ids
+        %td Array of Strings
+        %td
+          %em []
+        %td Distinct IDs of people to add to this company
 
   %p.note
     The property hash will be merged with the company's existing properties, if they have any.
