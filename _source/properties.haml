@@ -140,6 +140,18 @@ title: Properties
             }
           })
 
+      %p
+        The role property may also contain an array of roles if they have more than one.
+
+      %code.javascript
+        :escaped
+          trak.io.identify({
+            company: {
+              position: 'Director of EU Widget Sales',
+              role: ['sales', 'management']
+            }
+          })
+
 
 
     %h5 Multiple Companies
