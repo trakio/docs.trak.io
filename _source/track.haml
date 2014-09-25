@@ -19,8 +19,10 @@ title: Track
 
   %code.javascript.spread
     :escaped
+      trak.io.identify('matt@trak.io')
       trak.io.track('played video')
 
+  %p.note To Track events you must first have <a href='/identify.html'>identified</a> a person.
   %p.note Your event name will be <a href='data_keys.html'>standardized server side</a>, so 'played video' becomes 'played_video'. It will be humanized again in Trak.io's dashboard for you.
 
   %p If you do want to sent <a href='/properties.html#event'>properties</a> for an event you can do that by passing in an object for the second argument.
