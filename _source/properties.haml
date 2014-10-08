@@ -9,88 +9,249 @@ title: Properties
 
 %h5 Keys
 
-%p The property's keys (included those of nested hashes) are standardized before storage, for more information see [notes on data keys](/data_keys.html)
+%p The property's keys (included those of nested hashes) are standardized before storage, for more information see <a href='/data_keys.html'>notes on data keys</a>.
 
 %h5 Values
 
 %p You can send just about any value you wish, string, integer, array, nested hashes.
 
-#person
+#person-properties
 
   %h3 People Properties
 
-  %h4 Email
 
-  %p When sending properties for people the email property behaves a little differently. It must be a string or an array of strings, and the value or values that are sent will be merged with any existing emails for that person. We do not validate that they are correctly formatted email addresses.
+  #person-reserved-properties
 
-  %h4 Reserved Properties
+    %h4 Reserved Properties
 
-  %p The following properties are reserved and are set by trak.io. You may set them yourself using the <code><a href='/identify.html'>trak.io.identify()</a></code> method but they are at risk of being overridden.
+    %p The following properties are reserved and are set by Trak.io. You may set them yourself using the <code><a href='/identify.html'>/identify</a></code> endpoint but they are at risk of being overridden.
 
-  %ul
-    %li <code>referring_url</code> - The HTTP referer for the person's first event.
-    %li <code>referring_domain</code> - The domain of the HTTP referer for the person's first event.
-    %li <code>first_channel</code> - The first channel this person was seen on.
+    %ul
+      %li <code>referring_url</code> - The HTTP referer for the person's first event.
+      %li <code>referring_domain</code> - The domain of the HTTP referer for the person's first event.
+      %li <code>first_channel</code> - The first channel this person was seen on.
 
-  #special
+  #person-special-properties
+
+    #special
+
+      %h4 Special Properties
+
+      %p Whilst the following properties are not reserved (you can, if you wish, use them for what ever you want) your Trak.io dashboard assumes they have certain meaning and will display and use them as such:
+
+      %ul
+        %li <code>email</code> - <a href='#person-properties-email'>see below</a> for more information
+        %li <code>companies</code> - <a href='#person-properties-companies'>see below</a> for more information
+        %li <code>company</code> - an alias for <code><a href='#person-properties-companies'>companies</a></code>
+        %li <code>primary_email</code> - if there are multiple values for email, this will set the primary, otherwise it will use the latest
+        %li <code>telephone</code> - their telephone number, maybe an string, array or object
+        %li <code>avatar_url</code> - used for the users profile picture
+        %li <code>name</code> - the person's name
+        %li <code>first_name last_name</code> - if the person's name is missing these will be joined in its absense
+        %li <code>gender</code> - male or female, if missing we'll guess based on name
+        %li#person-special-properties-company-name
+          <code>company_name</code> - company name
+        %li <code>position</code> - current position within the company
+        %li <code>role</code> - their role within their company account, <a href='#company-role'>see below</a> for more infomation
+        %li <code>organization</code> - used in the same way as company if that is absent
+        %li <code>positions</code> - employment history
+        %li <code>industry</code> - the industry the person works or has experience in
+        %li <code>location</code> - can be any string you wish, if this is missing we'll try and determine it from the <code>latlng</code> property, or ip data
+        %li <code>latlng</code> - can be any string you wish, if this is missing we'll try and determine it from the <code>location</code> property
+        %li <code>languages</code> - string or array of langauges the person speaks
+        %li <code>birthday</code> - the person's date of birth
+        %li <code>tags</code> - an array of tags you would like to attribute to the person
+        %li <code>headline</code> - used as a sub title for people, if missing a headline will be formed from their position and company properties
+        %li <code>account_id</code> - if you are tracking users that may share an account, give us an id to their account and you'll be able to build metrics based on the number of times an event was performed by an account rather than a person
+        %li <code>twitter</code> - <a href='#person-social-media-properties'>see below</a> for more information
+        %li <code>facebook</code> - <a href='#person-social-media-properties'>see below</a> for more information
+        %li <code>linked_in</code> - <a href='#person-social-media-properties'>see below</a> for more information
+
+      %code.javascript.spread
+        :escaped
+          trak.io.identify({
+            name: "Matthew Spence",
+            email: "matt@trak.io",
+            gender: "male",
+            position: "CTO & Cofounder",
+            company: "trak.io",
+            industry: "Web Analytics",
+            location: "Canterbury, Kent, UK",
+            birthday: "1985-11-21" // Will any one reading this think to email me happy birthday I wonder?
+          })
+
+  #person-properties-email
+
+    %h4 Email
+
+    %p
+      When sending properties for people the email property behaves a little
+      differently. It must be a string or an array of strings, and the value
+      or values that are sent will be merged with any existing emails for that
+      person. We do not validate that they are correctly formatted email addresses.
+
+  #person-properties-companies
+
+    %h4 Company Roles
+
+    %p
+      If you are tracking <a href='/company.html'>company</a> infomation for
+      your users you may wish to send data that describes their association
+      with a company or companies, you can do this with the <code>companies</code>
+      properties. The Trak.io dashboard will look for the
+      <a href='#person-special-properties'>same properties that it does at
+      the person level</a>, however you are free to sent whatever data you want.
+
+    %p.note
+      The <code>company</code> property is an alias for
+      <code>companies</code> and both will in fact take either a single company
+      or an array of companies.
+
+    #company-id
+
+      %h5 Company ID
+
+      %p
+        Each company must have a distinct company ID, which will link it with
+        any company details provided to the
+        <code><a href='/company.html'>/company</a></code> endpoint. Company IDs
+        must be a string value.
+
+    #company-role
+
+      %h5 Role
+
+      %p
+        Use the <code>role</code> property at the company level to define a person's role
+        within a company account. This should be a key and is in fact <a href='/data_keys.html'>standardized</a>.
+        It can be used later to decide who receives automatic emails when a
+        company rather than an individual triggers them.
+
+      %p
+        This is contrast to <code>position</code>, which should be used as a wordier
+        description of the person's position in the company at large.
+
+      %code.javascript
+        :escaped
+          trak.io.identify({
+            company: {
+              position: 'Director of EU Widget Sales',
+              role: 'sales'
+            }
+          })
+
+      %p
+        The role property may also contain an array of roles if they have more than one.
+
+      %code.javascript
+        :escaped
+          trak.io.identify({
+            company: {
+              position: 'Director of EU Widget Sales',
+              role: ['sales', 'management']
+            }
+          })
+
+
+
+    %h5 Multiple Companies
+
+    %p
+      You can send data on a person's relationship with multiple companies by
+      sending an array value. Information sent in this way will be merged with
+      any existing data, in a similar way to
+      <a href='#person-properties-email'>email</a>.
+
+    %code.javascript
+      :escaped
+        trak.io.identify({
+          companies: [
+            {
+              company_id: 'acme_ltd',
+              position: 'Widget Consultant',
+              telephone: '01234567890'
+            }
+          ]
+        })
+
+    %h5 Single Value
+
+    %p
+      You can send data on a person's relationship with a single company by
+      sending an array value. Information sent in this way will be added to
+      any existing data, in a similar way to
+      <a href='#person-properties-email'>email</a>.
+
+    %code.javascript
+      :escaped
+        trak.io.identify({
+          company: {
+            company_id: 'acme_ltd',
+            position: 'Widget Consultant',
+            telephone: '01234567890'
+          }
+        })
+
+    %h5 String Values <em>Depreciated</em>
+
+    %p
+      In the past it was posible to send the company name as a string in
+      the <code>company</code> property, this has been depreciated but is
+      still supported. To name a person's company without using the
+      <code><a href='/company.html'>/company</a></code> end point you should
+      now use the <code><a href='#person-special-properties-company-name'>company_name</a></code>
+      property. If you are still sending a string value to the <code>company</code>
+      property we will copy it over to the <code>company_name</code> property.
+
+    %code.javascript
+      :escaped
+        trak.io.identify({ company: 'Acme Ltd' })
+        // is the equivilent of
+        trak.io.identify({ company_name: 'Acme Ltd' })
+
+  #person-social-media-properties
+
+    %h4 Social Network Properties
+
+    %p You can also send us information on a user's social network accounts, each hash should use the same structure as the respective network's api.
+
+    %p If any of the above properties are missing we will try to determine a value from one of social network's properties.
+
+    %ul
+      %li <code>twitter</code> - <a href='https://dev.twitter.com/docs/api/1.1/get/users/show' target='_blank'>Twitter documentation</a>
+      %li <code>facebook</code> - <a href='https://developers.facebook.com/docs/reference/api/user/' target='_blank'>Facebook documentation</a>
+      %li <code>linked_in</code> - <a href='http://developer.linkedin.com/documents/profile-fields' target='_blank'>LinkedIn documentation</a>
+
+    %p Here's how to store a person's social networking id, we'll be writing up more in depth examples in a future cook book recipe.
+
+    %code.javascript.spread
+      :escaped
+        trak.io.identify({
+          facebook: { id: 'xxxxxxxxxxxxx' },
+          twitter: { user_id: 'xxxxxxxxxxxxx' },
+          linked_in: { id: 'xxxxxxxxxxxxx' }
+        })
+
+#company
+
+  %h3 Company Properties
+
+  #company-special
 
     %h4 Special Properties
 
     %p Whilst the following properties are not reserved (you can, if you wish, use them for what ever you want) your Trak.io dashboard assumes they have certain meaning and will display and use them as such:
 
     %ul
-      %li <code>email</code> - see above for more information
-      %li <code>primary_email</code> - if there are multiple values for email, this will set the primary, otherwise it will use the latest
-      %li <code>avatar_url</code> - used for the users profile picture
-      %li <code>name</code> - the person's name
-      %li <code>first_name last_name</code> - if the person's name is missing these will be joined in its absense
-      %li <code>gender</code> - male or female, if missing we'll guess based on name
-      %li <code>position</code> - current job position
-      %li <code>company</code> - current company
-      %li <code>organization</code> - used in the same way as company if that is absent
-      %li <code>positions</code> - employment history
-      %li <code>industry</code> - the industry the person works or has experience in
+      %li <code>name</code> - the company name
+      %li <code>size</code> - the size of the company
+      %li <code>website</code> - a url to the companies website
+      %li <code>industry</code> - the industry the company operates in
       %li <code>location</code> - can be any string you wish, if this is missing we'll try and determine it from the <code>latlng</code> property, or ip data
       %li <code>latlng</code> - can be any string you wish, if this is missing we'll try and determine it from the <code>location</code> property
-      %li <code>languages</code> - string or array of langauges the person speaks
-      %li <code>birthday</code> - the person's date of birth
-      %li <code>tags</code> - an array of tags you would like to attribute to the person
-      %li <code>headline</code> - used as a sub title for people, if missing a headline will be formed from their position and company properties
-      %li <code>account_id</code> - if you are tracking users that may share an account, give us an id to their account and you'll be able to build metrics based on the number of times an event was performed by an account rather than a person
-
-    %code.javascript.spread
-      :escaped
-        trak.io.identify({
-          name: "Matthew Spence",
-          email: "matt@trak.io",
-          gender: "male",
-          position: "CTO & Cofounder",
-          company: "trak.io",
-          industry: "Web Analytics",
-          location: "Canterbury, Kent, UK",
-          birthday: "1985-11-21" // Will any one reading this think to email me happy birthday I wonder?
-        })
-
-  %h4 Social Network Properties
-
-  %p You can also send us information on a user's social network accounts, each hash should use the same structure as the respective network's api.
-
-  %p If any of the above properties are missing we will try to determine a value from one of social network's properties.
-
-  %ul
-    %li <code>twitter</code> - <a href='https://dev.twitter.com/docs/api/1.1/get/users/show' target='_blank'>Twitter documentation</a>
-    %li <code>facebook</code> - <a href='https://developers.facebook.com/docs/reference/api/user/' target='_blank'>Facebook documentation</a>
-    %li <code>linked_in</code> - <a href='http://developer.linkedin.com/documents/profile-fields' target='_blank'>LinkedIn documentation</a>
-
-  %p Here's how to store a person's social networking id, we'll be writing up more in depth examples in a future cook book recipe.
-
-  %code.javascript.spread
-    :escaped
-      trak.io.identify({
-        facebook: { id: 'xxxxxxxxxxxxx' },
-        twitter: { user_id: 'xxxxxxxxxxxxx' },
-        linked_in: { id: 'xxxxxxxxxxxxx' }
-      })
+      %li <code>headline</code> - used as a sub title for companies
+      %li <code>type</code> - companies dont need to be companies, if you need to distinguish between company types or even other organisation or group types (eg charity, non profits, etc)
+      %li <code>people_distinct_ids</code> - people who match any of theses will we added to the company
 
 #event
 
