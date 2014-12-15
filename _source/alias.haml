@@ -168,15 +168,11 @@ title: Alias
 
   %h3 Return Value
 
-  %p When alias returns you will recieve an object with the following structure.
+  %p When alias returns you will recieve an object with the following structure. This response means your request was successfully recieved and queued for <a href='/background_processing.html'>proccessing</a>. Under normal conditions this will happen asyncronously within a second or two.
 
   %code.json.spread
     :escaped
-      {
-        "status": "success",
-        "trak_id": "516d2737b1b92244bb000001", // Trak.io's id for the person
-        "distinct_ids": ["liam@trak.io","liam.gooding@trak.io"] // an array of existing distinct_ids for the person
-      }
+      { "status": "success" }
 
 #merging
   %h3 Merging People

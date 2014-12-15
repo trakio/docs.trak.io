@@ -102,9 +102,8 @@ title: Annotate
 
 %h3#return Return Value
 
+%p When annotate returns you will recieve an object with the following structure. This response means your request was successfully recieved and queued for <a href='/background_processing.html'>proccessing</a>. Under normal conditions this will happen asyncronously within a second or two.
+
 %code.json
   :escaped
-    {
-      "status": "success",
-      "trak_id": "516d2737b1b92244bb000001", // Trak.io's id for the annotation
-    }
+    { "status": "success" }

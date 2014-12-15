@@ -25,7 +25,8 @@ title: Errors
   %p We use HTTP response codes to indicate if anything went wrong whilst we were processing your request.
 
   %ul
-    %li <code>200</code> - OK, Everything worked as expected.
+    %li <code>200</code> - OK, everything worked as expected.
+    %li <code>202</code> - accepted, the request was accepted and stored for <a href='/background_processing.html'>background processing</a> but may be rejected later if it is invalid
     %li <code>400</code> - bad request, missing a required parameter, or incorrect format
     %li <code>401</code> - unauthorized, missing or invalid API token
     %li <code>404</code> - not found, the requested method or item doesn't exist
