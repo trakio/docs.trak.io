@@ -1,0 +1,24 @@
+---
+title: Erlang API Introduction
+---
+
+%h2 Erlang API Introduction
+
+%p We don't have an official Erlang library but <a href='https://github.com/novabyte' target='_blank'>Christopher Molozian</a> as started <a target='_blank' href='https://github.com/novabyte/pathway'>Pathway</a> as a open source project on GitHub.
+
+%p It is also distributed through <a target='_blank' href='https://hex.pm'>hex.pm</a>. Add <code>pathway</code> to your <code>mix.exs</code> dependencies:
+
+%code.elixir
+  :escaped
+    def deps do
+      [{:pathway, "~> 0.1"}]
+    end
+
+
+%p And then add <code>:pathway</code> to your application dependencies:
+
+%code.elixir
+  :escaped
+    def application do
+      [applications: [:pathway]]
+    end
