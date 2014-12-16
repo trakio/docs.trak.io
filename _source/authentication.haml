@@ -33,7 +33,8 @@ title: Authentication
   %code.bash
     :escaped
       $ curl https://api.trak.io/v1/identify \
-        --header "X-Token: YOUR_API_TOKEN" \
+        --header "X-Trakio-Token: YOUR_API_TOKEN" \
         --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}'
 
-
+  %p.note
+    Providing your token in the header <code>X-Token</code> is depreciated, but still supported for backwards compatibility.
