@@ -16,6 +16,7 @@ title: Errors
   %li <code>PropertiesObjectInvalid</code> - the properties object provided was invalid
   %li <code>RequestInvalidJson</code> - when <a href='/http.html#full-json'>sending the request as JSON</a> the body was invalid JSON
   %li <code>RevenuePropertyInvalid</code> - revenue property for an event was not a float, integer or string
+  %li <code>TrialExpired</code> - your account's free trial (including an additional 28 day grace period) has expired
   %li <code>InternalServiceError</code> - any other error will raise this, it usual means we did something wrong instead of you
 
 .for-http
@@ -29,6 +30,7 @@ title: Errors
     %li <code>202</code> - accepted, the request was accepted and stored for <a href='/background_processing.html'>background processing</a> but may be rejected later if it is invalid
     %li <code>400</code> - bad request, missing a required parameter, or incorrect format
     %li <code>401</code> - unauthorized, missing or invalid API token
+    %li <code>402</code> - payment required, your account's free trial has expired (including a 28 day grace period)
     %li <code>404</code> - not found, the requested method or item doesn't exist
     %li <code>500</code>, <code>502</code>, <code>503</code>, <code>504</code> - server errors, these are on us :(
 
@@ -45,7 +47,14 @@ title: Errors
       }
 
 .for-javascript
+
   %h3.first JavaScript
 
   %p When the JavaScript library encounters one of the above exceptions it will throw an equivilent JavaScript error.
+
+.for-ruby
+
+  %h3.first Ruby
+
+  %p When the Ruby library recieves one of the above response exceptions it will raise an equivilent Ruby exception.
 
