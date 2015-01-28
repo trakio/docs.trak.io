@@ -15,7 +15,17 @@ title: Quick Start Guide
       </script>
 %p Checkout <a href='/javascript.html#options'>docs.trak.io/javascript.html</a> for more information on the <code>trak.io.load()</code> method and its options.
 
-%h3.two Track an Event
+%h3.two Identify a Person
+%p If you have data about a person you want to send, such as their name, age, email address, etc, you can use the <code><a href='/identify.html'>trak.io.identify()</a></code> method:
+
+%code.javascript.spread
+  = preserve do
+    :escaped
+      trak.io.identify({ name: 'Matt Spence', email: 'matt@trak.io'});
+
+%p For more on the <code><a href='/identify.html'>trak.io.identify()</a></code> method, adding properties and callbacks checkout <a href='/identify.html'>docs.trak.io/identify.html</a>
+
+%h3.three Track an Event
 %p You can track an event with the <code><a href='/track.html'>trak.io.track()</a></code> method:
 
 %code.javascript.spread
@@ -25,12 +35,3 @@ title: Quick Start Guide
 
 %p For more on the <code><a href='/track.html'>trak.io.track()</a></code> method, adding properties, context, channels and callbacks checkout <a href='/track.html'>docs.trak.io/track.html</a>.
 
-%h3.three Identify a Person
-%p If you have data about a person you want to send, such as their name, age, email address, etc, you can use the <code><a href='/identify.html'>trak.io.identify()</a></code> method:
-
-%code.javascript.spread
-  = preserve do
-    :escaped
-      trak.io.identify({ name: 'Matt Spence', email: 'matt@trak.io'});
-
-%p For more on the <code><a href='/identify.html'>trak.io.identify()</a></code> method, adding properties and callbacks checkout <a href='/identify.html'>docs.trak.io/identify.html</a>
