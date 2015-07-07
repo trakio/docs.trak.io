@@ -66,16 +66,6 @@ title: HTTP API Introduction
       %td null
       %td If destination is set, after the request has been performed it will redirect to the destination, this is helpful for example, when you wish to track someone clicking a link.
 
-%h3#full-json Sending Requests As JSON
-
-%p You can send the above request parameters as encoded JSON, as apposed to GET parameters or POST form data, by setting your `Content-Type` request HTTP header to `application/json`.
-
-%code.bash.spread
-  :escaped
-    $ curl https://api.trak.io/v1/track \
-      --header "Content-Type: application/json" \
-      --data '{"token":"YOUR_API_TOKEN", "data":{"distinct_id": 12346789, "event": "Page view", "channel": "Web site", "properties": { "title": "Matts Home Page" }, "context": { "time_zone": "GMT" }}}'
-
 %h3 Retrieving data from Trak.io
 
 %ul
@@ -98,18 +88,13 @@ title: HTTP API Introduction
       %td
         %em Required
       %td Your API secret key can be found in your account settings and verifies your account for retrieving data.
-    %tr
-      %th callback
-      %td String
-      %td null
-      %td If you are making a JSONP ajax call you can provide a callback method that will wrap the returning data. Setting a callback will change the force_200 default from false to true.
-    %tr
-      %th force_200
-      %td Boolean
-      %td 0, 1 if callback provided
-      %td You can force a 200 status code by setting force_200 to true, this is designed specifically so that if you are using JSONP and there is an error you can still recieve the data.
-    %tr
-      %th destination
-      %td String
-      %td null
-      %td If destination is set, after the request has been performed it will redirect to the destination, this is helpful for example, when you wish to track someone clicking a link.
+
+%h3#full-json Sending Requests As JSON
+
+%p You can send the request parameters as encoded JSON, as apposed to GET parameters or POST form data, by setting your `Content-Type` request HTTP header to `application/json`.
+
+%code.bash.spread
+  :escaped
+    $ curl https://api.trak.io/v1/track \
+      --header "Content-Type: application/json" \
+      --data '{"token":"YOUR_API_TOKEN", "data":{"distinct_id": 12346789, "event": "Page view", "channel": "Web site", "properties": { "title": "Matts Home Page" }, "context": { "time_zone": "GMT" }}}'

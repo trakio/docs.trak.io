@@ -8,7 +8,8 @@ title: Background Processing
   <strong>Most Trak.io API requests are not processed immediately.</strong> It is
   validated and stored in a queue for processing by a background processor.
   Under normal conditions the background worker will process the request within a
-  second or two of being received. However, requests to retrieve data are not queued and are processed immediately.
+  second or two of being received. Requests to retrieve data are not queued and are
+  processed immediately.
 
 %p
   This ensures we can respond to API request as quickly as possible and adds a

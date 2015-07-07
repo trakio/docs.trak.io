@@ -14,13 +14,11 @@ title: Authentication
 
   %h3.first JavaScript
 
-  %p When using the JavaScript library you just can set your API token or API secret key once and it will be used for all subsequent API calls.
+  %p When using the JavaScript library you just can set your API token and it will be used for all subsequent API calls to send data to Trak.io.
 
   %code.javascript
     :escaped
-      trak.io.load("YOUR_API_TOKEN"); ***CHANGE THIS!!! HC***
-      trak.io.load_token("YOUR_API_TOKEN");
-      trak.io.load_key("YOUR_API_SECRET_KEY");
+      trak.io.load("YOUR_API_TOKEN");
 
 %div.for-http
 
@@ -28,11 +26,15 @@ title: Authentication
 
   %p When accessing the HTTP end points directly to send data you should send your API token with each request in a query parameter named 'token'. When retrieving data you should send your API secret key with each request in a query parameter named 'key'.
 
+  %h4 Sending data
+
   %code.bash
     :escaped
       $ curl https://api.trak.io/v1/identify \
         --data token='YOUR_API_TOKEN'\
         --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}'
+
+  %h4 Retrieving data
 
   %code.bash
     :escaped
@@ -42,11 +44,15 @@ title: Authentication
 
   %p You can also send your API token or API secret key as a HTTP header if you like.
 
+  %h4 Sending data
+
   %code.bash
     :escaped
       $ curl https://api.trak.io/v1/identify \
         --header "X-Trakio-Token: YOUR_API_TOKEN" \
         --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}'
+
+  %h4 Retrieving data
 
   %code.bash
     :escaped
