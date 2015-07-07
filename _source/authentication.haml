@@ -4,27 +4,29 @@ title: Authentication
 
 %h2 Authentication
 
-%p You authenticate to the Trak.io API by providing your API token in the request. You can find your API token in your account.
+%p You authenticate to the Trak.io API by providing your API token or API secret key in the request. You can find your API token and API secret key in your account settings.
 
 %h3 Expired Trials
 
-%p If you account doesn't have a paid subscription and is out of the 14 free trial (plus an additional 28 day grace period) your request will be rejected with a <a href='/errors.html'>402 error</a>
+%p If your account doesn't have a paid subscription and is out of the 14 day free trial (plus an additional 28 day grace period) your request will be rejected with a <a href='/errors.html'>402 error</a>
 
 %div.for-javascript
 
   %h3.first JavaScript
 
-  %p When using the JavaScript library you just can set the your API token once and it will be used for all subsequent API calls.
+  %p When using the JavaScript library you just can set your API token or API secret key once and it will be used for all subsequent API calls.
 
   %code.javascript
     :escaped
-      trak.io.load("YOUR_API_TOKEN");
+      trak.io.load("YOUR_API_TOKEN"); ***CHANGE THIS!!! HC***
+      trak.io.load_token("YOUR_API_TOKEN");
+      trak.io.load_key("YOUR_API_SECRET_KEY");
 
 %div.for-http
 
   %h3.first HTTP
 
-  %p When accessing the HTTP end points directly you should send your API token with each request in a query parameter named 'token'.
+  %p When accessing the HTTP end points directly to send data you should send your API token with each request in a query parameter named 'token'. When retrieving data you should send your API secret key with each request in a query parameter named 'key'.
 
   %code.bash
     :escaped
@@ -32,7 +34,13 @@ title: Authentication
         --data token='YOUR_API_TOKEN'\
         --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}'
 
-  %p You can also send your API token as a HTTP header if you like.
+  %code.bash
+    :escaped
+      $ curl https://api.trak.io/v1/score \
+        --data key='YOUR_API_SECRET_KEY'\
+        --data distinct_id='12346789'
+
+  %p You can also send your API token or API secret key as a HTTP header if you like.
 
   %code.bash
     :escaped
@@ -40,5 +48,11 @@ title: Authentication
         --header "X-Trakio-Token: YOUR_API_TOKEN" \
         --data data='{"distinct_id": "12346789", "properties": { "name": "Matthew Spence" }}'
 
+  %code.bash
+    :escaped
+      $ curl https://api.trak.io/v1/score \
+        --header "X-Trakio-Key: YOUR_API_SECRET_KEY" \
+        --data distinct_id="12346789"
+
   %p.note
-    Providing your token in the header <code>X-Token</code> is depreciated, but still supported for backwards compatibility.
+    Providing your token in the header <code>X-Token</code> or your key in the header <code>X-Key</code> is depreciated, but still supported for backwards compatibility.
