@@ -11,6 +11,7 @@ title: Errors
   %li <code>DataObjectInvalidBase64</code> - the encoded data object provided was missing or invalid url safe base64
   %li <code>DataObjectInvalidType</code> - the data value provided was not an object
   %li <code>InvalidToken</code> - API token was either missing or invalid
+  %li <code>InvalidKey</code> - API secret key was either missing or invalid
   %li <code>MissingParameter</code> - you missed a required data parameter
   %li <code>RouteNotFound</code> - You requested an end point that doesn't exist
   %li <code>PropertiesObjectInvalid</code> - the properties object provided was invalid
@@ -18,6 +19,8 @@ title: Errors
   %li <code>RevenuePropertyInvalid</code> - revenue property for an event was not a float, integer or string
   %li <code>TrialExpired</code> - your account's free trial (including an additional 28 day grace period) has expired
   %li <code>InternalServiceError</code> - any other error will raise this, it usual means we did something wrong instead of you
+  %li <code>PersonNotFound</code> - You provided a distinct_id that doesn't exist
+  %li <code>CompanyNotFound</code> - You provided a company_id that doesn't exist
 
 .for-http
 
@@ -29,7 +32,7 @@ title: Errors
     %li <code>200</code> - OK, everything worked as expected.
     %li <code>202</code> - accepted, the request was accepted and stored for <a href='/background_processing.html'>background processing</a> but may be rejected later if it is invalid
     %li <code>400</code> - bad request, missing a required parameter, or incorrect format
-    %li <code>401</code> - unauthorized, missing or invalid API token
+    %li <code>401</code> - unauthorized, missing or invalid API token/secret key
     %li <code>402</code> - payment required, your account's free trial has expired (including a 28 day grace period)
     %li <code>404</code> - not found, the requested method or item doesn't exist
     %li <code>500</code>, <code>502</code>, <code>503</code>, <code>504</code> - server errors, these are on us :(
@@ -40,7 +43,7 @@ title: Errors
     :escaped
       {
         "status": "error",
-        "code": 401, # repeats the HTTP status code, usefull if using the force_200 argument
+        "code": 401, # repeats the HTTP status code, useful if using the force_200 argument
         "exception": "TrakioAPI::Exceptions::InvalidToken", # The exception class raised
         "message": "Missing or invalid API token.", # The message for the raised exception
         "details": "You must povide a valid API token, see http://docs.tra.io/authentication.html." # Additional details for the specific error
@@ -50,11 +53,11 @@ title: Errors
 
   %h3.first JavaScript
 
-  %p When the JavaScript library encounters one of the above exceptions it will throw an equivilent JavaScript error.
+  %p When the JavaScript library encounters one of the above exceptions it will throw an equivalent JavaScript error.
 
 .for-ruby
 
   %h3.first Ruby
 
-  %p When the Ruby library recieves one of the above response exceptions it will raise an equivilent Ruby exception.
+  %p When the Ruby library recieves one of the above response exceptions it will raise an equivalent Ruby exception.
 
