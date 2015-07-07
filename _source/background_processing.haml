@@ -5,14 +5,14 @@ title: Background Processing
 %h2 Background Processing
 
 %p
-  <strong>When the Trak.io API recieves a request it is not processed immediately.</strong> It is
+  <strong>Most Trak.io API requests are not processed immediately.</strong> It is
   validated and stored in a queue for processing by a background processor.
   Under normal conditions the background worker will process the request within a
-  second or two of being recieved.
+  second or two of being received. However, requests to retrieve data are not queued and are processed immediately.
 
 %p
   This ensures we can respond to API request as quickly as possible and adds a
-  layer of redundency that ensures we can continue to recieve and respond promptly to your
+  layer of redundency that ensures we can continue to receive and respond promptly to your
   API requests during periods of unusually high traffic or while we are having
   technical difficulties.
 
@@ -20,7 +20,7 @@ title: Background Processing
 
 %p
   Before requests are queued for processing they are validated to predict any problems
-  that may arise during processing. This allows us to respond with the relavent <a href='errors.html'>error
+  that may arise during processing. This allows us to respond with the relevent <a href='errors.html'>error
   codes</a> when the request is made.
 
 %p
@@ -31,7 +31,7 @@ title: Background Processing
 %p.note
   Whilst we aim to have all of our services up all of the time, the realities of technlogy,
   means we need to pepare for having parts of our system unavailable. <strong>Having
-  our API up to recieve your data</strong> regardless of the status of our other systems
+  our API up to receive your data</strong> regardless of the status of our other systems
   <strong>is our number one priority</strong>.
 
 %h3 "The Benefit of the Doubt"
