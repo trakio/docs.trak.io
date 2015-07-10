@@ -1,0 +1,119 @@
+---
+title: Score
+---
+
+%h2 Score
+
+%p Score is how you retrieve the current Trak.io SuccessRank score and 60 day score history for a person or company.
+
+#javascript.for-javascript
+
+  %h3.first JavaScript
+
+  %p Since scores require an API secret key they are not supported by the JavaScript library. If you are building a JavaScript based client for trak.io and need to retrieve scores, <a href='mailto:support@trak.io?subject=I need score in the trak.io JavaScript library'>please let us know</a> and we'll work on adding it.
+
+#ruby.for-ruby
+
+  %h3.first Ruby
+
+  %p Retrieves a SuccessRank score and score history for a person with the specified <code>distinct_id</code> or company with the specified <code>company_id</code>.
+
+  %code.ruby.spread
+    :preserve
+      Trakio.score distinct_id: 'tobie@trak.io'
+      }
+
+      trakio = Trakio.new 'my_api_token', { api_secret_key: 'my_api_secret_key' }
+      trakio.score distinct_id: 'tobie@trak.io'
+
+  %h4 Arguments
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Argument
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr
+        %td distinct_id
+        %td String
+        %td
+          %em Required, unless <code><a href='#http-argument-company-id'>company_id</a></code> is provided
+        %td The distinct ID for the person you wish to retrieve a SuccessRank score for
+      %tr#ruby-arguments-company-id
+        %td company_id
+        %td String
+        %td
+          %em Required, unless <code><a href='#http-argument-distinct-id'>distinct_id</a></code> is provided
+        %td The company ID for the company you wish to retrieve a SuccessRank score for
+
+  %h4 Return Value
+
+  %p The return value of score is a Ruby <code>Hash</code> similar to the one below.
+
+  %code.ruby.spread
+    :preserve
+      {
+        "status": "success",
+        "score": 333,
+        "score_history": {
+          "2015-06-09": 333,
+          "2015-06-08": 333,
+          "2015-06-07": 333
+        }
+      }
+
+#http.for-http
+
+  %h3.first HTTP
+
+  %p A raw HTTP call to <code>api.trak.io/v1/score</code> has certain requirements and options as outlined in the <a href='/http.html'>introduction to the HTTP API</a>. In addition data specific to the track action should be sent in the data parameter as a JSON string.
+
+  %code.bash.spread
+    :escaped
+      $ curl -v -XPOST \
+        --data key='YOUR_API_SECRET_KEY' \
+        --data distinct_id='12346789' \
+        https://api.trak.io/v1/score
+
+  %h4 Data Object
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Property
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr#http-argument-distinct-id
+        %th distinct_id
+        %td String
+        %td
+          %em Required, unless <code><a href='#http-argument-company-id'>company_id</a></code> is provided
+        %td The distinct ID of the person you wish to retrieve a SuccessRank score for.
+      %tr#http-argument-company-id
+        %th company_id
+        %td String
+        %td
+          %em Required, unless <code><a href='#http-argument-distinct-id'>distinct_id</a></code> is provided
+        %td The company ID of the company you wish to retrieve a SuccessRank score for.
+
+#return
+  %h3 Return Value
+
+  %p When score returns you will receive an object with the following structure.
+
+  %code.json
+    :escaped
+      {
+        "status": "success",
+        "score": 333,
+        "score_history": {
+          "2015-06-09": 333,
+          "2015-06-08": 333,
+          "2015-06-07": 333
+        }
+      }
