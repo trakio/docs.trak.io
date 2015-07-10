@@ -4,7 +4,7 @@ title: Score
 
 %h2 Score
 
-%p Score is how you retrieve the current Trak.io SuccessRank score and score history for a person or company.
+%p Score is how you retrieve the current Trak.io SuccessRank score and 60 day score history for a person or company.
 
 #javascript.for-javascript
 
@@ -16,14 +16,14 @@ title: Score
 
   %h3.first Ruby
 
-  %p Retrieves a SuccessRank score and 60 day score history for a person with the specified <code>distinct_id</code> or company with the specified <code>company_id</code>.
+  %p Retrieves a SuccessRank score and score history for a person with the specified <code>distinct_id</code> or company with the specified <code>company_id</code>.
 
   %code.ruby.spread
     :preserve
       Trakio.score distinct_id: 'tobie@trak.io'
       }
 
-      trakio = Trakio.new 'my_api_token', { distinct_id: 'tobie@trak.io', channel: 'web_app' } *** INCORRECT ***
+      trakio = Trakio.new 'my_api_token', { api_secret_key: 'my_api_secret_key' }
       trakio.score distinct_id: 'tobie@trak.io'
 
   %h4 Arguments
@@ -74,7 +74,7 @@ title: Score
   %code.bash.spread
     :escaped
       $ curl -v -XPOST \
-        --data token='YOUR_API_SECRET_KEY' \
+        --data key='YOUR_API_SECRET_KEY' \
         --data distinct_id='12346789' \
         https://api.trak.io/v1/score
 
