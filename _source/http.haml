@@ -6,10 +6,12 @@ title: HTTP API Introduction
 
 %p
   :markdown
-    The Trak.io HTTP API endpoint is at `https://api.trak.io/v1/` and supports three actions all of which are avaliable with `POST` and `GET` requests.
+    The Trak.io HTTP API endpoint is at `https://api.trak.io/v1/`.
 
 %p.note
   The HTTP API supports both HTTP and HTTPS, however <strong>we strongly recommend you only use HTTPS</strong> when connecting. All Trak.io's API libraries use HTTPS.
+
+%h3 Sending data to Trak.io
 
 %ul
   %li
@@ -20,8 +22,10 @@ title: HTTP API Introduction
     %a{href: '/track.html#http'} POST\GET https://api.trak.io/v1/track
   %li
     %a{href: '/annotate.html#http'} POST\GET https://api.trak.io/v1/annotate
+  %li
+    %a{href: '/import.html#http'} POST\GET https://api.trak.io/v1/import
 
-%p Any request expects the following, as url parameters when sending a GET request or as form data when sending a POST request:
+%p Any request to the endpoints listed above expects the following, as url parameters when sending a GET request or as form data when sending a POST request:
 
 %table.table.spread
   %thead
@@ -52,7 +56,7 @@ title: HTTP API Introduction
       %th force_200
       %td Boolean
       %td 0, 1 if callback provided
-      %td You can force a 200 status code by setting force_200 to true, this is designed specifically so that if you are using JSONP and there is an error you can still recieve the data.
+      %td You can force a 200 status code by setting force_200 to true, this is designed specifically so that if you are using JSONP and there is an error you can still receive the data.
     %tr
       %th img
       %td Boolean
@@ -64,9 +68,32 @@ title: HTTP API Introduction
       %td null
       %td If destination is set, after the request has been performed it will redirect to the destination, this is helpful for example, when you wish to track someone clicking a link.
 
+%h3 Retrieving data from Trak.io
+
+%ul
+  %li
+    %a{href: '/score.html#http'} GET https://api.trak.io/v1/score
+
+%p Any request to the endpoints listed above expects the following as url parameters when sending a GET request:
+
+%table.table.spread
+  %thead
+    %tr
+      %th Parameter
+      %th Type
+      %th Default
+      %th Description
+  %tbody
+    %tr
+      %th key
+      %td String
+      %td
+        %em Required
+      %td Your API secret key can be found in your account settings and verifies your account for retrieving data.
+
 %h3#full-json Sending Requests As JSON
 
-%p You can send the above request parameters as encoded JSON, as apposed to GET parameters or POST form data, by setting your `Content-Type` request HTTP header to `application/json`.
+%p You can send the request parameters as encoded JSON, as apposed to GET parameters or POST form data, by setting your `Content-Type` request HTTP header to `application/json`.
 
 %code.bash.spread
   :escaped

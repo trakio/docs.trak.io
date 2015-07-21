@@ -1,0 +1,118 @@
+---
+title: Import
+---
+
+%h2 Import
+
+%p Import is how you record batches of events performed by people or companies.
+
+%p.note Batches greater than 2500 event objects will be rejected and invalid event objects will not be processed.
+
+#javascript.for-javascript
+
+  %h3.first JavaScript
+
+  %p Coming soon!
+
+#ruby.for-ruby
+
+  %h3.first Ruby
+
+  %p Coming soon!
+
+#http.for-http
+
+  %h3.first HTTP
+
+  %p A raw HTTP call to <code>api.trak.io/v1/import</code> has certain requirements and options as outlined in the <a href='/http.html'>introduction to the HTTP API</a>. In addition data specific to the import action should be sent in the data parameter as a JSON string.
+
+  %code.bash.spread
+    :escaped
+      $ curl -v -XPOST \
+        --data token=YOUR_API_TOKEN \
+        --data data='{
+          events: {
+            "event": "Page view",
+            "distinct_id": "12346789"
+            "channel": "Web site",
+            "properties": {},
+            "context": { "time_zone": "GMT" }
+          },{
+            "event": "Page view",
+            "company_id": "987654321",
+            "channel": "Web site",
+            "properties": {},
+            "context": { "time_zone": "GMT" }
+          }' \
+        https://api.trak.io/v1/import
+
+  %h4 Data Object
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Property
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr#http-argument-distinct-id
+        %th events
+        %td Array
+        %td
+          %em Required
+        %td A list of event objects you wish to import.
+
+  %h4 Event Object
+
+  %table.table.spread
+    %thead
+      %tr
+        %th Property
+        %th Type
+        %th Default
+        %th Description
+    %tbody
+      %tr#http-argument-distinct-id
+        %th distinct_id
+        %td String
+        %td
+          %em Required, unless <code><a href='#http-argument-company-id'>company_id</a></code> is provided
+        %td The distinct ID of the person you wish to register this event against.
+      %tr#http-argument-company-id
+        %th company_id
+        %td String
+        %td
+          %em Required, unless <code><a href='#http-argument-distinct-id'>distinct_id</a></code> is provided
+        %td The company ID of the company you wish to register this event against.
+      %tr
+        %th event
+        %td String
+        %td
+          %em Required
+        %td The key for this event, this value will be <a href='/data_keys.html'>standardized server side</a>.
+      %tr
+        %th channel
+        %td String
+        %td web_site
+        %td The channel this event occurred in.
+      %tr
+        %th properties
+        %td Object
+        %td {}
+        %td A set of key value <a href='/properties.html#event'>properties</a> that help describe the event.
+      %tr#time
+        %th time
+        %td String (ISO 8601)
+        %td
+          %em Now
+        %td The time that this event occurred, the time should be a string formatted in <a href='http://en.wikipedia.org/wiki/ISO_8601' target='_blank'>ISO 8601</a>.
+
+#return
+  %h3 Return Value
+
+  %p When track returns you will receive an object with the following structure. This response means your request was successfully received and queued for <a href='/background_processing.html'>proccessing</a>. Under normal conditions this will happen asyncronously within a second or two.
+
+  %code.json
+    :escaped
+      { "status": "success" }
