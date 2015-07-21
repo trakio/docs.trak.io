@@ -4,11 +4,9 @@ title: Import
 
 %h2 Import
 
-%p Import is how you load batches of events.
+%p Import is how you record batches of events performed by people or companies.
 
-%p.note 2500 limit.
-
-%p.note Invalid event objects will not be processed. No errors are thrown.
+%p.note Batches greater than 2500 event objects will be rejected and invalid event objects will not be processed.
 
 #javascript.for-javascript
 
@@ -32,7 +30,20 @@ title: Import
     :escaped
       $ curl -v -XPOST \
         --data token=YOUR_API_TOKEN \
-        --data data='{events: {"distinct_id": "12346789", "company_id": "acme_ltd", "event": "Page view", "channel": "Web site", "properties": {}, "context": { "time_zone": "GMT" }}}' \
+        --data data='{
+          events: {
+            "event": "Page view",
+            "distinct_id": "12346789"
+            "channel": "Web site",
+            "properties": {},
+            "context": { "time_zone": "GMT" }
+          },{
+            "event": "Page view",
+            "company_id": "987654321",
+            "channel": "Web site",
+            "properties": {},
+            "context": { "time_zone": "GMT" }
+          }' \
         https://api.trak.io/v1/import
 
   %h4 Data Object
